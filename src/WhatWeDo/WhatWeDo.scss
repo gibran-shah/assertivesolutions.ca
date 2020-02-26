@@ -1,0 +1,98 @@
+@import '../App.scss';
+
+.what-we-do-main {
+    position: relative;
+    width: 100%;
+    padding: 0;
+}
+
+.what-we-do-background {
+    width: 100%
+}
+
+.what-we-do-foreground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.what-we-do-anchor {
+    position: absolute;
+    background-color: red;
+    top: 15%;
+
+    @media(max-width: 950px) {
+        top: 0;
+    }
+
+    @media(max-width: 700px) {
+        top: -5%;
+    }
+}
+
+.what-we-do-blurb-and-button {
+    width: 30%;
+    height: 100%;
+
+    @media(max-width: 800px) {
+        width: 40%;
+    }
+
+    @media(max-width: 600px) {
+        left: 0;
+        width: 90%;
+        justify-content: center;
+    }
+}
+
+.what-we-do-heading {
+    font-size: $headingTextSize;
+
+    @media(max-width: 600px) {
+        text-align: center;
+    }
+}
+
+.what-we-do-blurb {
+    margin: 20px 0;
+    color: white;
+    font-size: 12pt;
+    text-align: justify;
+    text-align-last: left;
+
+    @media(max-width: 800px) {
+        font-size: 10pt;
+    }
+
+    @media(max-width: 600px) {
+        margin: 10px auto;
+    }
+}
+
+.what-we-do-button {
+    @media(max-width: 600px) {
+        margin: 0 auto;
+    }
+}
+
+.what-we-do-phone {
+    width: 50%;
+    height: 100%;
+
+    @extend .flex-column-center;
+
+    @media(max-width: 800px) {
+        width: 40%;
+    }
+
+    @media(max-width: 600px) {
+        display: none;
+    }
+}
+
+.what-we-do-phone-img {
+    width: 100%;
+}
+

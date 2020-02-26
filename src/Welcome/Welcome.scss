@@ -1,0 +1,57 @@
+@import '../App.scss';
+
+.welcome {
+    width: 90%;
+    text-align: center;
+    margin: 0 auto;
+    padding-bottom: 2%;
+    border-bottom: 1px solid #aaa; 
+}
+
+.welcome-heading {
+
+    font-size: $headingTextSize;
+
+    @media(max-width: 700px) {
+        font-size: 16pt;
+    }
+    
+    @media(max-width: 550px) {
+        font-size: 14pt;
+    }
+
+    @media(max-width: 460px) {
+        font-size: 12pt;
+    }
+}
+
+.welcome-blurb {
+    margin: 2% 0;
+    text-align: justify;
+    text-align-last: center;
+}
+
+.you {
+    font-weight: bold;
+    font-style: italic;
+    color: $primaryColor;
+}
+
+.welcome-buttons-div {
+    margin: 4% auto;
+    width: 400px;
+    flex-wrap: wrap;
+
+    @media(max-width: 500px) {
+        width: auto;
+        justify-content: space-around;
+    }
+}
+
+.welcome-buttons {
+    margin: 5px;
+}
+
+.contact-us-button {
+    background-color: $secondaryColor;
+}

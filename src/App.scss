@@ -1,0 +1,144 @@
+$primaryColor: #141e77;
+$secondaryColor: #00c8ea;
+$headingTextSize: 20pt;
+
+@font-face {
+  font-family: Astera;
+  src: url('./assets/ASTERA v2.ttf');
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.heading-text {
+  font-family: Astera;
+  text-transform: uppercase;
+}
+
+.primary-text {
+  @extend .heading-text;
+  color: $primaryColor;
+}
+
+.secondary-text {
+  @extend .heading-text;
+  color: $secondaryColor;
+}
+
+.black-text {
+  @extend .heading-text;
+  color: black;
+}
+
+.white-text {
+  @extend .heading-text;
+  color: white;
+}
+
+html {
+  font-family: arial;
+}
+
+@mixin flex($dir, $justCont) {
+  display: flex;
+  flex-direction: $dir;
+  justify-content: $justCont;
+}
+
+.flex-row-start {
+  @include flex(row, flex-start);
+}
+
+.flex-column-start {
+  @include flex(column, flex-start);
+}
+
+.flex-row-end {
+  @include flex(row, flex-end);
+}
+
+.flex-column-end {
+  @include flex(column, flex-end);
+}
+
+.flex-row-space-between {
+  @include flex(row, space-between);
+}
+
+.flex-column-space-between {
+  @include flex(column, space-between);
+}
+
+.flex-row-center {
+  @include flex(row, center);
+}
+
+.flex-column-center {
+  @include flex(column, center);
+}
+
+.flex-row-space-around {
+  @include flex(row, space-around);
+}
+
+.flex-column-space-around {
+  @include flex(column, space-around);
+}
+
+.flex-row-space-evenly {
+  @include flex(row, space-evenly);
+}
+
+.flex-column-space-evenly {
+  @include flex(column, space-evenly);
+}
+
+button {
+  width: 150px;
+  height: 50px;
+  font-weight: bold;
+  font-size: 12pt;
+  color: white;
+  background-color: $primaryColor;
+  border: 0;
+  border-radius: 25px;
+  transition: transform .5s;
+}
+
+button:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.as-form {
+  label {
+    color: #888888;
+    font-size: 10pt;
+  }
+
+  input, textarea {
+    width: 100%;
+    border: 1px solid $secondaryColor;
+    border-radius: 5px;
+    margin: 5px 0 20px 0;
+    padding-left: 5px;
+    font-size: 12pt;
+  }
+
+  input {
+    height: 30px;
+  }
+
+  ::placeholder {
+    color: #BBBBBB;
+  }
+}
+
+.section-heading {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+

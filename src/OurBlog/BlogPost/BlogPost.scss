@@ -1,0 +1,65 @@
+@import '../../App.scss';
+
+.blog-item {
+    width: 30%;
+
+    @media(max-width: 600px) {
+        width: 80%;
+    }
+}
+
+.blog-item span, a {
+    text-align: justify;
+    text-align-last: left;
+    margin: 10px 0;
+}
+
+.blog-img-and-date {
+    position: relative;
+}
+
+.blog-img {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.blog-date {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    background-color: $secondaryColor;
+    z-index: 100;
+    padding: 5px;
+    color: white;
+
+    @media(max-width: 1000px) {
+        font-size: 10pt;
+    }
+
+    @media(max-width: 700px) {
+        font-size: 8pt;
+    }
+
+    @media(max-width: 600px) {
+        font-size: 12pt;
+    }
+}
+
+.blog-title {
+    color: $primaryColor;
+    text-transform: uppercase;
+}
+
+.blog-blurb {
+    font-size: 10pt;
+}
+
+.read-more-link {
+    color: $secondaryColor;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    @media(max-width: 600px) {
+        margin-bottom: 30px;
+    }
+}

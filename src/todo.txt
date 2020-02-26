@@ -1,0 +1,30 @@
+
+- get higher resolution image for web, desktop, and mobile apps
+- figure out what you want to do about divider
+- see what you can add to focus areas
+- See if you can find a better way to keep what we do section within background image
+- figure out how to get main css class to stay separate between header and what we do section
+- Make sure you're using <section> the way it's meant to be used
+- figure out how to get image title for alt
+- figure out how to import images in batch
+- delete section title images and stop importing them   [CHECK]
+- figure out how to set formatting for phone number properly
+- standardize naming convention for images
+- upload code to github and link to pipeline
+- fix search button on safari
+- Let's Get Started button 
+- implement CI
+- document Image2Excel in github (create readme.dm)
+
+
+BEFORE GOING LIVE:
+- new phone number
+- need icon for website     [CHECK]    
+- why is textarea highlighted in red in firefox?    [CHECK]
+- link up form  [CHECK]
+- search [CHECK]
+- link up all buttons
+- get permissions to use clients icons
+- blogs
+- facebook, linkedin, instagram
+- create our services page

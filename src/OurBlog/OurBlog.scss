@@ -1,0 +1,30 @@
+@import '../App.scss';
+
+.our-blog-main {
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+.our-blog-heading {
+    font-size: $headingTextSize;
+}
+
+.our-blog-content {
+    width: 80%;
+    margin-top: 40px;
+
+    @extend .flex-row-space-evenly;
+
+    // Edge doesn't render space-evenly properly.
+    // So detect support for -ms-ime-align: auto (since only Edge supports that)
+    // and set it to space-around in that case.
+    // WATCH THIS SPACE: if Edge ever stops supporting this, this will no longer work.
+    @supports(-ms-ime-align: auto) {
+        justify-content: space-around;
+    }
+
+    @media(max-width: 600px) {
+        flex-direction: column;
+        align-items: center;
+    }
+}

@@ -1,0 +1,82 @@
+@import '../App.scss';
+
+.our-main-focus-areas {
+    @extend .flex-row-space-evenly;
+
+    padding-top: 6%;
+
+    @media(max-width: 740px) {
+        width: 100%;
+        flex-direction: column;
+    }
+}
+
+.main-focus {
+    width: 30%;
+    margin: 0 auto;
+
+    @media(max-width: 1000px) {
+        width: 40%;
+    }
+
+    @media(max-width: 740px) {
+        margin-bottom: 20px;
+    }
+
+    @media(max-width: 650px) {
+        width: 50%;
+    }
+
+    @media(max-width: 500px) {
+        width: 70%;
+    }
+}
+
+.main-focus-heading {
+    font-size: $headingTextSize;
+
+    @media(max-width: 1000px) {
+        font-size: 18pt;
+    }
+
+    @media(max-width: 860px) {
+        font-size: 14pt;
+    }
+}
+
+.main-focus-img {
+    width: 100%;
+}
+
+.main-focus-list {
+    width: 40%;
+    margin: 0 auto;
+
+    ul {
+        list-style-type: none;
+        text-align: left;
+
+        @extend .flex-column-center;
+
+        li {
+            margin: 5px 0;
+
+            i {
+                color: $secondaryColor;
+            }
+        }
+    }
+
+    @media(max-width: 740px) {
+        text-align: center;
+        width: 60%;
+    }
+}
+
+.our-main-focus-areas-img {
+    width: 100%;
+}
+
+.flex-item {
+    margin: 10px 0;
+}

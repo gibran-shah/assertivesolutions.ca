@@ -1,0 +1,83 @@
+
+@import '../../App.scss';
+
+.contact-method {
+    margin-top: 0px;
+
+    @media(max-width: 1340px) {
+        margin-top: 10px;
+    }
+}
+
+.contact-method-name {
+    font-weight: bold;
+    font-family: arial;
+    font-size: 10pt;
+    color: #182f89;
+}
+
+.contact-method-value {
+    font-weight: normal;
+    font-family: arial;
+    font-size: 10pt;
+    color: black;
+}
+
+.name-and-value {
+    margin-left: 10px;
+}
+
+// GSC container
+.gsc-control-cse {
+    padding: 0 !important;
+}
+
+// outer table
+table.gsc-search-box {
+
+    width: 230px !important;
+
+    td {
+        vertical-align: bottom !important;
+    }
+}
+
+// div for inner table
+.gsc-input-box {
+    border-color: $secondaryColor !important;
+    border-radius: 5px !important;
+}
+
+// inner table
+.gsc-input {
+    padding-right: 3px !important;
+}
+
+// td of inner table
+#gs_tti50 {
+    height: 18px !important;
+    padding: 5px 0 !important;
+}
+
+// input
+#gsc-i-id1 {
+    font-size: 10pt !important;
+    line-height: 1 !important;
+    background: none !important;
+    text-indent: 3px !important;
+}
+
+// cell for x
+.gsib_b {
+    display: none !important;
+}
+
+// button
+.gsc-search-button-v2 {
+    width: 30px !important;
+    height: 30px !important;
+    padding: 5px !important;
+    background-color: $secondaryColor !important;
+    border-color: $secondaryColor !important;
+    margin-left: 5px !important;
+}

@@ -1,0 +1,36 @@
+@import '../App.scss';
+
+.footer-main {
+    width: 100%;
+    background-color: black;
+}
+
+.footer-swish {
+    width: 100%;
+}
+
+.footer-content {
+    align-items: center;
+}
+
+.footer-item {
+    margin: 2% 0;
+}
+
+.footer-logo-img {
+    width: 10%;
+}
+
+.assertive-solutions {
+    width: 40%;
+}
+
+.social-media {
+    width: 30%;
+    color: $secondaryColor;
+    font-size: 24pt;
+
+    @media(max-width: 500px) {
+        font-size: 18pt;
+    }
+}
