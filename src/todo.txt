@@ -28,3 +28,4 @@ BEFORE GOING LIVE:
 - blogs
 - facebook, linkedin, instagram
 - create our services page
+- get blog.assertivesolutions.ca

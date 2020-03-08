@@ -10,6 +10,8 @@ import OurClients from './OurClients/OurClients';
 import ContactUs from './ContactUs/ContactUs';
 import Footer from './Footer/Footer';
 import smoothscroll from 'smoothscroll-polyfill';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Blog from './Blog/blog';
 
 class App extends Component {
 
@@ -18,17 +20,26 @@ class App extends Component {
     smoothscroll.polyfill();
 
     return (
-      <div>
-        <Header />
-        <Banner />
-        <Welcome />
-        <MainFocus />
-        <WhatWeDo />
-        <OurBlog />
-        <OurClients />
-        <ContactUs />
-        <Footer />
-      </div>
+      <Router>
+        <Switch>
+          <Route path="/" exact>
+            <div>
+              <Header />
+              <Banner />
+              <Welcome />
+              <MainFocus />
+              <WhatWeDo />
+              <OurBlog />
+              <OurClients />
+              <ContactUs />
+              <Footer />
+            </div>
+          </Route>
+          <Route path="/blog">
+            <Blog/>
+          </Route>
+        </Switch>
+      </Router>
     );
   }
 }

@@ -29,7 +29,7 @@ class ContactUs extends Component {
         const config = {
             headers: {'Access-Control-Allow-Origin': '*'}
         };
-        axios.post('http://35.232.230.0:3000/contact', this.state, config).then(response => {
+        axios.post('http://35.184.181.105:3000/contact', this.state, config).then(response => {
         //axios.post('http://localhost:3001/contact', this.state, config).then(response => {
             console.log('response =', response);
         }, err => {
