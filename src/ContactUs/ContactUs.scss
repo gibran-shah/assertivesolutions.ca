@@ -57,6 +57,16 @@
     text-align: center;
 }
 
+.inquiry-sent {
+    text-align: center;
+    color: green;
+}
+
+.inquiry-failed {
+    text-align: center;
+    color: red;
+}
+
 .contact-us-heading {
     font-size: $headingTextSize;
 }

@@ -12,7 +12,10 @@ class ContactUs extends Component {
             email: '',
             phone: '',
             company: '',
-            inquiry: ''
+            inquiry: '',
+            inquirySent: false,
+            inquiryFailed: false,
+            submitting: false
         };
         this.changeHandler = this.changeHandler.bind(this);
         this.submitHandler = this.submitHandler.bind(this);
@@ -24,6 +27,7 @@ class ContactUs extends Component {
 
     submitHandler(event) {
         event.preventDefault();
+        this.setState({submitting: true});
         // axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
         // axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
         const config = {
@@ -31,9 +35,9 @@ class ContactUs extends Component {
         };
         axios.post('http://35.184.181.105:3000/contact', this.state, config).then(response => {
         //axios.post('http://localhost:3001/contact', this.state, config).then(response => {
-            console.log('response =', response);
-        }, err => {
-            console.log('err =', err);
+            this.setState({inquirySent: true, inquiryFailed: false, submitting: false});
+        }).catch(err => {
+            this.setState({inquirySent: false, inquiryFailed: true, submitting: false});
         });
     }
 
@@ -42,6 +46,19 @@ class ContactUs extends Component {
             + '[0-9]{3}[0-9]{3}[0-9]{4}' + '|'
             + '[0-9]{3}.[0-9]{3}.[0-9]{4}' + '|'
             + '[0-9]{3} [0-9]{3} [0-9]{4}';
+
+        let inquiryFeedback = null;
+        if (this.state.inquirySent) {
+            inquiryFeedback = (
+                <div className="span-grid inquiry-sent">
+                    Your inquiry has been sent.
+                </div>);
+        } else if (this.state.inquiryFailed) {
+            inquiryFeedback = (
+                <div className="span-grid inquiry-failed">
+                    There was a problem sending your inquiry. Please try again later.
+                </div>);
+        }
 
         return (
             <section>
@@ -116,6 +133,8 @@ class ContactUs extends Component {
                             <div className="span-grid submit-button-div">
                                 <button className="submit-button" type="submit"><i className="fas fa-paper-plane">&nbsp;</i>Submit</button>
                             </div>
+
+                            {inquiryFeedback}
                         </div>
                     </form>
                 </div>
