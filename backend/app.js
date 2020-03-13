@@ -15,7 +15,7 @@ const port = process.env.PORT;
 const corsOptions = {
     origin: [
 		'http://localhost:3000',
-		'http://localhost:3000/blog',
+		//'http://localhost:3000/blog',
 		'http://www.assertivesolutions.ca',
 		'https://www.assertivesolutions.ca',
 		'http://assertivesolutions.ca',
