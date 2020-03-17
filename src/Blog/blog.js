@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './blog.scss';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import axios from 'axios';
+//import axios from 'axios';
+import axios from '../axios/axiosInstance';
 
 class Blog extends Component {
     // useStyles = makeStyles(theme => ({
@@ -30,6 +31,21 @@ class Blog extends Component {
     }
 
     componentDidMount() {
+
+        // const post = {
+        //     createdat: Date.now(),
+        //     updatedat: Date.now(),
+        //     title: 'strong bo',
+        //     body: 'do you have strong bo? well, sucks to be you.'
+        // };
+
+        // axios.post('/blogposts.json', post).then(response => {
+        //     console.log('point 1; response=', response);
+        // }).catch(err => {
+        //     console.log('point 1; err=', err);
+        // });
+
+
         const config = {
             headers: {'Access-Control-Allow-Origin': '*'}
         };
