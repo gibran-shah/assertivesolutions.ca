@@ -6,23 +6,16 @@ const router = exp.Router();
 
 router.get('/', (req, res, next) => {
 	fs.appendFileSync('log.txt', Date.now() + ': in blog.js : router.get\n');
-	
-	const post = {
-		createdat: Date.now(),
-		updatedat: Date.now(),
-		title: 'strong bo',
-		body: 'do you have strong bo? well, sucks to be you.'
-	};
 
-	axios.post('/blogpost.json', post).then(response => {
-		fs.appendFileSync('log.txt', Date.now() + ': response = ' + response + '\n');
+	axios.get('/blogposts.json').then(response => {
+		fs.appendFileSync('log.txt', Date.now() + ': Blogs retrieved.\n');
+		res.status(200).send(JSON.stringify(response.data));
 	}).catch(err => {
-		fs.appendFileSync('log.txt', Date.now() + ': err = ' + err + '\n');
+		fs.appendFileSync('log.txt', Date.now() + ': Error fetching blogs: ' + err + '\n');
+		res.status(500).send('Error fetching blogs.');
 	});
 	
 	fs.appendFileSync('log.txt', Date.now() + ': done\n');
-	
-	res.status(200).send('Hello from blog!!!');
 });
 
 module.exports = router;

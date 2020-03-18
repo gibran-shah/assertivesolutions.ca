@@ -10,7 +10,9 @@ const app = exp();
 //dotenv.config();
 fs.appendFileSync('log.txt', 'process.env.PORT = ' + process.env.PORT + '\n');
 //const port = 3001;
-const port = process.env.PORT;
+const port = process.env.PORT || 3001;
+
+console.log('port=', port);
 
 const corsOptions = {
     origin: [
@@ -54,6 +56,8 @@ app.use('/blogs', blogRoutes);
 app.listen(port);
 
 fs.appendFileSync('log.txt', 'Listening on port ' + port + '\n');
+
+console.log('ready!');
 
 module.exports = app;
 
