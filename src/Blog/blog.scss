@@ -13,3 +13,28 @@
 .card {
     border-radius: 50px;
 }
+
+.blog-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.blog-card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.blog-post-title {
+    text-align: left;
+}
+
+.blog-post-date {
+    text-align: right;
+}
+
+.blog-post-body {
+    width: 100%;
+}

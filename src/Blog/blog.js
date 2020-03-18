@@ -2,20 +2,21 @@ import React, { Component } from 'react';
 import './blog.scss';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-//import axios from 'axios';
 import axios from '../axios/axiosInstance';
+import BlogCard from './blogCard';
 
 class Blog extends Component {
-    // useStyles = makeStyles(theme => ({
-    //     root: {
-    //       maxWidth: 345,
-    //     }
-    // }));
+    state = {
+        blogPosts: []
+    };
 
     createTable() {
         const rows = [];
-        for (var index = 0; index < 10; index++) {
-            rows.push(<Card key={index} variant="outlined"><CardContent>Hi, this is card # {index+1}.</CardContent></Card>);
+        for (var index = 0; index < this.state.blogPosts.length; index++) {
+            const post = this.state.blogPosts[index];
+            rows.push(<Card key={index} variant="outlined">
+                    <CardContent><BlogCard post={post} /></CardContent>
+                </Card>);
         }
         return rows;
     }
@@ -31,13 +32,11 @@ class Blog extends Component {
     }
 
     componentDidMount() {
-        // const config = {
-        //     headers: {'Access-Control-Allow-Origin': '*'}
-        // };
-        // axios.get('http://35.184.181.105:3000/blogs', config).then(response => {
-        //axios.get('http://localhost:3001/blogs', config).then(response => {
         axios.get('/blogs').then(response => {
-            console.log('response=', response);
+            if (response.data) {
+                const entries = Object.entries(response.data);
+                this.setState({blogPosts: entries.map(p => p[1]).sort((p1, p2) => p1.updatedat > p2.updatedat ? 1 : -1)});
+            }
         }, err => {
             console.log('err=', err);
         })
