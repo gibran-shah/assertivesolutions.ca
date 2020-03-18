@@ -31,26 +31,12 @@ class Blog extends Component {
     }
 
     componentDidMount() {
-
-        // const post = {
-        //     createdat: Date.now(),
-        //     updatedat: Date.now(),
-        //     title: 'strong bo',
-        //     body: 'do you have strong bo? well, sucks to be you.'
+        // const config = {
+        //     headers: {'Access-Control-Allow-Origin': '*'}
         // };
-
-        // axios.post('/blogposts.json', post).then(response => {
-        //     console.log('point 1; response=', response);
-        // }).catch(err => {
-        //     console.log('point 1; err=', err);
-        // });
-
-
-        const config = {
-            headers: {'Access-Control-Allow-Origin': '*'}
-        };
-        axios.get('http://35.184.181.105:3000/blogs', config).then(response => {
+        // axios.get('http://35.184.181.105:3000/blogs', config).then(response => {
         //axios.get('http://localhost:3001/blogs', config).then(response => {
+        axios.get('/blogs').then(response => {
             console.log('response=', response);
         }, err => {
             console.log('err=', err);

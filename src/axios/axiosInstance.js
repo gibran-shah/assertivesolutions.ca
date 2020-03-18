@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'https://assertivesolutions-d01a1.firebaseio.com/'
+    baseURL: 'http://35.184.181.105:3000',
+    headers: {'Access-Control-Allow-Origin': '*'}
 });
 
 export default instance;
