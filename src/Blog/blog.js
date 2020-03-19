@@ -4,11 +4,22 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import axios from '../axios/axiosInstance';
 import BlogCard from './blogCard';
+import '../App.scss'
 
 class Blog extends Component {
-    state = {
-        blogPosts: []
-    };
+
+    constructor() {
+        super();
+        this.state = {
+            blogPosts: [],
+            newPost: {
+                title: null,
+                body: null
+            }
+        };
+        this.changeHandler = this.changeHandler.bind(this);
+        this.submitHandler = this.submitHandler.bind(this);
+    }
 
     createTable() {
         const rows = [];
@@ -21,11 +32,47 @@ class Blog extends Component {
         return rows;
     }
 
+    changeHandler(event) {
+        const newPost = this.state.newPost;
+        newPost[event.target.name] = event.target.value;
+        this.setState({newPost});
+    }
+
+    submitHandler(event) {
+        event.preventDefault();
+        console.log('this.state=', this.state);
+    }
+
     render() {
         return (
             <div className="background-container">
                 <div className="foreground-container">
                     {this.createTable()}
+                </div>
+                <div className="new-post-container">
+                    <form onSubmit={this.submitHandler}>
+                        <div className="as-form">
+                            <div className="new-post-title">
+                                <input className="title-input" 
+                                    type="text"
+                                    name="title"
+                                    placeholder="title for new blog post"
+                                    onChange={this.changeHandler}
+                                    required />
+                            </div>
+                            <div className="new-post-body">
+                                <textarea className="body-input"
+                                    name="body"
+                                    placeholder="body for new blog post"
+                                    onChange={this.changeHandler}
+                                    required>
+                                </textarea>
+                            </div>
+                            <div className="new-post-submit">
+                                <button className="submit-button button-center" type="submit"><i className="fas fa-paper-plane">&nbsp;</i>Submit</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         );

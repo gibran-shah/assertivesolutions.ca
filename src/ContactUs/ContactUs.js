@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './ContactUs.scss';
-import axios from 'axios';
+import axios from '../axios/axiosInstance';
 
 class ContactUs extends Component {
 
@@ -28,12 +28,8 @@ class ContactUs extends Component {
     submitHandler(event) {
         event.preventDefault();
         this.setState({submitting: true});
-        // axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-        // axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
-        const config = {
-            headers: {'Access-Control-Allow-Origin': '*'}
-        };
-        axios.post('http://35.184.181.105:3000/contact', this.state, config).then(response => {
+
+        axios.post('/contact', this.state).then(response => {
         //axios.post('http://localhost:3001/contact', this.state, config).then(response => {
             this.setState({inquirySent: true, inquiryFailed: false, submitting: false});
         }).catch(err => {
