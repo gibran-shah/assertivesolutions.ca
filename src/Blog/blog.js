@@ -40,7 +40,13 @@ class Blog extends Component {
 
     submitHandler(event) {
         event.preventDefault();
-        console.log('this.state=', this.state);
+
+        axios.post('/blogs', this.state.newPost).then(response => {
+            const newPostId = response.data.name;
+            console.log('newPostId=', newPostId);
+        }, err => {
+            console.log('err=', err);
+        });
     }
 
     render() {
@@ -86,7 +92,7 @@ class Blog extends Component {
             }
         }, err => {
             console.log('err=', err);
-        })
+        });
     }
 }
 
