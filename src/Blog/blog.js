@@ -10,15 +10,21 @@ class Blog extends Component {
 
     constructor() {
         super();
+
         this.state = {
             blogPosts: [],
             newPost: {
                 title: null,
                 body: null
-            }
+            },
+            editPostId: null
         };
+
         this.changeHandler = this.changeHandler.bind(this);
         this.submitHandler = this.submitHandler.bind(this);
+
+        this.postTitleRef = React.createRef();
+        this.postBodyRef = React.createRef();
     }
 
     createTable() {
@@ -26,10 +32,16 @@ class Blog extends Component {
         for (var index = 0; index < this.state.blogPosts.length; index++) {
             const post = this.state.blogPosts[index];
             rows.push(<Card key={index} variant="outlined">
-                    <CardContent><BlogCard post={post} /></CardContent>
+                    <CardContent><BlogCard post={post} editPostHandler={this.editPost}/></CardContent>
                 </Card>);
         }
         return rows;
+    }
+
+    editPost = (post) => {
+        this.setState({editPostId: post.id});
+        this.postTitleRef.current.value = post.title;
+        this.postBodyRef.current.value = post.body;
     }
 
     changeHandler(event) {
@@ -59,7 +71,8 @@ class Blog extends Component {
                     <form onSubmit={this.submitHandler}>
                         <div className="as-form">
                             <div className="new-post-title">
-                                <input className="title-input" 
+                                <input className="title-input"
+                                    ref={this.postTitleRef} 
                                     type="text"
                                     name="title"
                                     placeholder="title for new blog post"
@@ -68,6 +81,7 @@ class Blog extends Component {
                             </div>
                             <div className="new-post-body">
                                 <textarea className="body-input"
+                                    ref={this.postBodyRef}
                                     name="body"
                                     placeholder="body for new blog post"
                                     onChange={this.changeHandler}
@@ -88,7 +102,8 @@ class Blog extends Component {
         axios.get('/blogs').then(response => {
             if (response.data) {
                 const entries = Object.entries(response.data);
-                this.setState({blogPosts: entries.map(p => p[1]).sort((p1, p2) => p1.updatedat > p2.updatedat ? 1 : -1)});
+                this.setState({blogPosts: entries.map(p => Object.assign({id: p[0]}, {...p[1]}))
+                    .sort((p1, p2) => p1.updatedat > p2.updatedat ? 1 : -1)});
             }
         }, err => {
             console.log('err=', err);
