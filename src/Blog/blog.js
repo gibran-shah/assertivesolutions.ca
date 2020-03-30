@@ -22,6 +22,7 @@ class Blog extends Component {
 
         this.changeHandler = this.changeHandler.bind(this);
         this.submitHandler = this.submitHandler.bind(this);
+        this.clearForm = this.clearForm.bind(this);
 
         this.postTitleRef = React.createRef();
         this.postBodyRef = React.createRef();
@@ -61,7 +62,20 @@ class Blog extends Component {
         });
     }
 
+    clearForm(e) {
+        e.preventDefault();
+        this.setState({editPostId: null});
+        this.postTitleRef.current.value = '';
+        this.postBodyRef.current.value = '';
+    }
+
     render() {
+        let editPostBlurb = null;
+        if (this.state.editPostId) {
+            const editPost = this.state.blogPosts.find(p => p.id === this.state.editPostId);
+            editPostBlurb = <span>Editing post <i>{editPost.title}</i>. <a href="#" onClick={this.clearForm}>New post.</a></span>
+        }
+
         return (
             <div className="background-container">
                 <div className="foreground-container">
@@ -70,6 +84,7 @@ class Blog extends Component {
                 <div className="new-post-container">
                     <form onSubmit={this.submitHandler}>
                         <div className="as-form">
+                            {editPostBlurb}
                             <div className="new-post-title">
                                 <input className="title-input"
                                     ref={this.postTitleRef} 
