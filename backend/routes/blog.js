@@ -35,7 +35,7 @@ router.post('/', (req, res, next) => {
 		
 		axios.post('/blogposts.json', post).then(response => {
 			fs.appendFileSync('log.txt', Date.now() + ': Blog posted.\n');
-			res.status(200).send(JSON.stringify(response.data));
+			res.status(200).send(JSON.stringify({id: response.data.name, createdAt: post.createdAt}));
 		}).catch(err => {
 			fs.appendFileSync('log.txt', Date.now() + ': Error posting blog post: ' + err + '\n');
 			res.status(500).send('Error posting blog post.');
@@ -56,11 +56,11 @@ router.patch('/', (req, res, next) => {
 		const postId = data.postId;
 		post.updatedAt = Date.now();	
 		
-		axios.patch('/blogposts/' + postId + '.json', post, {headers: {'Content-Type': 'application/json'}}).then(response => {
-			fs.appendfilesync('log.txt', date.now() + ': blog patch.\n');
-			res.status(200).send(json.stringify(response.data));
+		axios.patch('/blogposts/' + postId + '.json', post).then(response => {
+			fs.appendFileSync('log.txt', Date.now() + ': blog patched.\n');
+			res.status(200).send(JSON.stringify(response.data));
 		}).catch(err => {
-			fs.appendfilesync('log.txt', date.now() + ': error patching blog post: ' + err + '\n');
+			fs.appendFileSync('log.txt', Date.now() + ': error patching blog post: ' + err + '\n');
 			res.status(500).send('error patching blog post.');
 		});
 	});

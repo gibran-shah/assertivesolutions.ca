@@ -58,15 +58,29 @@ class Blog extends Component {
             axios.patch('/blogs', {postId: this.state.editPostId, post: this.state.newPost})
                 .then(response => {
                     const updatedPost = response.data;
-                    console.log('updatedPost =', updatedPost);
+                    const existingPost = this.state.blogPosts.find(p => p.id === this.state.editPostId);
+                    existingPost.title = updatedPost.title;
+                    existingPost.body = updatedPost.body;
+                    existingPost.updatedAt = updatedPost.updatedAt;
+                    this.clearForm();
                 }, err => {
                     console.log('err=', err);
                 }); 
         } else {
             axios.post('/blogs', this.state.newPost)
                 .then(response => {
-                    const newPostId = response.data.name;
-                    console.log('newPostId=', newPostId);
+                    const newPostId = response.data.id;
+                    const createdAt = response.data.createdAt;
+                    const updatedAt = createdAt;
+                    this.state.blogPosts.push({
+                        id: newPostId,
+                        title: this.state.newPost.title,
+                        body: this.state.newPost.body,
+                        createdAt: createdAt,
+                        updatedAt: updatedAt
+                    });
+                    console.log(' this.state.blogPosts=',  this.state.blogPosts);
+                    this.clearForm();
                 }, err => {
                     console.log('err=', err);
                 });
@@ -74,8 +88,8 @@ class Blog extends Component {
     }
 
     clearForm(e) {
-        e.preventDefault();
-        this.setState({editPostId: null, editPostCreatedAt: null});
+        if (e) e.preventDefault();
+        this.setState({editPostId: null});
         this.postTitleRef.current.value = '';
         this.postBodyRef.current.value = '';
     }
