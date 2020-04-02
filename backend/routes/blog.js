@@ -41,8 +41,29 @@ router.post('/', (req, res, next) => {
 			res.status(500).send('Error posting blog post.');
 		});
 	});
+});
 
-	fs.appendFileSync('log.txt', Date.now() + ': done\n');
+router.patch('/', (req, res, next) => {
+	fs.appendFileSync('log.txt', Date.now() + ': in blog.js : router.patch\n');
+
+	const chunks = [];
+    req.on('data', chunk => chunks.push(chunk));
+    req.on('end', () => {
+		fs.appendFileSync('log.txt', Date.now() + ': Data chunked\n');
+		
+        const data = JSON.parse(chunks);
+		const post = data.post;
+		const postId = data.postId;
+		post.updatedAt = Date.now();	
+		
+		axios.patch('/blogposts/' + postId + '.json', post, {headers: {'Content-Type': 'application/json'}}).then(response => {
+			fs.appendfilesync('log.txt', date.now() + ': blog patch.\n');
+			res.status(200).send(json.stringify(response.data));
+		}).catch(err => {
+			fs.appendfilesync('log.txt', date.now() + ': error patching blog post: ' + err + '\n');
+			res.status(500).send('error patching blog post.');
+		});
+	});
 });
 
 module.exports = router;

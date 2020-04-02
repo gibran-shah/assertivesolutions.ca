@@ -54,17 +54,28 @@ class Blog extends Component {
     submitHandler(event) {
         event.preventDefault();
 
-        axios.post('/blogs', this.state.newPost).then(response => {
-            const newPostId = response.data.name;
-            console.log('newPostId=', newPostId);
-        }, err => {
-            console.log('err=', err);
-        });
+        if (this.state.editPostId) {
+            axios.patch('/blogs', {postId: this.state.editPostId, post: this.state.newPost})
+                .then(response => {
+                    const updatedPost = response.data;
+                    console.log('updatedPost =', updatedPost);
+                }, err => {
+                    console.log('err=', err);
+                }); 
+        } else {
+            axios.post('/blogs', this.state.newPost)
+                .then(response => {
+                    const newPostId = response.data.name;
+                    console.log('newPostId=', newPostId);
+                }, err => {
+                    console.log('err=', err);
+                });
+        }
     }
 
     clearForm(e) {
         e.preventDefault();
-        this.setState({editPostId: null});
+        this.setState({editPostId: null, editPostCreatedAt: null});
         this.postTitleRef.current.value = '';
         this.postBodyRef.current.value = '';
     }
@@ -130,3 +141,4 @@ export default Blog;
 
 // https://material-ui.com/components/cards/#complex-interaction
 // https://stackoverflow.com/questions/60538158/react-table-of-cards-instead-of-columns
+// https://stackoverflow.com/questions/60942752/can-i-merge-data-when-sending-put-request-to-firebase-realtime-database-using-ax
