@@ -7,11 +7,11 @@ const router = exp.Router();
 
 // router.post('/', (req, res, next) => res.status(200).send('contact post!!!'));
 router.post('/', (req, res, next) => {
-	fs.appendFileSync('log.txt', Date.now() + ': In contact.js : router.post\n');
+	fs.appendFileSync('log.txt', new Date().toString() + ': In contact.js : router.post\n');
     const chunks = [];
     req.on('data', chunk => chunks.push(chunk));
     req.on('end', () => {
-		fs.appendFileSync('log.txt', Date.now() + ': Data chunked\n');
+		fs.appendFileSync('log.txt', new Date().toString() + ': Data chunked\n');
         const data = JSON.parse(chunks);
         const name = data.firstName + ' ' + data.lastName;
         const email = data.email;
@@ -32,7 +32,7 @@ router.post('/', (req, res, next) => {
 		};
 		
 		sgMail.send(msg).then(result => {
-			fs.appendFileSync('log.txt', Date.now() + ': Email sent\n');
+			fs.appendFileSync('log.txt', new Date().toString() + ': Email sent\n');
 			res.status(200).send('Email successfully sent.');
 		}).catch(err => {
 			res.status(500).send('Error sending email.');

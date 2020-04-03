@@ -8,11 +8,9 @@ const blogRoutes = require('./routes/blog');
 const app = exp();
 
 //dotenv.config();
-fs.appendFileSync('log.txt', 'process.env.PORT = ' + process.env.PORT + '\n');
+fs.appendFileSync('log.txt', new Date().toString() + ': process.env.PORT = ' + process.env.PORT + '\n');
 //const port = 3001;
-const port = process.env.PORT || 3001;
-
-console.log('port=', port);
+const port = process.env.PORT;
 
 const corsOptions = {
     origin: [
@@ -27,7 +25,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-fs.appendFileSync('log.txt', 'CORS set up.\n');
+fs.appendFileSync('log.txt', new Date().toString() + ': CORS set up.\n');
 
 /*
 app.use(function(req, res, next) {
@@ -55,9 +53,7 @@ app.use('/blogs', blogRoutes);
 
 app.listen(port);
 
-fs.appendFileSync('log.txt', 'Listening on port ' + port + '\n');
-
-console.log('ready!');
+fs.appendFileSync('log.txt', new Date().toString() + ': Listening on port ' + port + '\n');
 
 module.exports = app;
 
