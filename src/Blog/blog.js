@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import axios from '../axios/axiosInstance';
 import BlogCard from './blogCard';
 import '../App.scss'
+import Login from '../login/login';
 
 class Blog extends Component {
 
@@ -103,6 +104,9 @@ class Blog extends Component {
 
         return (
             <div className="background-container">
+                <div className="login flex-row-end">
+                    <Login />
+                </div>
                 <div className="foreground-container">
                     {this.createTable()}
                 </div>
