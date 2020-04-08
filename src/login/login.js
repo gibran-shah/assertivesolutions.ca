@@ -6,22 +6,22 @@ class Login extends Component {
         return (
             <div className="login-container">
                 <form>
-                    <div className="form-element">
-                        <label htmlFor="username">Email</label><br/>
-                        <input type="text"
-                            placeholder="Username or email"
-                            name="username"
-                            required />
-                    </div>
-                    <div className="password form-element">
-                        <label htmlFor="password">Password</label><br/>
-                        <input type="password"
-                            placeholder="Password"
-                            name="password"
-                            required />
-                    </div>
-                    <div className="login-submit form-element">
-                        <button className="submit-button shrink-button" type="submit"><i class="fas fa-sign-in-alt">&nbsp;&nbsp;&nbsp;</i>Sign In</button>
+                    <div className="flex-row-end">
+                        <div className="form-element flex-column-end">
+                            <input type="text"
+                                placeholder="Username or email"
+                                name="username"
+                                required />
+                        </div>
+                        <div className="form-element flex-column-end">
+                            <input type="password"
+                                placeholder="Password"
+                                name="password"
+                                required />
+                        </div>
+                        <div className="login-submit">
+                            <button className="submit-login-button" type="submit"><i class="fas fa-sign-in-alt">&nbsp;&nbsp;&nbsp;</i>Sign In</button>
+                        </div>
                     </div>
                 </form>
             </div>

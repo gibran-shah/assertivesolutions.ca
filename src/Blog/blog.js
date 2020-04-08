@@ -160,3 +160,4 @@ export default Blog;
 // https://material-ui.com/components/cards/#complex-interaction
 // https://stackoverflow.com/questions/60538158/react-table-of-cards-instead-of-columns
 // https://stackoverflow.com/questions/60942752/can-i-merge-data-when-sending-put-request-to-firebase-realtime-database-using-ax
+// https://stackoverflow.com/questions/61046073/how-do-i-request-a-basic-authentication-token-from-my-firebase-realtime-database
