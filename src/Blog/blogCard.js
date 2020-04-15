@@ -10,7 +10,7 @@ const BlogCard = props => (
                 {props.post.title}
                 <i onClick={() => props.editPostHandler(props.post)} className="fas fa-edit edit-icon"></i>
             </span>
-            <span className="blog-post-date">{moment(props.post.updatedat).local().format('YYYY-MM-DD')}</span>
+            <span className="blog-post-date">{moment(props.post.updatedAt).local().format('YYYY-MM-DD')}</span>
         </div>
         <div className="blog-post-body">
             {props.post.body}

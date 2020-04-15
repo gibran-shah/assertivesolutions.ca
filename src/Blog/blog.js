@@ -58,7 +58,7 @@ class Blog extends Component {
         if (this.state.editPostId) {
             axios.patch('/blogs', {postId: this.state.editPostId, post: this.state.newPost})
                 .then(response => {
-                    const updatedPost = response.data;
+                    const updatedPost = this.state.newPost; //response.data;
                     const existingPost = this.state.blogPosts.find(p => p.id === this.state.editPostId);
                     existingPost.title = updatedPost.title;
                     existingPost.body = updatedPost.body;
@@ -80,7 +80,6 @@ class Blog extends Component {
                         createdAt: createdAt,
                         updatedAt: updatedAt
                     });
-                    console.log(' this.state.blogPosts=',  this.state.blogPosts);
                     this.clearForm();
                 }, err => {
                     console.log('err=', err);
@@ -147,7 +146,7 @@ class Blog extends Component {
             if (response.data) {
                 const entries = Object.entries(response.data);
                 this.setState({blogPosts: entries.map(p => Object.assign({id: p[0]}, {...p[1]}))
-                    .sort((p1, p2) => p1.updatedat > p2.updatedat ? 1 : -1)});
+                    .sort((p1, p2) => p1.updatedAt > p2.updatedAt ? 1 : -1)});
             }
         }, err => {
             console.log('err=', err);
