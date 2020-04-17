@@ -58,7 +58,7 @@ class Blog extends Component {
         if (this.state.editPostId) {
             axios.patch('/blogs', {postId: this.state.editPostId, post: this.state.newPost})
                 .then(response => {
-                    const updatedPost = this.state.newPost; //response.data;
+                    const updatedPost = this.state.newPost;
                     const existingPost = this.state.blogPosts.find(p => p.id === this.state.editPostId);
                     existingPost.title = updatedPost.title;
                     existingPost.body = updatedPost.body;
