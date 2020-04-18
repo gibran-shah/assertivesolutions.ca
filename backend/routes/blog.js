@@ -50,6 +50,12 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
 	fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post\n');
 
+	if (!req.headers.authorization) {
+		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : No Authorization token.\n');
+		res.status(401).status('Unauthorized');
+		return;
+	}
+
 	const chunks = [];
     req.on('data', chunk => chunks.push(chunk));
     req.on('end', () => {
@@ -90,6 +96,12 @@ router.post('/', (req, res, next) => {
 router.patch('/', (req, res, next) => {
 	fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.patch\n');
 
+	if (!req.headers.authorization) {
+		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.patch : No Authorization token.\n');
+		res.status(401).status('Unauthorized');
+		return;
+	}
+	
 	const chunks = [];
     req.on('data', chunk => chunks.push(chunk));
     req.on('end', () => {

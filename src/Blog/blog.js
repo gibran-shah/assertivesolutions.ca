@@ -59,8 +59,12 @@ class Blog extends Component {
         event.preventDefault();
 
         if (this.state.editPostId) {
-            axios.patch('/blogs', {postId: this.state.editPostId, post: this.state.newPost})
-                .then(response => {
+            axios.patch('/blogs', {
+                    postId: this.state.editPostId,
+                    post: this.state.newPost
+                }, {
+                    headers: {Authorization: this.state.accessToken}
+                }).then(response => {
                     const updatedPost = this.state.newPost;
                     const existingPost = this.state.blogPosts.find(p => p.id === this.state.editPostId);
                     existingPost.title = updatedPost.title;
@@ -71,8 +75,12 @@ class Blog extends Component {
                     console.log('err=', err);
                 }); 
         } else {
-            axios.post('/blogs', this.state.newPost)
-                .then(response => {
+            axios.post('/blogs', {
+                    title: this.state.newPost.title,
+                    body: this.state.newPost.body
+                }, {
+                    headers: {Authorization: this.state.accessToken}
+                }).then(response => {
                     const newPostId = response.data.id;
                     const createdAt = response.data.createdAt;
                     const updatedAt = createdAt;

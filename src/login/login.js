@@ -19,20 +19,23 @@ class Login extends Component {
 
     signin = (e) => {
         e.preventDefault();
-        axios.get('/auth', {headers: {
-            username: this.usernameRef.current.value,
-            password: this.passwordRef.current.value}}).then(response => {
-                this.setState({
-                    accessToken: response.data.user.stsTokenManager.accessToken,
-                    loginFailed: false
-                });
-                this.props.loginSuccess(response.data.user.stsTokenManager.accessToken);
-            }).catch(err => {
-                this.setState({
-                    accessToken: null,
-                    loginFailed: true
-                });
+        axios.get('/auth', {
+            headers: {
+                username: this.usernameRef.current.value,
+                password: this.passwordRef.current.value
+            }
+        }).then(response => {
+            this.setState({
+                accessToken: response.data.user.stsTokenManager.accessToken,
+                loginFailed: false
             });
+            this.props.loginSuccess(response.data.user.stsTokenManager.accessToken);
+        }).catch(err => {
+            this.setState({
+                accessToken: null,
+                loginFailed: true
+            });
+        });
     }
 
     togglePasswordType = () => {
