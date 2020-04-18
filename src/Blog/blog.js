@@ -35,7 +35,9 @@ class Blog extends Component {
         for (var index = 0; index < this.state.blogPosts.length; index++) {
             const post = this.state.blogPosts[index];
             rows.push(<Card key={index} variant="outlined">
-                    <CardContent><BlogCard post={post} editPostHandler={this.editPost}/></CardContent>
+                    <CardContent>
+                        <BlogCard post={post} canEdit={!!this.state.accessToken} editPostHandler={this.editPost}/>
+                    </CardContent>
                 </Card>);
         }
         return rows;
@@ -100,20 +102,56 @@ class Blog extends Component {
         this.setState({accessToken: accessToken});
     }
 
-    render() {
+    getWritePost = () => {
         let editPostBlurb = null;
         if (this.state.editPostId) {
             const editPost = this.state.blogPosts.find(p => p.id === this.state.editPostId);
             editPostBlurb = <span>Editing post <i>{editPost.title}</i>. <a href="#" onClick={this.clearForm}>New post.</a></span>
         }
 
+        return (
+            <div className="new-post-container">
+                <form onSubmit={this.submitHandler}>
+                    <div className="as-form">
+                        {editPostBlurb}
+                        <div className="new-post-title">
+                            <input className="title-input"
+                                ref={this.postTitleRef} 
+                                type="text"
+                                name="title"
+                                placeholder="title for new blog post"
+                                onChange={this.changeHandler}
+                                required />
+                        </div>
+                        <div className="new-post-body">
+                            <textarea className="body-input"
+                                ref={this.postBodyRef}
+                                name="body"
+                                placeholder="body for new blog post"
+                                onChange={this.changeHandler}
+                                required>
+                            </textarea>
+                        </div>
+                        <div className="new-post-submit">
+                            <button className="submit-button button-center" type="submit"><i className="fas fa-paper-plane">&nbsp;</i>Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        );
+    }
+
+    render() {
         let login = null;
+        let writePost = null;
         if (!this.state.accessToken) {
             login = (
                 <div className="login flex-row-end">
                     <Login loginSuccess={this.loginSuccess} />
                 </div>
             );
+        } else {
+            writePost = this.getWritePost();
         }
 
         return (
@@ -122,34 +160,7 @@ class Blog extends Component {
                 <div className="foreground-container">
                     {this.createTable()}
                 </div>
-                <div className="new-post-container">
-                    <form onSubmit={this.submitHandler}>
-                        <div className="as-form">
-                            {editPostBlurb}
-                            <div className="new-post-title">
-                                <input className="title-input"
-                                    ref={this.postTitleRef} 
-                                    type="text"
-                                    name="title"
-                                    placeholder="title for new blog post"
-                                    onChange={this.changeHandler}
-                                    required />
-                            </div>
-                            <div className="new-post-body">
-                                <textarea className="body-input"
-                                    ref={this.postBodyRef}
-                                    name="body"
-                                    placeholder="body for new blog post"
-                                    onChange={this.changeHandler}
-                                    required>
-                                </textarea>
-                            </div>
-                            <div className="new-post-submit">
-                                <button className="submit-button button-center" type="submit"><i className="fas fa-paper-plane">&nbsp;</i>Submit</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                {writePost}
             </div>
         );
     }
