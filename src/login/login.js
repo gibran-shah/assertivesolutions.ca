@@ -25,6 +25,7 @@ class Login extends Component {
                     accessToken: response.data.user.stsTokenManager.accessToken,
                     loginFailed: false
                 });
+                this.props.loginSuccess(response.data.user.stsTokenManager.accessToken);
             }).catch(err => {
                 this.setState({
                     accessToken: null,
@@ -65,7 +66,7 @@ class Login extends Component {
                                 required />
                         </div>
                         <div className="login-submit">
-                            <button className="submit-login-button" type="submit"><i class="fas fa-sign-in-alt">&nbsp;&nbsp;&nbsp;</i>Sign In</button>
+                            <button className="submit-login-button" type="submit"><i className="fas fa-sign-in-alt">&nbsp;&nbsp;&nbsp;</i>Sign In</button>
                         </div>
                     </div>
                 </form>

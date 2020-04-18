@@ -18,7 +18,8 @@ class Blog extends Component {
                 title: null,
                 body: null
             },
-            editPostId: null
+            editPostId: null,
+            accessToken: null
         };
 
         this.changeHandler = this.changeHandler.bind(this);
@@ -94,6 +95,11 @@ class Blog extends Component {
         this.postBodyRef.current.value = '';
     }
 
+    loginSuccess = accessToken => {
+        localStorage.setItem('accessToken', accessToken);
+        this.setState({accessToken: accessToken});
+    }
+
     render() {
         let editPostBlurb = null;
         if (this.state.editPostId) {
@@ -101,11 +107,18 @@ class Blog extends Component {
             editPostBlurb = <span>Editing post <i>{editPost.title}</i>. <a href="#" onClick={this.clearForm}>New post.</a></span>
         }
 
+        let login = null;
+        if (!this.state.accessToken) {
+            login = (
+                <div className="login flex-row-end">
+                    <Login loginSuccess={this.loginSuccess} />
+                </div>
+            );
+        }
+
         return (
             <div className="background-container">
-                <div className="login flex-row-end">
-                    <Login />
-                </div>
+                {login}
                 <div className="foreground-container">
                     {this.createTable()}
                 </div>
@@ -142,6 +155,8 @@ class Blog extends Component {
     }
 
     componentDidMount() {
+        this.setState({accessToken: localStorage.getItem('accessToken')});
+
         axios.get('/blogs').then(response => {
             if (response.data) {
                 const entries = Object.entries(response.data);

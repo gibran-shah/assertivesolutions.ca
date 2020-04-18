@@ -17,7 +17,6 @@ const initFirebase = () => {
 		measurementId: "G-8QSQBE00MH"
 	};
 	const app = fb.initializeApp(config);
-	app.firestore().settings({timestampsInSnapshots: true});
 	return app.firestore();
 }
 
@@ -30,7 +29,7 @@ router.get('/', (req, res, next) => {
 		try {
 			firestore = initFirebase();
 		} catch (err) {
-			fs.appendFileSync('log.txt', new Date().toString() + ': in router.get : Error initializing Firebase; err = ' + err + '\n');
+			fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.get : Error initializing Firebase; err = ' + err + '\n');
 			res.status(500).send('Error initializing Firebase.');
 			return;
 		}

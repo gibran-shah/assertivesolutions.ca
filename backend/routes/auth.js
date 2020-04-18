@@ -16,7 +16,6 @@ const initFirebase = () => {
 		measurementId: "G-8QSQBE00MH"
 	};
 	const app = fb.initializeApp(config);
-	app.firestore().settings({timestampsInSnapshots: true});
 	return app.firestore();
 }
 
@@ -43,6 +42,7 @@ router.get('/', (req, res, next) => {
 		fs.appendFileSync('log.txt', new Date().toString() + ': in auth.js : router.get : user ' + email + ' successfully signed in.\n');
 		res.status(200).send(JSON.stringify(user));
 	}).catch(err => {
+		fs.appendFileSync('log.txt', new Date().toString() + ': in auth.js : router.get : Login failed for user ' + email + '.\n');
 		res.status(401).send();
 	});
 
