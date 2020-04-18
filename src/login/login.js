@@ -9,7 +9,8 @@ class Login extends Component {
 
         this.state = {
             accessToken: null,
-            loginFailed: false
+            loginFailed: false,
+            passwordType: 'password'
         };
 
         this.usernameRef = React.createRef();
@@ -34,7 +35,15 @@ class Login extends Component {
             });
     }
 
+    togglePasswordType = () => {
+        this.setState({passwordType: this.state.passwordType === 'password' ? 'text' : 'password'});
+    }
+
     render() {
+
+        let passwordType = this.state.passwordType;
+        let hidePasswordIconClass = 'far fa-eye hide-show-password';
+        if (passwordType === 'text') hidePasswordIconClass = 'far fa-eye-slash hide-show-password';
 
         let formClass = null;
         let loginFailedDiv = null;
@@ -59,11 +68,12 @@ class Login extends Component {
                                 required />
                         </div>
                         <div className="form-element flex-column-end">
-                            <input type="password"
+                            <input type={passwordType}
                                 placeholder="Password"
                                 name="password"
                                 ref={this.passwordRef}
                                 required />
+                            <i className={hidePasswordIconClass} onClick={this.togglePasswordType}></i>
                         </div>
                         <div className="login-submit">
                             <button className="submit-login-button" type="submit"><i className="fas fa-sign-in-alt">&nbsp;&nbsp;&nbsp;</i>Sign In</button>

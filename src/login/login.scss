@@ -31,8 +31,16 @@ input {
     margin: 0;
     width: 500px;
     padding-left: 20px;
+    position: relative;
 }
 
+.hide-show-password {
+    position: absolute;
+    right: 0;
+    top: 8px;
+    cursor: pointer;
+    z-index: 2;
+}
 
 .login-failed {
     margin-bottom: -16px;
