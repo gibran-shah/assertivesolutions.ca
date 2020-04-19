@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import './blog.scss';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import axios from '../axios/axiosInstance';
 import BlogCard from './blogCard';
 import '../App.scss'
 import Login from '../login/login';
+import firestore from '../firebase/firebase';
 
 class Blog extends Component {
 
@@ -19,7 +19,7 @@ class Blog extends Component {
                 body: null
             },
             editPostId: null,
-            accessToken: null
+            loggedIn: false
         };
 
         this.changeHandler = this.changeHandler.bind(this);
@@ -36,7 +36,7 @@ class Blog extends Component {
             const post = this.state.blogPosts[index];
             rows.push(<Card key={index} variant="outlined">
                     <CardContent>
-                        <BlogCard post={post} canEdit={!!this.state.accessToken} editPostHandler={this.editPost}/>
+                        <BlogCard post={post} canEdit={this.state.loggedIn} editPostHandler={this.editPost}/>
                     </CardContent>
                 </Card>);
         }
@@ -59,40 +59,35 @@ class Blog extends Component {
         event.preventDefault();
 
         if (this.state.editPostId) {
-            axios.patch('/blogs', {
-                    postId: this.state.editPostId,
-                    post: this.state.newPost
-                }, {
-                    headers: {Authorization: this.state.accessToken}
-                }).then(response => {
-                    const updatedPost = this.state.newPost;
+            const post = {
+                title: this.postTitleRef.current.value,
+                body: this.postBodyRef.current.value,
+                updatedAt: Date.now()
+            };
+            firestore.collection('blogposts').doc(this.state.editPostId).set(post, {merge: true})
+                .then(response => {
                     const existingPost = this.state.blogPosts.find(p => p.id === this.state.editPostId);
-                    existingPost.title = updatedPost.title;
-                    existingPost.body = updatedPost.body;
-                    existingPost.updatedAt = updatedPost.updatedAt;
+                    existingPost.title = post.title;
+                    existingPost.body = post.body;
+                    existingPost.updatedAt = post.updatedAt;
+                    this.state.blogPosts.sort((p1, p2) => p1.updatedAt > p2.updatedAt ? -1 : 1);
                     this.clearForm();
-                }, err => {
+                }).catch(err => {
                     console.log('err=', err);
-                }); 
+                });
         } else {
-            axios.post('/blogs', {
-                    title: this.state.newPost.title,
-                    body: this.state.newPost.body
-                }, {
-                    headers: {Authorization: this.state.accessToken}
-                }).then(response => {
-                    const newPostId = response.data.id;
-                    const createdAt = response.data.createdAt;
-                    const updatedAt = createdAt;
-                    this.state.blogPosts.unshift({
-                        id: newPostId,
-                        title: this.state.newPost.title,
-                        body: this.state.newPost.body,
-                        createdAt: createdAt,
-                        updatedAt: updatedAt
-                    });
+            const now = Date.now();
+            const post = {
+                title: this.state.newPost.title,
+                body: this.state.newPost.body,
+                createdAt: now,
+                updatedAt: now
+            };
+            firestore.collection('blogposts').add(post)
+                .then(docRef => {
+                    this.state.blogPosts.unshift({id: docRef.id, ...post});
                     this.clearForm();
-                }, err => {
+                }).catch(err => {
                     console.log('err=', err);
                 });
         }
@@ -105,9 +100,9 @@ class Blog extends Component {
         this.postBodyRef.current.value = '';
     }
 
-    loginSuccess = accessToken => {
-        localStorage.setItem('accessToken', accessToken);
-        this.setState({accessToken: accessToken});
+    loginSuccess = () => {
+        this.setState({loggedIn: true});
+        localStorage.setItem('loggedIn', true);
     }
 
     getWritePost = () => {
@@ -152,7 +147,7 @@ class Blog extends Component {
     render() {
         let login = null;
         let writePost = null;
-        if (!this.state.accessToken) {
+        if (!this.state.loggedIn) {
             login = (
                 <div className="login flex-row-end">
                     <Login loginSuccess={this.loginSuccess} />
@@ -174,15 +169,14 @@ class Blog extends Component {
     }
 
     componentDidMount() {
-        this.setState({accessToken: localStorage.getItem('accessToken')});
+        this.setState({loggedIn: localStorage.getItem('loggedIn')});
 
-        axios.get('/blogs').then(response => {
-            if (response.data) {
-                const entries = Object.entries(response.data);
-                this.setState({blogPosts: entries.map(p => Object.assign({id: p[0]}, {...p[1]}))
-                    .sort((p1, p2) => p1.updatedAt > p2.updatedAt ? -1 : 1)});
-            }
-        }, err => {
+        firestore.collection('blogposts').get().then(snapshot => {
+            const posts = [];
+            snapshot.forEach(doc => posts.push({id: doc.id, ...doc.data()}));
+            posts.sort((p1, p2) => p1.updatedAt > p2.updatedAt ? -1 : 1);
+            this.setState({blogPosts: posts});
+        }).catch(err => {
             console.log('err=', err);
         });
     }

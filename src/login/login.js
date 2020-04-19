@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './login.scss';
-import axios from '../axios/axiosInstance';
+import fb from 'firebase';
 
 class Login extends Component {
 
@@ -19,23 +19,14 @@ class Login extends Component {
 
     signin = (e) => {
         e.preventDefault();
-        axios.get('/auth', {
-            headers: {
-                username: this.usernameRef.current.value,
-                password: this.passwordRef.current.value
-            }
-        }).then(response => {
-            this.setState({
-                accessToken: response.data.user.stsTokenManager.accessToken,
-                loginFailed: false
+
+        fb.auth().signInWithEmailAndPassword(this.usernameRef.current.value, this.passwordRef.current.value)
+            .then(user => {
+                this.setState({loginFailed: false});
+                this.props.loginSuccess();
+            }).catch(err => {
+                this.setState({loginFailed: true});
             });
-            this.props.loginSuccess(response.data.user.stsTokenManager.accessToken);
-        }).catch(err => {
-            this.setState({
-                accessToken: null,
-                loginFailed: true
-            });
-        });
     }
 
     togglePasswordType = () => {
