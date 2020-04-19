@@ -138,3 +138,5 @@ router.patch('/', (req, res, next) => {
 });
 
 module.exports = router;
+
+// https://stackoverflow.com/questions/61298999/how-to-write-a-firebase-rule-to-check-access-token

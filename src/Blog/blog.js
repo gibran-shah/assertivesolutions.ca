@@ -84,7 +84,7 @@ class Blog extends Component {
                     const newPostId = response.data.id;
                     const createdAt = response.data.createdAt;
                     const updatedAt = createdAt;
-                    this.state.blogPosts.push({
+                    this.state.blogPosts.unshift({
                         id: newPostId,
                         title: this.state.newPost.title,
                         body: this.state.newPost.body,
@@ -180,7 +180,7 @@ class Blog extends Component {
             if (response.data) {
                 const entries = Object.entries(response.data);
                 this.setState({blogPosts: entries.map(p => Object.assign({id: p[0]}, {...p[1]}))
-                    .sort((p1, p2) => p1.updatedAt > p2.updatedAt ? 1 : -1)});
+                    .sort((p1, p2) => p1.updatedAt > p2.updatedAt ? -1 : 1)});
             }
         }, err => {
             console.log('err=', err);

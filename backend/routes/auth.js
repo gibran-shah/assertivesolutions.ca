@@ -38,7 +38,7 @@ router.get('/', (req, res, next) => {
 	fbApp = fb.apps[0];
 	fs.appendFileSync('log.txt', new Date().toString() + ': in auth.js : router.get : Firebase initialized.\n');
 	
-	fb.apps[0].auth().signInWithEmailAndPassword(email, password).then(user => {
+	fbApp.auth().signInWithEmailAndPassword(email, password).then(user => {
 		fs.appendFileSync('log.txt', new Date().toString() + ': in auth.js : router.get : user ' + email + ' successfully signed in.\n');
 		res.status(200).send(JSON.stringify(user));
 	}).catch(err => {
