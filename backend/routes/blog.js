@@ -1,7 +1,7 @@
 const exp = require('express');
 const fs = require('fs');
-const axios = require('./axios-instance');
 const fb = require('firebase');
+const fbAdmin = require('firebase-admin');
 
 const router = exp.Router();
 
@@ -50,7 +50,9 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
 	fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post\n');
 
-	if (!req.headers.authorization) {
+	const accessToken = req.headers.authorization;
+
+	if (!accessToken) {
 		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : No Authorization token.\n');
 		res.status(401).status('Unauthorized');
 		return;
@@ -58,8 +60,35 @@ router.post('/', (req, res, next) => {
 
 	const chunks = [];
     req.on('data', chunk => chunks.push(chunk));
-    req.on('end', () => {
+    req.on('end', async () => {
 		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : Data chunked\n');
+		
+		if (!fbAdmin.apps.length) {
+			try {
+				const serviceAccount = require("C:/inetpub/wwwroot/assertivesolutions/backend/assertivesolutions2-firebase-adminsdk-zrq1r-0292d968e4.json");
+				fbAdmin.initializeApp({
+					credential: fbAdmin.credential.cert(serviceAccount),
+					databaseURL: 'https://assertivesolutions2.firebaseio.com'
+				});
+			} catch (err) {
+				fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : Error initializing firebase admin; err = ' + err + '\n');
+				res.status(500).send('Error initializing firebase admin.');
+				return;
+			}
+			fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : Firebase Admin initialized.\n');
+		}
+		
+		let decodedToken;
+		try {
+			decodedToken = await fbAdmin.auth().verifyIdToken(accessToken);
+		} catch (err) {
+			fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : Error verifying access token; err = ' + err + '\n');
+			res.status(401).send('Unauthorized');
+			return;
+		}
+
+		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : decodedToken = ' + JSON.stringify(decodedToken) + '\n');	
+		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : User ' + decodedToken.email + ' is authorized to post.\n');
 		
         const data = JSON.parse(chunks);
 		const post = {};
@@ -96,7 +125,9 @@ router.post('/', (req, res, next) => {
 router.patch('/', (req, res, next) => {
 	fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.patch\n');
 
-	if (!req.headers.authorization) {
+	const accessToken = req.headers.authorization;
+
+	if (!accessToken) {
 		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.patch : No Authorization token.\n');
 		res.status(401).status('Unauthorized');
 		return;
@@ -104,9 +135,33 @@ router.patch('/', (req, res, next) => {
 	
 	const chunks = [];
     req.on('data', chunk => chunks.push(chunk));
-    req.on('end', () => {
+    req.on('end', async () => {
 		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.patch : Data chunked\n');
 		
+		if (!fbAdmin.apps.length) {
+			try {
+				const serviceAccount = require("C:/inetpub/wwwroot/assertivesolutions/backend/assertivesolutions2-firebase-adminsdk-zrq1r-0292d968e4.json");
+				fbAdmin.initializeApp({
+					credential: fbAdmin.credential.cert(serviceAccount),
+					databaseURL: 'https://assertivesolutions2.firebaseio.com'
+				});
+			} catch (err) {
+				fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.patch : Error initializing firebase admin; err = ' + err + '\n');
+				res.status(500).send('Error initializing firebase admin.');
+				return;
+			}
+			fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.patch : Firebase Admin initialized.\n');
+		}
+		
+		let decodedToken;
+		try {
+			decodedToken = await fbAdmin.auth().verifyIdToken(accessToken);
+		} catch (err) {
+			fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.patch : Error verifying access token; err = ' + err + '\n');
+			res.status(401).send('Unauthorized');
+			return;
+		}
+	
         const data = JSON.parse(chunks);
 		const post = data.post;
 		const postId = data.postId;
@@ -129,7 +184,7 @@ router.patch('/', (req, res, next) => {
 		
 		firestore.collection('blogposts').doc(postId).set(post, {merge: true}).then(() => {
 			fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.patch : Blog post patched.\n');
-			res.status(200).send(JSON.stringify('Post updated.'));
+			res.status(200).send({updatedAt: post.updatedAt});
 		}).catch(err => {
 			fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.patch : Error patching blog post: ' + err + '\n');
 			res.status(500).send('Error patching blog post.');
