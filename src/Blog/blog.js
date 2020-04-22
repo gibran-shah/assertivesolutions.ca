@@ -58,18 +58,22 @@ class Blog extends Component {
     submitHandler(event) {
         event.preventDefault();
 
+//const expiredToken = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjBiYWJiMjI0NDBkYTAzMmM1ZDAwNDJjZGFhOWQyODVjZjhkMjAyYzQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vYXNzZXJ0aXZlc29sdXRpb25zMiIsImF1ZCI6ImFzc2VydGl2ZXNvbHV0aW9uczIiLCJhdXRoX3RpbWUiOjE1ODc0Mzg3ODYsInVzZXJfaWQiOiJrV2hhZ2ZIano3WnpCZ25iUVNXektLd21WMjIyIiwic3ViIjoia1doYWdmSGp6N1p6QmduYlFTV3pLS3dtVjIyMiIsImlhdCI6MTU4NzQzODc4NiwiZXhwIjoxNTg3NDQyMzg2LCJlbWFpbCI6Imp1bmsubWFpbDI5MTI3NkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsianVuay5tYWlsMjkxMjc2QGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.HPTHr8u3sQyZZwnQ3QMGTfIzYKOxpnpXHcFPFkxLCFV1k_93FKMqk10cKLhxJi6cnYNYCI4taBLqBne6xTt171SkxXilfJQbSf6MJdSoG5fiB20smU9XgiB6vxbOfmnl3KJbcHUMZcHdXPdebPkOgB6A-IF8ZVywHXD4ORDNeUr1JpND6InEoJUGns191nn_7140krLDoaH-pTYl-1UBFoOJSB4TzjXNcxR99gvmjvZqlaz_pUDGYb1emAOUMtKykWFPf3tgD8mLxsWiOUsxToDH6YGPnZE2oglm172x3k63SzuEV9N4SX1sgIBCpGTZHEjCeYt_9pVsM3BrmO94iQ';
+
         if (this.state.editPostId) {
-            const post = {
-                title: this.postTitleRef.current.value,
-                body: this.postBodyRef.current.value,
-                updatedAt: Date.now()
-            };
-            firestore.collection('blogposts').doc(this.state.editPostId).set(post, {merge: true})
-                .then(response => {
+            axios.patch('/blogs', {
+                    postId: this.state.editPostId,
+                    post: {
+                        title: this.postTitleRef.current.value,
+                        body: this.postBodyRef.current.value
+                    }
+                }, {
+                    headers: {Authorization: this.state.accessToken}
+                }).then(response => {
                     const existingPost = this.state.blogPosts.find(p => p.id === this.state.editPostId);
-                    existingPost.title = post.title;
-                    existingPost.body = post.body;
-                    existingPost.updatedAt = post.updatedAt;
+                    existingPost.title = this.postTitleRef.current.value;
+                    existingPost.body = this.postBodyRef.current.value;
+                    existingPost.updatedAt = response.data.updatedAt;
                     this.state.blogPosts.sort((p1, p2) => p1.updatedAt > p2.updatedAt ? -1 : 1);
                     this.clearForm();
                 }).catch(err => {
