@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import BlogCard from './blogCard';
 import '../App.scss'
 import Login from '../login/login';
-import firestore from '../firebase/firebase';
+import axios from '../axios/axiosInstance';
 
 class Blog extends Component {
 
@@ -19,7 +19,7 @@ class Blog extends Component {
                 body: null
             },
             editPostId: null,
-            loggedIn: false
+            accessToken: null
         };
 
         this.changeHandler = this.changeHandler.bind(this);
@@ -36,7 +36,7 @@ class Blog extends Component {
             const post = this.state.blogPosts[index];
             rows.push(<Card key={index} variant="outlined">
                     <CardContent>
-                        <BlogCard post={post} canEdit={this.state.loggedIn} editPostHandler={this.editPost}/>
+                        <BlogCard post={post} canEdit={!!this.state.accessToken} editPostHandler={this.editPost}/>
                     </CardContent>
                 </Card>);
         }
@@ -80,20 +80,23 @@ class Blog extends Component {
                     console.log('err=', err);
                 });
         } else {
-            const now = Date.now();
-            const post = {
-                title: this.state.newPost.title,
-                body: this.state.newPost.body,
-                createdAt: now,
-                updatedAt: now
-            };
-            firestore.collection('blogposts').add(post)
-                .then(docRef => {
-                    this.state.blogPosts.unshift({id: docRef.id, ...post});
-                    this.clearForm();
-                }).catch(err => {
-                    console.log('err=', err);
+            axios.post('/blogs', {
+                title: this.postTitleRef.current.value,
+                body: this.postBodyRef.current.value
+            }, {
+                headers: {Authorization: this.state.accessToken}
+            }).then(response => {
+                this.state.blogPosts.unshift({
+                    id: response.data.id,
+                    createdAt: response.data.createdAt,
+                    updatedAt: response.data.createdAt,
+                    title: this.postTitleRef.current.value,
+                    body: this.postBodyRef.current.value
                 });
+                this.clearForm();
+            }).catch(err => {
+                console.log('err=', err);
+            });
         }
     }
 
@@ -104,9 +107,9 @@ class Blog extends Component {
         this.postBodyRef.current.value = '';
     }
 
-    loginSuccess = () => {
-        this.setState({loggedIn: true});
-        localStorage.setItem('loggedIn', true);
+    loginSuccess = accessToken => {
+        localStorage.setItem('accessToken', accessToken);
+        this.setState({accessToken});
     }
 
     getWritePost = () => {
@@ -151,7 +154,7 @@ class Blog extends Component {
     render() {
         let login = null;
         let writePost = null;
-        if (!this.state.loggedIn) {
+        if (!this.state.accessToken) {
             login = (
                 <div className="login flex-row-end">
                     <Login loginSuccess={this.loginSuccess} />
@@ -173,14 +176,15 @@ class Blog extends Component {
     }
 
     componentDidMount() {
-        this.setState({loggedIn: localStorage.getItem('loggedIn')});
+        this.setState({accessToken: localStorage.getItem('accessToken')});
 
-        firestore.collection('blogposts').get().then(snapshot => {
-            const posts = [];
-            snapshot.forEach(doc => posts.push({id: doc.id, ...doc.data()}));
-            posts.sort((p1, p2) => p1.updatedAt > p2.updatedAt ? -1 : 1);
-            this.setState({blogPosts: posts});
-        }).catch(err => {
+        axios.get('/blogs').then(response => {
+            if (response.data) {
+                const entries = Object.entries(response.data);
+                this.setState({blogPosts: entries.map(p => Object.assign({id: p[0]}, {...p[1]}))
+                    .sort((p1, p2) => p1.updatedAt > p2.updatedAt ? -1 : 1)});
+            }
+        }, err => {
             console.log('err=', err);
         });
     }
