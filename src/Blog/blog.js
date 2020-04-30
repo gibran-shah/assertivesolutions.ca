@@ -112,6 +112,11 @@ class Blog extends Component {
         this.setState({accessToken});
     }
 
+    logoutSuccess = () => {
+        localStorage.removeItem('accessToken');
+        this.setState({accessToken: null});
+    }
+
     getWritePost = () => {
         let editPostBlurb = null;
         if (this.state.editPostId) {
@@ -152,21 +157,18 @@ class Blog extends Component {
     }
 
     render() {
-        let login = null;
         let writePost = null;
-        if (!this.state.accessToken) {
-            login = (
-                <div className="login flex-row-end">
-                    <Login loginSuccess={this.loginSuccess} />
-                </div>
-            );
-        } else {
+        if (!!this.state.accessToken) {
             writePost = this.getWritePost();
         }
 
         return (
             <div className="background-container">
-                {login}
+                <div className="login flex-row-end">
+                    <Login loginSuccess={this.loginSuccess}
+                        logoutSuccess={this.logoutSuccess}
+                        accessToken={this.state.accessToken} />
+                </div>
                 <div className="foreground-container">
                     {this.createTable()}
                 </div>
