@@ -87,7 +87,7 @@ router.post('/', (req, res, next) => {
 			return;
 		}
 
-		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : decodedToken = ' + JSON.stringify(decodedToken) + '\n');	
+		//fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : decodedToken = ' + JSON.stringify(decodedToken) + '\n');	
 		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : User ' + decodedToken.email + ' is authorized to post.\n');
 		
         const data = JSON.parse(chunks);

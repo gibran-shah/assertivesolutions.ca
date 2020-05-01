@@ -4,6 +4,7 @@ const cors = require('cors');
 const fs = require('fs');
 const contactRoutes = require('./routes/contact');
 const blogRoutes = require('./routes/blog');
+const authRoutes = require('./routes/auth');
 
 const app = exp();
 
@@ -26,6 +27,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 fs.appendFileSync('log.txt', new Date().toString() + ': CORS set up.\n');
+
 
 /*
 app.use(function(req, res, next) {
@@ -50,6 +52,7 @@ app.post('/contact', (req, res, next) => {
 */
 
 app.use('/blogs', blogRoutes);
+app.use('/auth', authRoutes);
 
 app.listen(port);
 
