@@ -1,3 +1,5 @@
+@import '../app.scss';
+
 .background-container {
     width: 80%;
     height: 100%;
@@ -71,5 +73,30 @@ form {
 
 textarea {
     height: 200px;
+}
+
+.image-upload-container {
+    text-align: left;
+    border: $secondaryColor solid 1px;
+    border-radius: 5px;
+    padding: 10px 0 12px 5px;
+    margin-bottom: 40px!important;
+}
+
+.image-upload {
+    display: none;
+}
+
+.image-upload-label {
+    background-color: $secondaryColor;
+    border-radius: 5px;
+    padding: 8px;
+    color: white!important;
+    cursor: pointer;
+}
+
+.filename-label {
+    margin-left: 5px;
+    font-size: 12pt!important;
 }
 

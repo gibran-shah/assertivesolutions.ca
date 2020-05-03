@@ -19,7 +19,8 @@ class Blog extends Component {
                 body: null
             },
             editPostId: null,
-            accessToken: null
+            accessToken: null,
+            filename: null
         };
 
         this.changeHandler = this.changeHandler.bind(this);
@@ -28,6 +29,7 @@ class Blog extends Component {
 
         this.postTitleRef = React.createRef();
         this.postBodyRef = React.createRef();
+        this.selectedFileRef = React.createRef();
     }
 
     createTable() {
@@ -118,6 +120,13 @@ class Blog extends Component {
         this.setState({accessToken: null});
     }
 
+    fileSelected = (e) => {
+        if (e.target.files.length) {
+            const filename = e.target.files[0].name;
+            this.setState({filename: filename});
+        }
+    }
+
     getWritePost = () => {
         let editPostBlurb = null;
         if (this.state.editPostId) {
@@ -147,6 +156,20 @@ class Blog extends Component {
                                 onChange={this.changeHandler}
                                 required>
                             </textarea>
+                        </div>
+                        <div className="image-upload-container">
+                            <input className="image-upload"
+                                type="file"
+                                name="file"
+                                id="file"
+                                onChange={this.fileSelected} />
+                            <label htmlFor="file"
+                                className="image-upload-label" >
+                                    upload an image
+                            </label>
+                            <label className="filename-label" >
+                                {this.state.filename}
+                            </label>
                         </div>
                         <div className="new-post-submit">
                             <button className="submit-button button-center" type="submit"><i className="fas fa-paper-plane">&nbsp;</i>Submit</button>
