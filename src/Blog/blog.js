@@ -20,7 +20,7 @@ class Blog extends Component {
             },
             editPostId: null,
             accessToken: null,
-            filename: null
+            file: null
         };
 
         this.changeHandler = this.changeHandler.bind(this);
@@ -63,6 +63,11 @@ class Blog extends Component {
 //const expiredToken = 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjBiYWJiMjI0NDBkYTAzMmM1ZDAwNDJjZGFhOWQyODVjZjhkMjAyYzQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vYXNzZXJ0aXZlc29sdXRpb25zMiIsImF1ZCI6ImFzc2VydGl2ZXNvbHV0aW9uczIiLCJhdXRoX3RpbWUiOjE1ODc0Mzg3ODYsInVzZXJfaWQiOiJrV2hhZ2ZIano3WnpCZ25iUVNXektLd21WMjIyIiwic3ViIjoia1doYWdmSGp6N1p6QmduYlFTV3pLS3dtVjIyMiIsImlhdCI6MTU4NzQzODc4NiwiZXhwIjoxNTg3NDQyMzg2LCJlbWFpbCI6Imp1bmsubWFpbDI5MTI3NkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsianVuay5tYWlsMjkxMjc2QGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.HPTHr8u3sQyZZwnQ3QMGTfIzYKOxpnpXHcFPFkxLCFV1k_93FKMqk10cKLhxJi6cnYNYCI4taBLqBne6xTt171SkxXilfJQbSf6MJdSoG5fiB20smU9XgiB6vxbOfmnl3KJbcHUMZcHdXPdebPkOgB6A-IF8ZVywHXD4ORDNeUr1JpND6InEoJUGns191nn_7140krLDoaH-pTYl-1UBFoOJSB4TzjXNcxR99gvmjvZqlaz_pUDGYb1emAOUMtKykWFPf3tgD8mLxsWiOUsxToDH6YGPnZE2oglm172x3k63SzuEV9N4SX1sgIBCpGTZHEjCeYt_9pVsM3BrmO94iQ';
 //const loggedOutToken = 'eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg4ODQ4YjVhZmYyZDUyMDEzMzFhNTQ3ZDE5MDZlNWFhZGY2NTEzYzgiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vYXNzZXJ0aXZlc29sdXRpb25zMiIsImF1ZCI6ImFzc2VydGl2ZXNvbHV0aW9uczIiLCJhdXRoX3RpbWUiOjE1ODgzMDE5NDMsInVzZXJfaWQiOiJrV2hhZ2ZIano3WnpCZ25iUVNXektLd21WMjIyIiwic3ViIjoia1doYWdmSGp6N1p6QmduYlFTV3pLS3dtVjIyMiIsImlhdCI6MTU4ODMwMTk0MywiZXhwIjoxNTg4MzA1NTQzLCJlbWFpbCI6Imp1bmsubWFpbDI5MTI3NkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsianVuay5tYWlsMjkxMjc2QGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.l25VzSftTWi8NNkxWkOHsAKNhlVt2irXPKw4f7EQIuhHutv_nLbj_TBwFQyNCFQ5DT1YpKXa2eCKfQl-8H1ZbrSiHRNjglLJZpdAUNVRn_fk8J4XRnVQuQLYfwQuSqFLE5aewmMYRQLzobGTG5DMhiQrEBmyvsD4xl27dOyA0IIBgpSOYI4ceOE3D3AV2PxF9xuYayJ4E3dkp_XrgbZp6bgx3-RdM5xfNPWtMSCWuB-HuoLNPMd3TPbv-RnKnhjtFrT7u9OEfFxKa4Ix961BuUQtiaIhssC9lTcNTQ-xUdZWhXEc_yaYBsJKaj6JumRr9zmWaoK9n8pvRmvYK3V_Bw';
 
+        let formData = new FormData();
+        if (this.state.file) {
+            formData.append('image', this.state.file);
+        }
+
         if (this.state.editPostId) {
             axios.patch('/blogs', {
                     postId: this.state.editPostId,
@@ -83,11 +88,13 @@ class Blog extends Component {
                     console.log('err=', err);
                 });
         } else {
-            axios.post('/blogs', {
-                title: this.postTitleRef.current.value,
-                body: this.postBodyRef.current.value
-            }, {
-                headers: {Authorization: this.state.accessToken}
+            formData.append('title', this.postTitleRef.current.value);
+            formData.append('body', this.postBodyRef.current.value);
+            axios.post('/blogs', formData, {
+                headers: {
+                    Authorization: this.state.accessToken,
+                    'content-type': 'multipart/form-data'
+                }
             }).then(response => {
                 this.state.blogPosts.unshift({
                     id: response.data.id,
@@ -122,8 +129,7 @@ class Blog extends Component {
 
     fileSelected = (e) => {
         if (e.target.files.length) {
-            const filename = e.target.files[0].name;
-            this.setState({filename: filename});
+            this.setState({file: e.target.files[0]});
         }
     }
 
@@ -162,13 +168,14 @@ class Blog extends Component {
                                 type="file"
                                 name="file"
                                 id="file"
-                                onChange={this.fileSelected} />
+                                onChange={this.fileSelected}
+                                accept=".jpg, .jpeg, .gif, .png, .bmp" />
                             <label htmlFor="file"
                                 className="image-upload-label" >
                                     upload an image
                             </label>
                             <label className="filename-label" >
-                                {this.state.filename}
+                                {this.state.file ? this.state.file.name : null}
                             </label>
                         </div>
                         <div className="new-post-submit">

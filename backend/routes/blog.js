@@ -2,6 +2,8 @@ const exp = require('express');
 const fs = require('fs');
 const fb = require('firebase');
 const fbAdmin = require('firebase-admin');
+//https://flaviocopes.com/express-forms-files/
+const formidable = require('formidable');
 
 const router = exp.Router();
 
@@ -48,20 +50,25 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+	
 	fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post\n');
+	
+	new formidable.IncomingForm().parse(req, async (err, fields, files) => {
+		if (err) {
+			fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : Error parsing form.\n');
+			res.status(500).status('Error parsing form.');
+			return;
+		}
+		
+		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : form parsed.\n');
+		
+		const accessToken = req.headers.authorization;
 
-	const accessToken = req.headers.authorization;
-
-	if (!accessToken) {
-		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : No Authorization token.\n');
-		res.status(401).status('Unauthorized');
-		return;
-	}
-
-	const chunks = [];
-    req.on('data', chunk => chunks.push(chunk));
-    req.on('end', async () => {
-		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : Data chunked\n');
+		if (!accessToken) {
+			fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : No Authorization token.\n');
+			res.status(401).status('Unauthorized');
+			return;
+		}
 		
 		if (!fbAdmin.apps.length) {
 			try {
@@ -86,14 +93,12 @@ router.post('/', (req, res, next) => {
 			res.status(401).send('Unauthorized');
 			return;
 		}
-
-		//fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : decodedToken = ' + JSON.stringify(decodedToken) + '\n');	
+	
 		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : User ' + decodedToken.email + ' is authorized to post.\n');
 		
-        const data = JSON.parse(chunks);
 		const post = {};
-		post.title = data.title;
-		post.body = data.body;
+		post.title = fields.title;
+		post.body = fields.body;
 		post.createdAt = Date.now();
 		post.updatedAt = post.createdAt;
 		
@@ -110,6 +115,7 @@ router.post('/', (req, res, next) => {
 				return;	
 			}
 		}
+		
 		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : Firebase initialized.\n');
 		
 		firestore.collection('blogposts').add(post).then(docRef => {
