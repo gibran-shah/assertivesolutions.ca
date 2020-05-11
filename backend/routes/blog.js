@@ -131,18 +131,20 @@ router.post('/', (req, res, next) => {
 router.patch('/', (req, res, next) => {
 	fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.patch\n');
 
-	const accessToken = req.headers.authorization;
+	new formidable.IncomingForm().parse(req, async (err, fields, files) => {
+		if (err) {
+			fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.patch : Error parsing form.\n');
+			res.status(500).status('Error parsing form.');
+			return;
+		}
+		
+		const accessToken = req.headers.authorization;
 
-	if (!accessToken) {
-		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.patch : No Authorization token.\n');
-		res.status(401).status('Unauthorized');
-		return;
-	}
-	
-	const chunks = [];
-    req.on('data', chunk => chunks.push(chunk));
-    req.on('end', async () => {
-		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.patch : Data chunked\n');
+		if (!accessToken) {
+			fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.patch : No Authorization token.\n');
+			res.status(401).status('Unauthorized');
+			return;
+		}
 		
 		if (!fbAdmin.apps.length) {
 			try {
@@ -168,10 +170,12 @@ router.patch('/', (req, res, next) => {
 			return;
 		}
 	
-        const data = JSON.parse(chunks);
-		const post = data.post;
-		const postId = data.postId;
-		post.updatedAt = Date.now();	
+		const postId = fields.postId;
+		const post = {
+			title: fields.title,
+			body: fields.body,
+			updatedAt: Date.now()
+		};	
 		
 		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.patch : Post extracted. Initializing Firebase.\n');
 		

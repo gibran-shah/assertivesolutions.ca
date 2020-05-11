@@ -64,19 +64,19 @@ class Blog extends Component {
 //const loggedOutToken = 'eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg4ODQ4YjVhZmYyZDUyMDEzMzFhNTQ3ZDE5MDZlNWFhZGY2NTEzYzgiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vYXNzZXJ0aXZlc29sdXRpb25zMiIsImF1ZCI6ImFzc2VydGl2ZXNvbHV0aW9uczIiLCJhdXRoX3RpbWUiOjE1ODgzMDE5NDMsInVzZXJfaWQiOiJrV2hhZ2ZIano3WnpCZ25iUVNXektLd21WMjIyIiwic3ViIjoia1doYWdmSGp6N1p6QmduYlFTV3pLS3dtVjIyMiIsImlhdCI6MTU4ODMwMTk0MywiZXhwIjoxNTg4MzA1NTQzLCJlbWFpbCI6Imp1bmsubWFpbDI5MTI3NkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsianVuay5tYWlsMjkxMjc2QGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.l25VzSftTWi8NNkxWkOHsAKNhlVt2irXPKw4f7EQIuhHutv_nLbj_TBwFQyNCFQ5DT1YpKXa2eCKfQl-8H1ZbrSiHRNjglLJZpdAUNVRn_fk8J4XRnVQuQLYfwQuSqFLE5aewmMYRQLzobGTG5DMhiQrEBmyvsD4xl27dOyA0IIBgpSOYI4ceOE3D3AV2PxF9xuYayJ4E3dkp_XrgbZp6bgx3-RdM5xfNPWtMSCWuB-HuoLNPMd3TPbv-RnKnhjtFrT7u9OEfFxKa4Ix961BuUQtiaIhssC9lTcNTQ-xUdZWhXEc_yaYBsJKaj6JumRr9zmWaoK9n8pvRmvYK3V_Bw';
 
         let formData = new FormData();
+        formData.append('title', this.postTitleRef.current.value);
+        formData.append('body', this.postBodyRef.current.value);
         if (this.state.file) {
             formData.append('image', this.state.file);
         }
 
         if (this.state.editPostId) {
-            axios.patch('/blogs', {
-                    postId: this.state.editPostId,
-                    post: {
-                        title: this.postTitleRef.current.value,
-                        body: this.postBodyRef.current.value
+            formData.append('postId', this.state.editPostId);
+            axios.patch('/blogs', formData, {
+                    headers: {
+                        Authorization: this.state.accessToken,
+                        'content-type': 'multipart/form-data'
                     }
-                }, {
-                    headers: {Authorization: this.state.accessToken}
                 }).then(response => {
                     const existingPost = this.state.blogPosts.find(p => p.id === this.state.editPostId);
                     existingPost.title = this.postTitleRef.current.value;
@@ -88,8 +88,6 @@ class Blog extends Component {
                     console.log('err=', err);
                 });
         } else {
-            formData.append('title', this.postTitleRef.current.value);
-            formData.append('body', this.postBodyRef.current.value);
             axios.post('/blogs', formData, {
                 headers: {
                     Authorization: this.state.accessToken,
