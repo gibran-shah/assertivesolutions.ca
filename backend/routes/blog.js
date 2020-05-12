@@ -96,6 +96,19 @@ router.post('/', (req, res, next) => {
 	
 		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : User ' + decodedToken.email + ' is authorized to post.\n');
 		
+		const image = (files && files.image) ? files.image : null;
+		// image = {
+		// 	size: 22059,
+		// 	path: "C:\\Windows\\TEMP\\upload_de9718c33e999ea496a5cb0ce01d37c4",
+		// 	name: "castle (sketch).jpg",
+		// 	type: "image/jpeg",
+		// 	mtime: "2020-05-12T02:28:21.839Z"
+		// }
+		
+		if (image) {
+			fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : Image "' + image.name + '" extracted.\n');
+		}
+		
 		const post = {};
 		post.title = fields.title;
 		post.body = fields.body;
