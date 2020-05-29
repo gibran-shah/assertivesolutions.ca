@@ -110,9 +110,17 @@ class Blog extends Component {
 
     clearForm(e) {
         if (e) e.preventDefault();
-        this.setState({editPostId: null});
         this.postTitleRef.current.value = '';
         this.postBodyRef.current.value = '';
+        this.selectedFileRef.current.value = '';
+        this.setState({
+            editPostId: null,
+            newPost: {
+                title: null,
+                body: null
+            },
+            file: null
+        });
     }
 
     loginSuccess = accessToken => {
@@ -163,6 +171,7 @@ class Blog extends Component {
                         </div>
                         <div className="image-upload-container">
                             <input className="image-upload"
+                                ref={this.selectedFileRef}
                                 type="file"
                                 name="file"
                                 id="file"

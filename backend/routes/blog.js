@@ -2,7 +2,8 @@ const exp = require('express');
 const fs = require('fs');
 const fb = require('firebase');
 const fbAdmin = require('firebase-admin');
-//https://flaviocopes.com/express-forms-files/
+const fbs = require('@firebase/storage');
+// https://flaviocopes.com/express-forms-files/
 const formidable = require('formidable');
 
 const router = exp.Router();
@@ -13,7 +14,7 @@ const initFirebase = () => {
 		authDomain: "assertivesolutions2.firebaseapp.com",
 		databaseURL: "https://assertivesolutions2.firebaseio.com",
 		projectId: "assertivesolutions2",
-		storageBucket: "assertivesolutions2.appspot.com",
+		storageBucket: "gs://assertivesolutions2.appspot.com",
 		messagingSenderId: "1031899362745",
 		appId: "1:1031899362745:web:79abbebd6db7d499083268",
 		measurementId: "G-8QSQBE00MH"
@@ -96,19 +97,6 @@ router.post('/', (req, res, next) => {
 	
 		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : User ' + decodedToken.email + ' is authorized to post.\n');
 		
-		const image = (files && files.image) ? files.image : null;
-		// image = {
-		// 	size: 22059,
-		// 	path: "C:\\Windows\\TEMP\\upload_de9718c33e999ea496a5cb0ce01d37c4",
-		// 	name: "castle (sketch).jpg",
-		// 	type: "image/jpeg",
-		// 	mtime: "2020-05-12T02:28:21.839Z"
-		// }
-		
-		if (image) {
-			fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : Image "' + image.name + '" extracted.\n');
-		}
-		
 		const post = {};
 		post.title = fields.title;
 		post.body = fields.body;
@@ -130,6 +118,25 @@ router.post('/', (req, res, next) => {
 		}
 		
 		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : Firebase initialized.\n');
+		
+		if (files && files.image) {
+			// image = {
+			// 	size: 22059,
+			// 	path: "C:\\Windows\\TEMP\\upload_de9718c33e999ea496a5cb0ce01d37c4",
+			// 	name: "castle (sketch).jpg",
+			// 	type: "image/jpeg",
+			// 	mtime: "2020-05-12T02:28:21.839Z"
+			// }
+			try {
+				const bucket = fbAdmin.storage().bucket('gs://assertivesolutions2.appspot.com');
+				const result = await bucket.upload(files.image.path, {metadata: {contentType: files.image.type}});
+				const file = bucket.file(result[0].metadata.name);
+				post.imageUrl = await file.getSignedUrl({ action: 'read', expires: '03-09-2400'});
+				fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : Image url: ' + post.imageUrl + '\n');
+			} catch (err) {
+				fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : Error storing image or retrieving image URL. err:' + err + '\n');
+			}
+		}
 		
 		firestore.collection('blogposts').add(post).then(docRef => {
 			fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : Blog posted.\n');
