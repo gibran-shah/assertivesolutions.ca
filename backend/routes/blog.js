@@ -5,6 +5,7 @@ const fbAdmin = require('firebase-admin');
 const fbs = require('@firebase/storage');
 // https://flaviocopes.com/express-forms-files/
 const formidable = require('formidable');
+const ft = require('file-type');
 
 const router = exp.Router();
 
@@ -120,6 +121,7 @@ router.post('/', (req, res, next) => {
 		fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : Firebase initialized.\n');
 		
 		if (files && files.image) {
+			//fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : files.image = ' + JSON.stringify(files.image) + '\n');
 			// image = {
 			// 	size: 22059,
 			// 	path: "C:\\Windows\\TEMP\\upload_de9718c33e999ea496a5cb0ce01d37c4",
@@ -128,13 +130,21 @@ router.post('/', (req, res, next) => {
 			// 	mtime: "2020-05-12T02:28:21.839Z"
 			// }
 			try {
+				const acceptedMimes = ['image/jpg', 'image/jpeg', 'image/png', 'image/bmp', 'image/gif'];
+				const ftResult = await ft.fromFile(files.image.path);
+				if (!ftResult || !acceptedMimes.includes(ftResult.mime)) {
+					fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : Invalid mime type for image file: ' + (ftResult ? ftResult.mime : 'unknown') + '.\n');
+					return res.status(500).send('Invalid mime type for image file.');
+				}
+
 				const bucket = fbAdmin.storage().bucket('gs://assertivesolutions2.appspot.com');
 				const result = await bucket.upload(files.image.path, {metadata: {contentType: files.image.type}});
 				const file = bucket.file(result[0].metadata.name);
-				post.imageUrl = await file.getSignedUrl({ action: 'read', expires: '03-09-2400'});
+				post.imageUrl = await file.getSignedUrl({ action: 'read', expires: '12-31-9999'});
 				fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : Image url: ' + post.imageUrl + '\n');
 			} catch (err) {
 				fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : Error storing image or retrieving image URL. err:' + err + '\n');
+				return res.status(500).send('Error storing image or retrieving image URL.');
 			}
 		}
 		
