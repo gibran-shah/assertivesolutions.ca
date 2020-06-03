@@ -150,7 +150,11 @@ router.post('/', (req, res, next) => {
 		
 		firestore.collection('blogposts').add(post).then(docRef => {
 			fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : Blog posted.\n');
-			res.status(200).send(JSON.stringify({id: docRef.id, createdAt: post.createdAt}));
+			res.status(200).send(JSON.stringify({
+				id: docRef.id,
+				createdAt: post.createdAt,
+				imageUrl: post.imageUrl
+			}));
 		}).catch (err => {
 			fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : Error posting blog post: ' + err + '\n');
 			res.status(500).send('Error posting blog post.');

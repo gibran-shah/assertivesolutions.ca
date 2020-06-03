@@ -99,7 +99,8 @@ class Blog extends Component {
                     createdAt: response.data.createdAt,
                     updatedAt: response.data.createdAt,
                     title: this.postTitleRef.current.value,
-                    body: this.postBodyRef.current.value
+                    body: this.postBodyRef.current.value,
+                    imageUrl: response.data.imageUrl
                 });
                 this.clearForm();
             }).catch(err => {
