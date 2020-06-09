@@ -72,6 +72,10 @@ class Blog extends Component {
 
         if (this.state.editPostId) {
             formData.append('postId', this.state.editPostId);
+            const editPost = this.state.blogPosts.find(p => p.id === this.state.editPostId);
+            if (editPost.filename) {
+                formData.append('filename', editPost.filename);
+            }
             axios.patch('/blogs', formData, {
                     headers: {
                         Authorization: this.state.accessToken,
@@ -82,6 +86,8 @@ class Blog extends Component {
                     existingPost.title = this.postTitleRef.current.value;
                     existingPost.body = this.postBodyRef.current.value;
                     existingPost.updatedAt = response.data.updatedAt;
+                    existingPost.filename = response.data.filename ? response.data.filename : existingPost.filename;
+                    existingPost.imageUrl = response.data.imageUrl ? response.data.imageUrl : existingPost.imageUrl;
                     this.state.blogPosts.sort((p1, p2) => p1.updatedAt > p2.updatedAt ? -1 : 1);
                     this.clearForm();
                 }).catch(err => {
