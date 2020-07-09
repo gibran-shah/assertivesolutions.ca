@@ -6,7 +6,24 @@ import BlogCard from './blogCard';
 import '../App.scss'
 import Login from '../login/login';
 import axios from '../axios/axiosInstance';
+import moment from 'moment';
+import {
+    useTable,
+    useGroupBy,
+    useFilters,
+    useSortBy,
+    useExpanded,
+    usePagination
+} from 'react-table';
+import Table from './Table';
 
+// https://www.npmjs.com/package/react-table
+// https://github.com/tannerlinsley/react-table
+// https://github.com/tannerlinsley/react-table/blob/master/docs/quickstart.md
+// https://stackoverflow.com/questions/56663785/invalid-hook-call-hooks-can-only-be-called-inside-of-the-body-of-a-function-com
+// https://stackoverflow.com/questions/62462611/why-isnt-react-usememo-working-in-my-react-function
+// https://stackoverflow.com/questions/62649055/why-does-my-react-table-say-that-columns-are-undefined
+// https://chat.stackoverflow.com/rooms/17/javascript
 class Blog extends Component {
 
     constructor() {
@@ -33,16 +50,7 @@ class Blog extends Component {
     }
 
     createTable() {
-        const rows = [];
-        for (var index = 0; index < this.state.blogPosts.length; index++) {
-            const post = this.state.blogPosts[index];
-            rows.push(<Card key={index} variant="outlined">
-                    <CardContent>
-                        <BlogCard post={post} canEdit={!!this.state.accessToken} editPostHandler={this.editPost}/>
-                    </CardContent>
-                </Card>);
-        }
-        return rows;
+        return this.state.blogPosts.length ? <Table posts={this.state.blogPosts} /> : null;
     }
 
     editPost = (post) => {
@@ -130,13 +138,15 @@ class Blog extends Component {
         });
     }
 
-    loginSuccess = accessToken => {
+    loginSuccess = (accessToken, expiryTime) => {
         localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('expiryTime', expiryTime);
         this.setState({accessToken});
     }
 
     logoutSuccess = () => {
         localStorage.removeItem('accessToken');
+        localStorage.removeItem('expiryTime');
         this.setState({accessToken: null});
     }
 
@@ -223,8 +233,13 @@ class Blog extends Component {
     }
 
     componentDidMount() {
-        this.setState({accessToken: localStorage.getItem('accessToken')});
-
+        const expiryTime = localStorage.getItem('expiryTime');
+        if (moment.unix(expiryTime/1000) > moment()) {
+            this.setState({accessToken: localStorage.getItem('accessToken')});
+        } else {
+            this.setState({accessToken: null});
+        }
+        
         axios.get('/blogs').then(response => {
             if (response.data) {
                 const entries = Object.entries(response.data);

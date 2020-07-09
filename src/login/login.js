@@ -30,7 +30,10 @@ class Login extends Component {
                 accessToken: response.data.user.stsTokenManager.accessToken,
                 loginFailed: false
             });
-            this.props.loginSuccess(response.data.user.stsTokenManager.accessToken);
+            this.props.loginSuccess(
+                response.data.user.stsTokenManager.accessToken,
+                response.data.user.stsTokenManager.expirationTime
+            );
             this.usernameRef.current.value = '';
             this.passwordRef.current.value = '';
         }).catch(err => {

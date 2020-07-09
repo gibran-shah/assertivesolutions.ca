@@ -1,0 +1,35 @@
+.post {
+    padding-top: 20px;
+    min-height: 300px;
+}
+
+hr {
+    width: 60%;
+}
+
+.post-image {
+    max-width: 200px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+}
+
+.right {
+   float: right;
+   margin-left: 10px;
+}
+
+.left {
+    float: left;
+    margin-right: 10px;
+}
+
+.image-title-updated-at {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.post-body {
+    width: 100%;
+}
