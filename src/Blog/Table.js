@@ -8,6 +8,7 @@ import {
     usePagination
 } from 'react-table';
 import './Table.scss';
+import moment from 'moment';
 
 function Table(props) {
     const columns = React.useMemo(() => [
@@ -41,7 +42,7 @@ function Table(props) {
         });
     }
 
-    const data = React.useMemo(() => dataArray, []);
+    const data = React.useMemo(() => dataArray, [dataArray]);
 
     const {
         getTableProps,
@@ -68,10 +69,10 @@ function Table(props) {
                     const imageUrl = row.cells.find(c => c.render('Header') === 'image').value;
                     
                     return (
-                        <div className="post">
+                        <div className="post" key={row.index}>
                             <div className="image-title-updated-at">
-                                <p>{title}</p>
-                                <p>{updatedAt}</p>
+                                <h3>{title}</h3>
+                                <p>{moment.unix(updatedAt/1000).format('MMM DD, YYYY')}</p>
                             </div>
                             <div className="post-body">
                                 <p><img src={imageUrl} className={imageClass} />{body}</p>
@@ -86,3 +87,6 @@ function Table(props) {
 };
 
 export default Table;
+
+// How to preserve new lines
+// Add edit button back in

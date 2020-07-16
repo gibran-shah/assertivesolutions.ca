@@ -94,8 +94,8 @@ class Blog extends Component {
                     existingPost.title = this.postTitleRef.current.value;
                     existingPost.body = this.postBodyRef.current.value;
                     existingPost.updatedAt = response.data.updatedAt;
-                    existingPost.filename = response.data.filename ? response.data.filename : existingPost.filename;
-                    existingPost.imageUrl = response.data.imageUrl ? response.data.imageUrl : existingPost.imageUrl;
+                    existingPost.filename = response.data.filename || existingPost.filename;
+                    existingPost.imageUrl = response.data.imageUrl || existingPost.imageUrl;
                     this.state.blogPosts.sort((p1, p2) => p1.updatedAt > p2.updatedAt ? -1 : 1);
                     this.clearForm();
                 }).catch(err => {
@@ -108,14 +108,18 @@ class Blog extends Component {
                     'content-type': 'multipart/form-data'
                 }
             }).then(response => {
-                this.state.blogPosts.unshift({
+                const newPost = {
                     id: response.data.id,
                     createdAt: response.data.createdAt,
                     updatedAt: response.data.createdAt,
+                    filename: response.data.filename || null,
                     title: this.postTitleRef.current.value,
                     body: this.postBodyRef.current.value,
-                    imageUrl: response.data.imageUrl
-                });
+                    imageUrl: response.data.imageUrl || null
+                };
+                this.setState(state => ({
+                    blogPosts: [newPost, ...state.blogPosts]
+                }));
                 this.clearForm();
             }).catch(err => {
                 console.log('err=', err);
@@ -258,3 +262,4 @@ export default Blog;
 // https://stackoverflow.com/questions/60538158/react-table-of-cards-instead-of-columns
 // https://stackoverflow.com/questions/60942752/can-i-merge-data-when-sending-put-request-to-firebase-realtime-database-using-ax
 // https://stackoverflow.com/questions/61046073/how-do-i-request-a-basic-authentication-token-from-my-firebase-realtime-database
+// https://stackoverflow.com/questions/62907219/why-wont-react-component-rerender-when-state-is-updated

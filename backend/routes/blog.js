@@ -154,7 +154,8 @@ router.post('/', (req, res, next) => {
 			res.status(200).send(JSON.stringify({
 				id: docRef.id,
 				createdAt: post.createdAt,
-				imageUrl: post.imageUrl
+				imageUrl: post.imageUrl,
+				filename: post.filename
 			}));
 		}).catch (err => {
 			fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.post : Error posting blog post: ' + err + '\n');
@@ -231,6 +232,7 @@ router.patch('/', (req, res, next) => {
 					return res.status(500).send('Invalid mime type for image file.');
 				}
 
+//https://stackoverflow.com/questions/62294287/what-is-an-alternative-to-updating-an-image-in-firebase-storage-bucket-than-dele
 				const bucket = fbAdmin.storage().bucket('gs://assertivesolutions2.appspot.com');
 				if (fields.filename) {
 					await bucket.file(fields.filename).delete();
