@@ -13,6 +13,10 @@ import moment from 'moment';
 function Table(props) {
     const columns = React.useMemo(() => [
         {
+            Header: 'id',
+            accessor: 'idCol'
+        },
+        {
             Header: 'title',
             accessor: 'titleCol'
         },
@@ -35,6 +39,7 @@ function Table(props) {
     for (var index = 0; index < props.posts.length; index++) {
         const post = props.posts[index];
         dataArray.push({
+            idCol: post.id,
             titleCol: post.title,
             bodyCol: post.body,
             updatedAtCol: post.updatedAt,
@@ -63,15 +68,22 @@ function Table(props) {
 
                     prepareRow(row);
                     
+                    const id = row.cells.find(c => c.render('Header') === 'id').value;
                     const title = row.cells.find(c => c.render('Header') === 'title').value;
                     const body = row.cells.find(c => c.render('Header') === 'body').value;
                     const updatedAt = row.cells.find(c => c.render('Header') === 'last updated').value;
                     const imageUrl = row.cells.find(c => c.render('Header') === 'image').value;
+
+                    const post = {id, title, body};
+
+                    const editButton = props.isLoggedIn
+                        ? <i className="edit-button far fa-edit" onClick={() => props.editPost(post)}></i>
+                        : null;
                     
                     return (
                         <div className="post" key={row.index}>
                             <div className="image-title-updated-at">
-                                <h3>{title}</h3>
+                                <h3>{title}&nbsp;&nbsp;&nbsp;{editButton}</h3>
                                 <p>{moment.unix(updatedAt/1000).format('MMM DD, YYYY')}</p>
                             </div>
                             <div className="post-body">
@@ -89,4 +101,4 @@ function Table(props) {
 export default Table;
 
 // How to preserve new lines
-// Add edit button back in
+// figure out why sign up throwing error

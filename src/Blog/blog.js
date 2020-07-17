@@ -50,7 +50,12 @@ class Blog extends Component {
     }
 
     createTable() {
-        return this.state.blogPosts.length ? <Table posts={this.state.blogPosts} /> : null;
+        return this.state.blogPosts.length
+            ? <Table
+                posts={this.state.blogPosts}
+                isLoggedIn={!!this.state.accessToken}
+                editPost={this.editPost} />
+            : null;
     }
 
     editPost = (post) => {
