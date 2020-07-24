@@ -268,3 +268,5 @@ export default Blog;
 // https://stackoverflow.com/questions/60942752/can-i-merge-data-when-sending-put-request-to-firebase-realtime-database-using-ax
 // https://stackoverflow.com/questions/61046073/how-do-i-request-a-basic-authentication-token-from-my-firebase-realtime-database
 // https://stackoverflow.com/questions/62907219/why-wont-react-component-rerender-when-state-is-updated
+// https://stackoverflow.com/questions/63025876/how-do-i-preserve-newlines-in-my-string-when-storing-to-firebase-database
+// https://stackoverflow.com/questions/63046680/how-do-i-replace-newline-characters-in-a-string-such-that-html-will-render-it-as

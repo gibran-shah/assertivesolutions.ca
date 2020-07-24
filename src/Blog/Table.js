@@ -76,6 +76,16 @@ function Table(props) {
 
                     const post = {id, title, body};
 
+                    let paragraphCount = 0;
+                    const paragraphArray = body.split('\n').filter(p => p !== '').map(p => {
+                        paragraphCount++;
+                        return <p>
+                                {paragraphCount === 1 ? <img src={imageUrl} className={imageClass} /> : null}
+                                {p}
+                            </p>;
+                    });
+                    const paragraphs = <div className="post-body">{paragraphArray}</div>;
+
                     const editButton = props.isLoggedIn
                         ? <i className="edit-button far fa-edit" onClick={() => props.editPost(post)}></i>
                         : null;
@@ -86,9 +96,7 @@ function Table(props) {
                                 <h3>{title}&nbsp;&nbsp;&nbsp;{editButton}</h3>
                                 <p>{moment.unix(updatedAt/1000).format('MMM DD, YYYY')}</p>
                             </div>
-                            <div className="post-body">
-                                <p><img src={imageUrl} className={imageClass} />{body}</p>
-                            </div>
+                            {paragraphs}
                             <hr />
                         </div>
                     );
