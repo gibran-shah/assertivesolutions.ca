@@ -80,6 +80,7 @@ function Table(props) {
                     const paragraphArray = body.split('\n').filter(p => p !== '').map(p => {
                         paragraphCount++;
                         return <p>
+                                {/* Add image to first paragraph */}
                                 {paragraphCount === 1 ? <img src={imageUrl} className={imageClass} /> : null}
                                 {p}
                             </p>;
@@ -107,6 +108,3 @@ function Table(props) {
 };
 
 export default Table;
-
-// How to preserve new lines
-// figure out why sign up throwing error

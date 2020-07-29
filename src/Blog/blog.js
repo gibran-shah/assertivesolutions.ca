@@ -16,6 +16,7 @@ import {
     usePagination
 } from 'react-table';
 import Table from './Table';
+import Footer from '../Footer/Footer';
 
 // https://www.npmjs.com/package/react-table
 // https://github.com/tannerlinsley/react-table
@@ -227,16 +228,19 @@ class Blog extends Component {
         }
 
         return (
-            <div className="background-container">
-                <div className="login flex-row-end">
-                    <Login loginSuccess={this.loginSuccess}
-                        logoutSuccess={this.logoutSuccess}
-                        accessToken={this.state.accessToken} />
+            <div className="main-container">
+                <div className="background-container">
+                    <div className="login flex-row-end">
+                        <Login loginSuccess={this.loginSuccess}
+                            logoutSuccess={this.logoutSuccess}
+                            accessToken={this.state.accessToken} />
+                    </div>
+                    <div className="foreground-container">
+                        {this.createTable()}
+                    </div>
+                    {writePost}
                 </div>
-                <div className="foreground-container">
-                    {this.createTable()}
-                </div>
-                {writePost}
+                <Footer />
             </div>
         );
     }

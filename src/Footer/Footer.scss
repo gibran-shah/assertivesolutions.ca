@@ -7,6 +7,21 @@
 
 .footer-swish {
     width: 100%;
+    height: 100px;
+    background-image: url('../assets/images/footer swish.png');
+    background-size: 100% 100%;
+
+    @media(max-width: 1400px) {
+        height: 75px;
+    }
+
+    @media(max-width: 1000px) {
+        height: 50px;
+    }
+
+    @media(max-width: 500px) {
+        height: 25px;
+    }
 }
 
 .footer-content {

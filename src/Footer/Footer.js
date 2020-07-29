@@ -9,9 +9,7 @@ class Footer extends Component {
         return (
             <section>
                 <div className="footer-main">
-                    <div className="footer-swish">
-                        <img className="footer-swish" src={footerSwish} alt="footer swish.png" />
-                    </div>
+                    <div className="footer-swish" />
                     <div className="flex-column-space-around footer-content">
                         <img className="footer-logo-img footer-item" src={AssertiveSolutionsLogo} alt="logo.png" />
                         <img className="assertive-solutions footer-item" src={AssertiveSolutionsFooter} alt="assertive solutions footer.png" />
