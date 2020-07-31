@@ -14,8 +14,23 @@
     background-size: 100% 180px;
 }
 
+.logo {
+    width: 50%;
+}
+
+.logo-img {
+    width: 75px;
+    height: 75px;
+}
+
+.logo-item {
+    align-self: center;
+    font-size: 18pt;
+    margin-left: 10px;
+}
+
 .login {
-    width: 100%;
+    width: 50%;
 }
 
 .foreground-container {

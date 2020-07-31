@@ -17,6 +17,7 @@ import {
 } from 'react-table';
 import Table from './Table';
 import Footer from '../Footer/Footer';
+import logo_white_288x305 from '../assets/images/logo white - 288 x 305.png';
 
 // https://www.npmjs.com/package/react-table
 // https://github.com/tannerlinsley/react-table
@@ -230,10 +231,16 @@ class Blog extends Component {
         return (
             <div className="main-container">
                 <div className="background-container">
-                    <div className="login flex-row-end">
-                        <Login loginSuccess={this.loginSuccess}
-                            logoutSuccess={this.logoutSuccess}
-                            accessToken={this.state.accessToken} />
+                    <div className="header flex-row-space-between">
+                        <div className="logo flex-row-start">
+                            <img className="logo-img logo-item" src={logo_white_288x305} alt="logo white - 288 x 305.png" />
+                            <span className="heading-text white-text logo-item">assertive solutions</span>
+                        </div>
+                        <div className="login flex-row-end">
+                            <Login loginSuccess={this.loginSuccess}
+                                logoutSuccess={this.logoutSuccess}
+                                accessToken={this.state.accessToken} />
+                        </div>
                     </div>
                     <div className="foreground-container">
                         {this.createTable()}
