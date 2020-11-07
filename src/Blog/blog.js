@@ -18,6 +18,7 @@ import {
 import Table from './Table';
 import Footer from '../Footer/Footer';
 import logo_white_288x305 from '../assets/images/logo white - 288 x 305.png';
+import Pagination from './pagination';
 
 // https://www.npmjs.com/package/react-table
 // https://github.com/tannerlinsley/react-table
@@ -26,6 +27,7 @@ import logo_white_288x305 from '../assets/images/logo white - 288 x 305.png';
 // https://stackoverflow.com/questions/62462611/why-isnt-react-usememo-working-in-my-react-function
 // https://stackoverflow.com/questions/62649055/why-does-my-react-table-say-that-columns-are-undefined
 // https://chat.stackoverflow.com/rooms/17/javascript
+// https://stackoverflow.com/questions/63479836/does-react-table-no-longer-support-pagination
 class Blog extends Component {
 
     constructor() {
@@ -234,7 +236,7 @@ class Blog extends Component {
                     <div className="header flex-row-space-between">
                         <div className="logo flex-row-start">
                             <img className="logo-img logo-item" src={logo_white_288x305} alt="logo white - 288 x 305.png" />
-                            <span className="heading-text white-text logo-item">assertive solutions</span>
+                            <span className="heading-text white-text logo-item">assertive solutions <i>blog</i></span>
                         </div>
                         <div className="login flex-row-end">
                             <Login loginSuccess={this.loginSuccess}
@@ -244,6 +246,12 @@ class Blog extends Component {
                     </div>
                     <div className="foreground-container">
                         {this.createTable()}
+                        <Pagination
+                            totalRecords={this.state.blogPosts.length}
+                            pageLimit={5}
+                            pageNeighbours={2}
+                            onPageChanged={() => {console.log('page changed');}}
+                        />
                     </div>
                     {writePost}
                 </div>
@@ -260,7 +268,7 @@ class Blog extends Component {
             this.setState({accessToken: null});
         }
         
-        axios.get('/blogs').then(response => {
+        axios.get('/blogs?startPost=1&endPost=5').then(response => {
             if (response.data) {
                 const entries = Object.entries(response.data);
                 this.setState({blogPosts: entries.map(p => Object.assign({id: p[0]}, {...p[1]}))
@@ -269,6 +277,15 @@ class Blog extends Component {
         }, err => {
             console.log('err=', err);
         });
+    }
+
+    onPageChanged = data => {
+        // const { allCountries } = this.state;
+        // const { currentPage, totalPages, pageLimit } = data;
+        // const offset = (currentPage - 1) * pageLimit;
+        // const currentCountries = allCountries.slice(offset, offset + pageLimit);
+    
+        // this.setState({ currentPage, currentCountries, totalPages });
     }
 }
 

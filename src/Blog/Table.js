@@ -79,7 +79,7 @@ function Table(props) {
                     let paragraphCount = 0;
                     const paragraphArray = body.split('\n').filter(p => p !== '').map(p => {
                         paragraphCount++;
-                        return <p>
+                        return <p key={paragraphCount}>
                                 {/* Add image to first paragraph */}
                                 {paragraphCount === 1 ? <img src={imageUrl} className={imageClass} /> : null}
                                 {p}
