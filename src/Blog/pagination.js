@@ -179,6 +179,15 @@ class Pagination extends Component {
     evt.preventDefault();
     this.gotoPage(this.state.currentPage + (this.pageNeighbours * 2) + 1);
   }
+
+  componentWillReceiveProps(nextProps) {
+    this.pageLimit = typeof nextProps.pageLimit === 'number' ? nextProps.pageLimit : 30;
+    this.totalRecords = typeof nextProps.totalRecords === 'number' ? nextProps.totalRecords : 0;
+    this.pageNeighbours = typeof nextProps.pageNeighbours === 'number'
+      ? Math.max(0, Math.min(nextProps.pageNeighbours, 2))
+      : 0;
+    this.totalPages = Math.ceil(this.totalRecords / this.pageLimit);
+  }
 }
 
 Pagination.propTypes = {

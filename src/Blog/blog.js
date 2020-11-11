@@ -268,7 +268,7 @@ class Blog extends Component {
             this.setState({accessToken: null});
         }
         
-        axios.get('/blogs?startPost=1&endPost=5').then(response => {
+        axios.get('/blogs').then(response => {
             if (response.data) {
                 const entries = Object.entries(response.data);
                 this.setState({blogPosts: entries.map(p => Object.assign({id: p[0]}, {...p[1]}))
@@ -287,6 +287,10 @@ class Blog extends Component {
     
         // this.setState({ currentPage, currentCountries, totalPages });
     }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state.blogPosts.length !== nextState.blogPosts.length;
+    }
 }
 
 export default Blog;
@@ -298,3 +302,4 @@ export default Blog;
 // https://stackoverflow.com/questions/62907219/why-wont-react-component-rerender-when-state-is-updated
 // https://stackoverflow.com/questions/63025876/how-do-i-preserve-newlines-in-my-string-when-storing-to-firebase-database
 // https://stackoverflow.com/questions/63046680/how-do-i-replace-newline-characters-in-a-string-such-that-html-will-render-it-as
+// https://stackoverflow.com/questions/64763039/why-wont-my-react-component-re-render-when-componentshouldupdate-returns-true
