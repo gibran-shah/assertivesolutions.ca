@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import './pagination.scss';
 
 const LEFT_PAGE = 'LEFT';
 const RIGHT_PAGE = 'RIGHT';
@@ -112,38 +113,35 @@ class Pagination extends Component {
 
     return (
       <Fragment>
-        <nav aria-label="Countries Pagination">
-          <ul className="pagination">
-            { pages.map((page, index) => {
+        <div className="pagination-container">
+          { pages.map((page, index) => {
 
-              if (page === LEFT_PAGE) return (
-                <li key={index} className="page-item">
-                  <a className="page-link" href="#" aria-label="Previous" onClick={this.handleMoveLeft}>
-                    <span aria-hidden="true">&laquo;</span>
-                    <span className="sr-only">Previous</span>
-                  </a>
-                </li>
-              );
+            if (page === LEFT_PAGE) return (
+              <div className="pagination-button">
+                <a className="page-link" href="#" aria-label="Previous" onClick={this.handleMoveLeft}>
+                  <span aria-hidden="true">&laquo;</span>
+                  <span className="sr-only">Previous</span>
+                </a>
+              </div>
+            );
 
-              if (page === RIGHT_PAGE) return (
-                <li key={index} className="page-item">
-                  <a className="page-link" href="#" aria-label="Next" onClick={this.handleMoveRight}>
-                    <span aria-hidden="true">&raquo;</span>
-                    <span className="sr-only">Next</span>
-                  </a>
-                </li>
-              );
+            if (page === RIGHT_PAGE) return (
+              <div className="pagination-button">
+                <a className="page-link" href="#" aria-label="Next" onClick={this.handleMoveRight}>
+                  <span aria-hidden="true">&raquo;</span>
+                  <span className="sr-only">Next</span>
+                </a>
+              </div>
+            );
 
-              return (
-                <li key={index} className={`page-item${ currentPage === page ? ' active' : ''}`}>
-                  <a className="page-link" href="#" onClick={ this.handleClick(page) }>{ page }</a>
-                </li>
-              );
+            return (
+              <div className={`pagination-button ${index === currentPage ? 'pagination-active' : ''}`}>
+                <a className="page-link" href="#" onClick={ this.handleClick(page) }>{ page }</a>
+              </div>
+            );
 
-            }) }
-
-          </ul>
-        </nav>
+          }) }
+        </div>
       </Fragment>
     );
   }

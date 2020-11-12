@@ -1,0 +1,29 @@
+@import '../App.scss';
+
+.pagination-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.pagination-active {
+    background-color: $secondaryColor;
+}
+
+.pagination-button {
+    width: 20px;
+    height: 20px;
+    border: $primaryColor solid 1px;
+    border-radius: 5px;
+    margin: 2px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    a {
+        text-decoration: none;
+    }
+}
