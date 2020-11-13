@@ -43,7 +43,7 @@ function Table(props) {
             titleCol: post.title,
             bodyCol: post.body,
             updatedAtCol: post.updatedAt,
-            imageUrlCol: post.imageUrl[0]
+            imageUrlCol: post.imageUrl ? post.imageUrl[0] : null
         });
     }
 
