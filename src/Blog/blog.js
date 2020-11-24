@@ -41,7 +41,9 @@ class Blog extends Component {
             },
             editPostId: null,
             accessToken: null,
-            file: null
+            file: null,
+            currentPagePosts: [],
+            pageSize: 5
         };
 
         this.changeHandler = this.changeHandler.bind(this);
@@ -56,7 +58,7 @@ class Blog extends Component {
     createTable() {
         return this.state.blogPosts.length
             ? <Table
-                posts={this.state.blogPosts}
+                posts={this.state.currentPagePosts}
                 isLoggedIn={!!this.state.accessToken}
                 editPost={this.editPost} />
             : null;
@@ -250,7 +252,7 @@ class Blog extends Component {
                             totalRecords={this.state.blogPosts.length}
                             pageLimit={5}
                             pageNeighbours={2}
-                            onPageChanged={() => {console.log('page changed');}}
+                            onPageChanged={this.onPageChanged}
                         />
                     </div>
                     {writePost}
@@ -271,8 +273,13 @@ class Blog extends Component {
         axios.get('/blogs').then(response => {
             if (response.data) {
                 const entries = Object.entries(response.data);
-                this.setState({blogPosts: entries.map(p => Object.assign({id: p[0]}, {...p[1]}))
-                    .sort((p1, p2) => p1.updatedAt > p2.updatedAt ? -1 : 1)});
+                const allPosts = entries.map(p => Object.assign({id: p[0]}, {...p[1]}))
+                    .sort((p1, p2) => p1.updatedAt > p2.updatedAt ? -1 : 1);
+                const currentPagePosts = allPosts.slice(0, this.state.pageSize);
+                this.setState({
+                    blogPosts: allPosts,
+                    currentPagePosts
+                });
             }
         }, err => {
             console.log('err=', err);
@@ -280,16 +287,20 @@ class Blog extends Component {
     }
 
     onPageChanged = data => {
-        // const { allCountries } = this.state;
-        // const { currentPage, totalPages, pageLimit } = data;
-        // const offset = (currentPage - 1) * pageLimit;
-        // const currentCountries = allCountries.slice(offset, offset + pageLimit);
-    
-        // this.setState({ currentPage, currentCountries, totalPages });
+        const pageSize = this.state.pageSize;
+        const totalPostCount = this.state.blogPosts.length;
+        const startIndex = pageSize * (data.currentPage - 1);
+        const endIndex = startIndex + pageSize >= totalPostCount ? totalPostCount : startIndex + pageSize;
+        const currentPagePosts = this.state.blogPosts.slice(startIndex, endIndex);
+
+        this.setState({currentPagePosts});
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return this.state.blogPosts.length !== nextState.blogPosts.length;
+        const blogPostsLengthChanges = this.state.blogPosts.length !== nextState.blogPosts.length;
+        const pagePostsChanged = this.state.currentPagePosts !== nextState.blogPosts.currentPagePosts;
+
+        return blogPostsLengthChanges || pagePostsChanged;
     }
 }
 
