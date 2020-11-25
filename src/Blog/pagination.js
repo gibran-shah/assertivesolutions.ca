@@ -135,7 +135,7 @@ class Pagination extends Component {
             );
 
             return (
-              <div className={`pagination-button ${index === currentPage ? 'pagination-active' : ''}`}>
+              <div className={`pagination-button ${(index + 1) === currentPage ? 'pagination-active' : ''}`}>
                 <a className="page-link" href="#" onClick={ this.handleClick(page) }>{ page }</a>
               </div>
             );
@@ -152,7 +152,7 @@ class Pagination extends Component {
 
   gotoPage = page => {
     const { onPageChanged = f => f } = this.props;
-    const currentPage = Math.max(0, Math.min(page, this.totalPages));
+    const currentPage = Math.max(1, Math.min(page, this.totalPages));
     const paginationData = {
       currentPage,
       totalPages: this.totalPages,
