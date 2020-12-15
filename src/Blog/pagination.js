@@ -117,7 +117,7 @@ class Pagination extends Component {
           { pages.map((page, index) => {
 
             if (page === LEFT_PAGE) return (
-              <div className="pagination-button">
+              <div className="pagination-button" key={index}>
                 <a className="page-link" href="#" aria-label="Previous" onClick={this.handleMoveLeft}>
                   <span aria-hidden="true">&laquo;</span>
                   <span className="sr-only">Previous</span>
@@ -126,7 +126,7 @@ class Pagination extends Component {
             );
 
             if (page === RIGHT_PAGE) return (
-              <div className="pagination-button">
+              <div className="pagination-button" key={index}>
                 <a className="page-link" href="#" aria-label="Next" onClick={this.handleMoveRight}>
                   <span aria-hidden="true">&raquo;</span>
                   <span className="sr-only">Next</span>
@@ -135,7 +135,7 @@ class Pagination extends Component {
             );
 
             return (
-              <div className={`pagination-button ${(index + 1) === currentPage ? 'pagination-active' : ''}`}>
+              <div className={`pagination-button ${page == currentPage ? 'pagination-active' : ''}`} key={index}>
                 <a className="page-link" href="#" onClick={ this.handleClick(page) }>{ page }</a>
               </div>
             );
