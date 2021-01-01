@@ -31,6 +31,10 @@ function Table(props) {
         {
             Header: 'image',
             accessor: 'imageUrlCol'
+        },
+        {
+            Header: 'collapsed',
+            accessor: 'collapsedCol'
         }
     ], []);
 
@@ -43,7 +47,8 @@ function Table(props) {
             titleCol: post.title,
             bodyCol: post.body,
             updatedAtCol: post.updatedAt,
-            imageUrlCol: post.imageUrl ? post.imageUrl[0] : null
+            imageUrlCol: post.imageUrl ? post.imageUrl[0] : null,
+            collapsedCol: post.collapsed
         });
     }
 
@@ -73,6 +78,7 @@ function Table(props) {
                     const body = row.cells.find(c => c.render('Header') === 'body').value;
                     const updatedAt = row.cells.find(c => c.render('Header') === 'last updated').value;
                     const imageUrl = row.cells.find(c => c.render('Header') === 'image').value;
+                    const collapsed = row.cells.find(c => c.render('Header') === 'collapsed').value;
 
                     const post = {id, title, body};
 
@@ -91,14 +97,19 @@ function Table(props) {
                         ? <i className="edit-button far fa-edit" onClick={() => props.editPost(post)}></i>
                         : null;
                     
+                    const postClasses = collapsed ? 'collapsed' : 'post';
+
                     return (
-                        <div className="post" key={row.index}>
+                        <div className={postClasses} key={row.index}>
                             <div className="image-title-updated-at">
                                 <h3>{title}&nbsp;&nbsp;&nbsp;{editButton}</h3>
                                 <p>{moment.unix(updatedAt/1000).format('MMM DD, YYYY')}</p>
                             </div>
                             {paragraphs}
                             <hr />
+                            <div className="read-more-link-container">
+                                <span className="read-more-link">Read more...</span>
+                            </div>
                         </div>
                     );
                 })
