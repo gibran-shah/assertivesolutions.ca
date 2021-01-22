@@ -10,8 +10,8 @@ const app = exp();
 
 //dotenv.config();
 fs.appendFileSync('log.txt', new Date().toString() + ': process.env.PORT = ' + process.env.PORT + '\n');
-//const port = 3001;
-const port = process.env.PORT;
+const port = 3001;
+//const port = process.env.PORT;
 
 const corsOptions = {
     origin: [
