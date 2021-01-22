@@ -1,13 +1,20 @@
 .post {
-    padding-top: 20px;
-    min-height: 300px;
+    padding-top: 20px;  
+    overflow-y: hidden;
+    position: relative;
 }
 
 .collapsed {
-    padding-top: 20px;
     max-height: 300px;
-    overflow-y: hidden;
-    position: relative;
+}
+
+.expanded {
+    min-height: 300px;
+    max-height: 1000px;
+}
+
+.height-transition {
+    transition: max-height 2s;
 }
 
 .collapsed::before {

@@ -64,6 +64,11 @@ function Table(props) {
 
     let odd = true;
 
+    const readMoreClicked = (postId) => {
+        const post = props.posts.find(p => p.id === postId);
+        post.collapsed = false;
+    };
+
     return (
         <div>
             {
@@ -97,10 +102,10 @@ function Table(props) {
                         ? <i className="edit-button far fa-edit" onClick={() => props.editPost(post)}></i>
                         : null;
                     
-                    const postClasses = collapsed ? 'collapsed' : 'post';
+                    let postClass = collapsed ? 'collapsed' : 'expanded';
 
                     return (
-                        <div className={postClasses} key={row.index}>
+                        <div className={[postClass, 'post height-transition opacity-transition'].join(' ')} key={row.index}>
                             <div className="image-title-updated-at">
                                 <h3>{title}&nbsp;&nbsp;&nbsp;{editButton}</h3>
                                 <p>{moment.unix(updatedAt/1000).format('MMM DD, YYYY')}</p>
@@ -108,7 +113,9 @@ function Table(props) {
                             {paragraphs}
                             <hr />
                             <div className="read-more-link-container">
-                                <span className="read-more-link">Read more...</span>
+                                <span className="read-more-link" onClick={() => props.readMoreClicked(id, props.that)}>
+                                    Read more...
+                                </span>
                             </div>
                         </div>
                     );
