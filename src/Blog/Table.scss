@@ -27,6 +27,7 @@
   background-image: linear-gradient(transparent, transparent, white, white);
   z-index: 100;
   opacity: 1;
+  transition: opacity 2s;
 }
 
 .expanded::before {

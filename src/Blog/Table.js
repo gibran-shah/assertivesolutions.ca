@@ -64,11 +64,6 @@ function Table(props) {
 
     let odd = true;
 
-    const readMoreClicked = (postId) => {
-        const post = props.posts.find(p => p.id === postId);
-        post.collapsed = false;
-    };
-
     return (
         <div>
             {
@@ -113,8 +108,8 @@ function Table(props) {
                             {paragraphs}
                             <hr />
                             <div className="read-more-link-container">
-                                <span className="read-more-link" onClick={() => props.readMoreClicked(id, props.that)}>
-                                    Read more...
+                                <span className="read-more-link" onClick={() => props.readMoreLessClicked(id, props.that)}>
+                                    {collapsed ? 'Read more...' : 'Read less...'}
                                 </span>
                             </div>
                         </div>

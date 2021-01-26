@@ -49,17 +49,16 @@ class Blog extends Component {
         this.changeHandler = this.changeHandler.bind(this);
         this.submitHandler = this.submitHandler.bind(this);
         this.clearForm = this.clearForm.bind(this);
-        this.readMoreClicked.bind(this);
+        this.readMoreLessClicked.bind(this);
 
         this.postTitleRef = React.createRef();
         this.postBodyRef = React.createRef();
         this.selectedFileRef = React.createRef();
     }
 
-    readMoreClicked(postId, that) {
-        console.log('this.state=', this.state);
+    readMoreLessClicked(postId, that) {
         const post = that.state.blogPosts.find(p => p.id === postId);
-        post.collapsed = false;
+        post.collapsed = !post.collapsed;
         that.setState({blogPosts: that.state.blogPosts});
     }
 
@@ -69,7 +68,7 @@ class Blog extends Component {
                 posts={this.state.currentPagePosts}
                 isLoggedIn={!!this.state.accessToken}
                 editPost={this.editPost}
-                readMoreClicked={this.readMoreClicked}
+                readMoreLessClicked={this.readMoreLessClicked}
                 that={this} />
             : null;
     }
