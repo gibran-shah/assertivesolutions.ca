@@ -106,7 +106,6 @@ function Table(props) {
                                 <p>{moment.unix(updatedAt/1000).format('MMM DD, YYYY')}</p>
                             </div>
                             {paragraphs}
-                            <hr />
                             <div className="read-more-link-container">
                                 <span className="read-more-link" onClick={() => props.readMoreLessClicked(id, props.that)}>
                                     {collapsed ? 'Read more...' : 'Read less...'}

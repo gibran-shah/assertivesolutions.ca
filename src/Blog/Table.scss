@@ -1,7 +1,10 @@
 .post {
-    padding-top: 20px;  
-    overflow-y: hidden;
+    padding: 20px 50px 50px 50px;
+    margin: 20px auto;
+    overflow: hidden;
     position: relative;
+    border: 1px solid grey;
+    border-radius: 10px;
 }
 
 .collapsed {
