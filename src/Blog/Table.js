@@ -111,6 +111,8 @@ function Table(props) {
                                     {collapsed ? 'Read more...' : 'Read less...'}
                                 </span>
                             </div>
+                            <div className="divider">
+                            </div>
                         </div>
                     );
                 })
