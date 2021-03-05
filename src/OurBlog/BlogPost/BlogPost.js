@@ -9,9 +9,10 @@ class BlogPost extends Component {
           backgroundImage: `url(${this.props.blogImg})`,
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          backgroundColor: 'red'
+          backgroundSize: 'cover'
         };
+
+        const blogLink = `/blog?id=${this.props.id}`;
 
         return (
             <div className="blog-item flex-column-space-between">
@@ -21,7 +22,7 @@ class BlogPost extends Component {
                 </div>  
                 <span className="blog-title">{this.props.title}</span>
                 <span className="blog-blurb">{this.props.blurb}</span>
-                <a className="read-more-link" href="#" onClick={(e) => {this.props.blogClicked(e, this.props.title)}}>read more</a>
+                <a className="read-more-link" href={blogLink}>read more</a>
             </div>
         );
     }

@@ -14,10 +14,6 @@ class OurBlog extends Component {
       };
     }
 
-    blogClicked(e, blogId) {
-        e.preventDefault();
-    }
-
     render() {
         let blogs = [];
         if (this.state.blogs.length) {
@@ -26,11 +22,11 @@ class OurBlog extends Component {
             blogs.push(
               <BlogPost
                 key={blog.id}
+                id={blog.id}
                 blogImg={blog.imageUrl[0]}
                 date={moment.unix(blog.updatedAt/1000).format('MMM DD, YYYY')}
                 title={blog.title}
                 blurb={blog.body}
-                blogClicked={(e) => { this.blogClicked(e, blog.id) }}
               />
             );
           }
