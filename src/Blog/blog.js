@@ -1,20 +1,9 @@
 import React, { Component } from 'react';
 import './blog.scss';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import BlogCard from './blogCard';
 import '../App.scss'
 import Login from '../login/login';
 import axios from '../axios/axiosInstance';
 import moment from 'moment';
-import {
-    useTable,
-    useGroupBy,
-    useFilters,
-    useSortBy,
-    useExpanded,
-    usePagination
-} from 'react-table';
 import Table from './Table';
 import Footer from '../Footer/Footer';
 import logo_white_288x305 from '../assets/images/logo white - 288 x 305.png';
@@ -262,6 +251,7 @@ class Blog extends Component {
                             pageLimit={5}
                             pageNeighbours={2}
                             onPageChanged={this.onPageChanged}
+                            postIds={this.state.blogPosts.map(p => p.id)}
                         />
                     </div>
                     {writePost}

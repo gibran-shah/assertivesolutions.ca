@@ -36,6 +36,8 @@ class Pagination extends Component {
 
     this.totalPages = Math.ceil(this.totalRecords / this.pageLimit);
 
+    this.paramUsed = false;
+
     this.state = { currentPage: 1 };
   }
 
@@ -146,10 +148,6 @@ class Pagination extends Component {
     );
   }
 
-  componentDidMount() {
-    this.gotoPage(1);
-  }
-
   gotoPage = page => {
     const { onPageChanged = f => f } = this.props;
     const currentPage = Math.max(1, Math.min(page, this.totalPages));
@@ -185,6 +183,19 @@ class Pagination extends Component {
       ? Math.max(0, Math.min(nextProps.pageNeighbours, 2))
       : 0;
     this.totalPages = Math.ceil(this.totalRecords / this.pageLimit);
+
+    if (nextProps.postIds && nextProps.postIds.length && !this.paramUsed) {
+      const params = new URLSearchParams(window.location.search);
+      this.gotoPage(this.getPageByPostId(nextProps.postIds, params.get('id')));
+      this.paramUsed = true;
+    }
+  }
+
+  getPageByPostId(postIds, postId) {
+    const index = postIds.indexOf(postId);
+    let pageNum = Math.floor((index + 1) / this.pageLimit);
+    pageNum += ((index + 1) % this.pageLimit) ? 1 : 0;
+    return pageNum;
   }
 }
 
