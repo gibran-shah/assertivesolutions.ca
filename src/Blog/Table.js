@@ -101,6 +101,7 @@ function Table(props) {
 
                     return (
                         <div className={[postClass, 'post height-transition opacity-transition'].join(' ')} key={row.index}>
+                            <a name={id} />
                             <div className="image-title-updated-at">
                                 <h3>{title}&nbsp;&nbsp;&nbsp;{editButton}</h3>
                                 <p>{moment.unix(updatedAt/1000).format('MMM DD, YYYY')}</p>

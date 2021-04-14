@@ -176,6 +176,17 @@ class Pagination extends Component {
     this.gotoPage(this.state.currentPage + (this.pageNeighbours * 2) + 1);
   }
 
+  componentDidUpdate() {
+    const idParam = new URLSearchParams(window.location.search).get('id');
+    const postIds = this.props.postIds;
+
+    // https://medium.com/@nugen/react-hooks-calling-child-component-function-from-parent-component-4ea249d00740
+    if (idParam && postIds && postIds.length && !this.paramUsed) {
+      this.gotoPage(this.getPageByPostId(postIds, idParam));
+      this.paramUsed = true;
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     this.pageLimit = typeof nextProps.pageLimit === 'number' ? nextProps.pageLimit : 30;
     this.totalRecords = typeof nextProps.totalRecords === 'number' ? nextProps.totalRecords : 0;
@@ -184,11 +195,15 @@ class Pagination extends Component {
       : 0;
     this.totalPages = Math.ceil(this.totalRecords / this.pageLimit);
 
-    if (nextProps.postIds && nextProps.postIds.length && !this.paramUsed) {
-      const params = new URLSearchParams(window.location.search);
-      this.gotoPage(this.getPageByPostId(nextProps.postIds, params.get('id')));
-      this.paramUsed = true;
-    }
+    
+    // const params = new URLSearchParams(window.location.search);
+    // const idParam = params.get('id');
+    // if (idParam && nextProps.postIds && nextProps.postIds.length && !this.paramUsed) {
+    //   this.gotoPage(this.getPageByPostId(nextProps.postIds, idParam));
+    //   this.paramUsed = true;
+    //   console.log(`[name="${idParam}"]`);
+    //   document.querySelector(`[name="${idParam}"]`).scrollIntoView({behavior:'smooth'});
+    // }
   }
 
   getPageByPostId(postIds, postId) {
