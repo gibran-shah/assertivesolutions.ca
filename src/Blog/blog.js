@@ -1,4 +1,4 @@
-import React, { Component, forwardRef, useImperativeHandle } from 'react';
+import React, { Component } from 'react';
 import './blog.scss';
 import '../App.scss'
 import Login from '../login/login';
@@ -43,40 +43,7 @@ class Blog extends Component {
         this.postTitleRef = React.createRef();
         this.postBodyRef = React.createRef();
         this.selectedFileRef = React.createRef();
-
-       // this.paginationRef = React.useRef();
     }
-
-    // import React, { forwardRef, useRef, useImperativeHandle } from 'react';
-    // export default function ParentFunction() {
-    //     const childRef = useRef();
-    //     return (
-    //         <div className="container">
-    //             <div>
-    //                 Parent Component
-    //             </div>
-    //             <button
-    //                 onClick={() => { childRef.current.showAlert() }}
-    //             >
-    //             Call Function
-    //             </button>
-    //             <Child ref={childRef}/>
-    //         </div>
-    //     )
-    // }
-    // const Child = forwardRef((props, ref) => {
-    //     useImperativeHandle(
-    //         ref,
-    //         () => ({
-    //             showAlert() {
-    //                 alert("Child Function Called")
-    //             }
-    //         }),
-    //     )
-    //     return (
-    //        <div>Child Component</div>
-    //     )
-    // })
 
     readMoreLessClicked(postId, that) {
         const post = that.state.blogPosts.find(p => p.id === postId);
@@ -263,33 +230,6 @@ class Blog extends Component {
             writePost = this.getWritePost();
         }
 
-            // const Child = forwardRef((props, ref) => {
-    //     useImperativeHandle(
-    //         ref,
-    //         () => ({
-    //             showAlert() {
-    //                 alert("Child Function Called")
-    //             }
-    //         }),
-    //     )
-    //     return (
-    //        <div>Child Component</div>
-    //     )
-    // })
-
-        const paginator = React.forwardRef((props, ref) => {
-          useImperativeHandle(ref, () => ({}));
-          return (
-            <Pagination
-              totalRecords={this.state.blogPosts.length}
-              pageLimit={5}
-              pageNeighbours={2}
-              onPageChanged={this.onPageChanged}
-              postIds={this.state.blogPosts.map(p => p.id)}
-            />
-          )
-        });
-
         return (
             <div className="main-container">
                 <div className="background-container">
@@ -313,6 +253,8 @@ class Blog extends Component {
                             pageNeighbours={2}
                             onPageChanged={this.onPageChanged}
                             postIds={this.state.blogPosts.map(p => p.id)}
+                            readMoreLessClicked={this.readMoreLessClicked}
+                            that={this}
                         />
                     </div>
                     {writePost}

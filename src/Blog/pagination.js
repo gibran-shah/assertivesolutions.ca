@@ -183,6 +183,10 @@ class Pagination extends Component {
     // https://medium.com/@nugen/react-hooks-calling-child-component-function-from-parent-component-4ea249d00740
     if (idParam && postIds && postIds.length && !this.paramUsed) {
       this.gotoPage(this.getPageByPostId(postIds, idParam));
+      document.querySelector(`[name="${idParam}"]`).scrollIntoView({behavior: 'smooth'});
+      setTimeout(() => {
+        this.props.readMoreLessClicked(idParam, this.props.that);
+      }, 500);
       this.paramUsed = true;
     }
   }
@@ -194,16 +198,6 @@ class Pagination extends Component {
       ? Math.max(0, Math.min(nextProps.pageNeighbours, 2))
       : 0;
     this.totalPages = Math.ceil(this.totalRecords / this.pageLimit);
-
-    
-    // const params = new URLSearchParams(window.location.search);
-    // const idParam = params.get('id');
-    // if (idParam && nextProps.postIds && nextProps.postIds.length && !this.paramUsed) {
-    //   this.gotoPage(this.getPageByPostId(nextProps.postIds, idParam));
-    //   this.paramUsed = true;
-    //   console.log(`[name="${idParam}"]`);
-    //   document.querySelector(`[name="${idParam}"]`).scrollIntoView({behavior:'smooth'});
-    // }
   }
 
   getPageByPostId(postIds, postId) {
