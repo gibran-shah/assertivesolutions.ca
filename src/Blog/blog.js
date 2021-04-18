@@ -8,6 +8,7 @@ import Table from './Table';
 import Footer from '../Footer/Footer';
 import logo_white_288x305 from '../assets/images/logo white - 288 x 305.png';
 import Pagination from './pagination';
+import Loader from '../Loader/Loader';
 
 // https://www.npmjs.com/package/react-table
 // https://github.com/tannerlinsley/react-table
@@ -59,7 +60,7 @@ class Blog extends Component {
                 editPost={this.editPost}
                 readMoreLessClicked={this.readMoreLessClicked}
                 that={this} />
-            : null;
+           : null;
     }
 
     editPost = (post) => {
@@ -230,12 +231,21 @@ class Blog extends Component {
             writePost = this.getWritePost();
         }
 
+        const foregroundContainerStyles = 'foreground-container'
+          + (!this.state.blogPosts.length ? ' loading-height' : '');
+
         return (
             <div className="main-container">
                 <div className="background-container">
+                    {!this.state.blogPosts.length ? <Loader /> : null}
                     <div className="header flex-row-space-between">
                         <div className="logo flex-row-start">
-                            <img className="logo-img logo-item" src={logo_white_288x305} alt="logo white - 288 x 305.png" />
+                            <img
+                              className="logo-img logo-item"
+                              src={logo_white_288x305}
+                              alt="logo white - 288 x 305.png" 
+                              onClick={() => window.location.assign('http://localhost:3000')} />
+                              {/* Make this into the actual url and create an environment file */}
                             <span className="heading-text white-text logo-item">assertive solutions <i>blog</i></span>
                         </div>
                         <div className="login flex-row-end">
@@ -244,9 +254,8 @@ class Blog extends Component {
                                 accessToken={this.state.accessToken} />
                         </div>
                     </div>
-                    <div className="foreground-container">
+                    <div className={foregroundContainerStyles}>
                         {this.createTable()}
-                        {/* <paginator ref={this.paginationRef} /> */}
                         <Pagination
                             totalRecords={this.state.blogPosts.length}
                             pageLimit={5}
