@@ -16,7 +16,10 @@ class Welcome extends Component {
                         Assertive Solutions is a business with integrity. We believe in certain core values: quality, efficiency, and our client's satisfaction. What we bring to the table is in our name: solutions. Businesses from all industries need solutions to their problems, and Assertive Solutions delivers. We listen. We listen to your pain points and design custom solutions, collaboratively with you, to meet your specific needs. Whether it's web based, desktop, or mobile apps, we have the skills and experience to deliver your solution with <span className="you">you</span> in mind.
                     </div>
                     <div className="welcome-buttons-div flex-row-space-between">
-                        <button className="welcome-buttons">Read More &nbsp;<i className="fas fa-arrow-alt-circle-right"></i></button>
+                        <button className="welcome-buttons"
+                          onClick={() => window.location.href = 'http://localhost:3000/services'}>
+                            Read More &nbsp;<i className="fas fa-arrow-alt-circle-right"></i>
+                        </button>
                         <button className="welcome-buttons contact-us-button"
                             onClick={() => document.querySelector('[name=contact-us]').scrollIntoView({behavior:'smooth'})}>
                                 Contact Us &nbsp;<i className="fas fa-arrow-alt-circle-right"></i>

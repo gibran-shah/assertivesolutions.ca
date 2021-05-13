@@ -12,6 +12,7 @@ import Footer from './Footer/Footer';
 import smoothscroll from 'smoothscroll-polyfill';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Blog from './Blog/blog';
+import OurServices from './OurServices/OurServices';
 
 class App extends Component {
 
@@ -37,6 +38,9 @@ class App extends Component {
           </Route>
           <Route path="/blog">
             <Blog/>
+          </Route>
+          <Route path="/services">
+            <OurServices/>
           </Route>
         </Switch>
       </Router>
