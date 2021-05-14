@@ -24,7 +24,10 @@ class MainFocus extends Component {
                             <li><i className="far fa-arrow-alt-circle-right"></i> Desktop Applications</li>
                         </ul>
                         <div>
-                            <button className="flex-item">Read More &nbsp;<i className="fas fa-arrow-alt-circle-right"></i></button>
+                            <button className="flex-item"
+                              onClick={() => window.location.href = 'http://localhost:3000/services'}>
+                                Read More &nbsp;<i className="fas fa-arrow-alt-circle-right"></i>
+                            </button>
                         </div>
                     </div>
                 </div>

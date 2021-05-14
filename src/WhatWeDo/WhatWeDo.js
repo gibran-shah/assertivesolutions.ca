@@ -22,7 +22,10 @@ class WhatWeDo extends Component {
                                 We solve problems. We listen to your pain points and collaboratively design technical solutions in the former of custom software.
                                 Our main focus areas are web, desktop, and mobile applications, but we also do bug fixes, revamp existing software, and offer consulting services.
                             </span>
-                            <button className="what-we-do-button">Our Services &nbsp;<i className="fas fa-arrow-alt-circle-right"></i></button>
+                            <button className="what-we-do-button"
+                              onClick={() => window.location.href = 'http://localhost:3000/services'}>
+                                Our Services &nbsp;<i className="fas fa-arrow-alt-circle-right"></i>
+                            </button>
                         </div>
                         <div className="what-we-do-phone">
                             <img className="what-we-do-phone-img" src={WhatWeDoPhone} alt="what we do phone.png" />
