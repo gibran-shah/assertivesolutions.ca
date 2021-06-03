@@ -17,7 +17,6 @@ class WhatWeDo extends Component {
                             <div className="what-we-do-heading">
                                 <span className="white-text">what we do</span>
                             </div>
-                            {/* <img className="what-we-do-header" src={WhatWeDoText} alt="what we do.png" /> */}
                             <span className="what-we-do-blurb">
                                 We solve problems. We listen to your pain points and collaboratively design technical solutions in the former of custom software.
                                 Our main focus areas are web, desktop, and mobile applications, but we also do bug fixes, revamp existing software, and offer consulting services.

@@ -238,7 +238,7 @@ class Blog extends Component {
             <div className="main-container">
                 <div className="background-container">
                     {!this.state.blogPosts.length ? <Loader /> : null}
-                    <div className="header flex-row-space-between">
+                    <div className="flex-row-space-between">
                         <div className="logo flex-row-start">
                             <img
                               className="logo-img logo-item"

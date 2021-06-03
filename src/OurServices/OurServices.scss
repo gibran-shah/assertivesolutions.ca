@@ -1,7 +1,32 @@
 @import '../App.scss';
 
-.blah {
-  width: 100px;
-  height: 100px;
-  background-color: red;
+.os-main-container {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.os-background-container {
+  width: 80%;
+  height: 50vh;
+  padding: 10px 10% 0 10%;
+
+  background-image: url('../assets/images/top swish.png');
+  background-repeat: no-repeat;
+  background-size: 100% 180px;
+}
+
+.os-logo {
+  width: 50%;
+}
+
+.os-logo-img {
+  width: 75px;
+  height: 75px;
+}
+
+.os-logo-item {
+  align-self: center;
+  font-size: 18pt;
+  margin-left: 10px;
+  cursor: pointer;
 }
