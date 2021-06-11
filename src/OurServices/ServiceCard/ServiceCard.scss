@@ -1,0 +1,23 @@
+.service-card {
+  width: 400px;
+  height: 300px;
+  margin-bottom: 300px;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.blue-card {
+  box-shadow: 5px 5px 5px 5px #25398b inset, -5px -5px 5px 5px #25398b inset;
+}
+
+.red-card {
+  box-shadow: 5px 5px 5px 5px red inset, -5px -5px 5px 5px red inset;
+}
+
+.green-card {
+  box-shadow: 5px 5px 5px 5px green inset, -5px -5px 5px 5px green inset;
+}
+
+.grey-card {
+  box-shadow: 5px 5px 5px 5px grey inset, -5px -5px 5px 5px grey inset;
+}

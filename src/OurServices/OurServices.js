@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './OurServices.scss';
 import Footer from '../Footer/Footer';
 import logo_white_288x305 from '../assets/images/logo white - 288 x 305.png';
+import ServiceCard from './ServiceCard/ServiceCard';
 
 class OurServices extends Component {
   render() {
@@ -18,6 +19,11 @@ class OurServices extends Component {
                 {/* Make this into the actual url and create an environment file */}
               <span className="heading-text white-text os-logo-item">assertive solutions <i>services</i></span>
           </div>
+        </div>
+        <div className="os-foreground-container">
+          <ServiceCard type="blue-card" />
+          <ServiceCard type="grey-card" />
+          <ServiceCard type="red-card" />
         </div>
         <Footer />
       </div>
