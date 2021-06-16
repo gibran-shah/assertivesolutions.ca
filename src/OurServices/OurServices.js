@@ -21,9 +21,9 @@ class OurServices extends Component {
           </div>
         </div>
         <div className="os-foreground-container">
-          <ServiceCard type="blue-card" />
-          <ServiceCard type="grey-card" />
-          <ServiceCard type="red-card" />
+          <ServiceCard colorClass="blue-card" type="webapp" />
+          <ServiceCard colorClass="grey-card" type="desktop" />
+          <ServiceCard colorClass="red-card" type="mobile" />
         </div>
         <Footer />
       </div>

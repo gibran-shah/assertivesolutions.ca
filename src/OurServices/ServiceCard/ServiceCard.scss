@@ -1,4 +1,9 @@
 .service-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  
   width: 400px;
   height: 300px;
   margin-bottom: 300px;
