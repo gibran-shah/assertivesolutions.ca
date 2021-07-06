@@ -6,7 +6,6 @@
   
   width: 400px;
   height: 300px;
-  margin-bottom: 300px;
   border-radius: 20px;
   background-color: white;
 }
@@ -25,4 +24,12 @@
 
 .grey-card {
   box-shadow: 5px 5px 5px 5px grey inset, -5px -5px 5px 5px grey inset;
+}
+
+.orange-card {
+  box-shadow: 5px 5px 5px 5px orange inset, -5px -5px 5px 5px orange inset;
+}
+
+.yellow-card {
+  box-shadow: 5px 5px 5px 5px yellow inset, -5px -5px 5px 5px yellow inset;
 }

@@ -6,6 +6,13 @@ import ServiceCard from './ServiceCard/ServiceCard';
 
 class OurServices extends Component {
   render() {
+    const webappText = 'Web apps are awesome!';
+    const desktopText = 'Desktop apps are also kinda cool';
+    const mobileText = 'But mobile apps are da bomb';
+    const bugFixText = 'Bug fixes';
+    const maintenanceText = 'Maintenance';
+    const upgradeText = 'Upgrades';
+
     return (
       <div className="os-main-container">
         <div className="os-background-container">
@@ -21,11 +28,40 @@ class OurServices extends Component {
           </div>
         </div>
         <div className="os-foreground-container">
-          <ServiceCard colorClass="blue-card" type="webapp" />
-          <ServiceCard colorClass="grey-card" type="desktop" />
-          <ServiceCard colorClass="red-card" type="mobile" />
-        </div>
-        <Footer />
+          <div className="os-top-margin"></div>
+          <div className="os-card-row">
+            <ServiceCard
+              colorClass="blue-card"
+              type="webapp"
+              text={webappText} />
+            <ServiceCard
+              colorClass="grey-card"
+              type="desktop"
+              text={desktopText} />
+            <ServiceCard
+              colorClass="red-card"
+              type="mobile"
+              text={mobileText} />
+          </div>
+          <div className="thats-not-all-container">
+            <strong>But that's not all. We also provide the following services:</strong>
+          </div>
+          <div className="os-card-row">
+            <ServiceCard
+              colorClass="green-card"
+              type="bug-fixes"
+              text={bugFixText} />
+            <ServiceCard
+              colorClass="orange-card"
+              type="maintenance"
+              text={maintenanceText} />
+            <ServiceCard
+              colorClass="yellow-card"
+              type="upgrades"
+              text={upgradeText} />
+          </div>
+          <Footer />
+        </div>   
       </div>
     );
   }
