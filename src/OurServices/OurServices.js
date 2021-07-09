@@ -48,15 +48,15 @@ class OurServices extends Component {
           </div>
           <div className="os-card-row">
             <ServiceCard
-              colorClass="green-card"
+              colorClass="red-card"
               type="bug-fixes"
               text={bugFixText} />
             <ServiceCard
-              colorClass="orange-card"
+              colorClass="blue-card"
               type="maintenance"
               text={maintenanceText} />
             <ServiceCard
-              colorClass="yellow-card"
+              colorClass="grey-card"
               type="upgrades"
               text={upgradeText} />
           </div>
