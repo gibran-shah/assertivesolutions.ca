@@ -45,6 +45,10 @@
     color: $secondaryColor;
     font-size: 24pt;
 
+    a, a:visited {
+      color: $secondaryColor;
+    }
+
     @media(max-width: 500px) {
         font-size: 18pt;
     }
