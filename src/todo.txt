@@ -27,5 +27,7 @@ BEFORE GOING LIVE:
 - get permissions to use clients icons
 - blogs
 - facebook, linkedin, instagram
+  - facebook needs: website link, support email, blog posts
+  - twitter needs: website link, better bio, blog posts
 - create our services page
 - get blog.assertivesolutions.ca
