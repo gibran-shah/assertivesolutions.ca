@@ -31,3 +31,4 @@ BEFORE GOING LIVE:
   - twitter needs: website link, better bio, blog posts
 - create our services page
 - get blog.assertivesolutions.ca
+- figure out token thing with git: https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/
