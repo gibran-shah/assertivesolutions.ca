@@ -32,3 +32,5 @@ BEFORE GOING LIVE:
 - create our services page
 - get blog.assertivesolutions.ca
 - figure out token thing with git: https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ 
+- Email from linkedin support: Aug 19 in gibran.shah@gmail.com --> https://www.linkedin.com/in/gibran-shah-752439160/
+- Flesh out Linkedin page

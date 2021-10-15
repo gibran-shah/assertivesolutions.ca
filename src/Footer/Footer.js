@@ -20,10 +20,11 @@ class Footer extends Component {
                           <a target="_blank" href="https://www.facebook.com/Assertive-Solutions-Inc-729853577771300">
                             <i className="fab fa-facebook-square"></i>
                           </a>
-                          <a href="#">
-                            <i className="fab fa-linkedin"></i>
+                          <a target="_blank" href="https://linkedin.com/company/assertivesolutionsinc">
+                            <i className="fab fa-linkedin"></i> {/* Email from linkedin support: Aug 19 in gibran.shah@gmail.com */}
                           </a>
-                          <a target="_blank" href="https://twitter.com/AssertiveInc">
+                          {/* <a target="_blank" href="https://twitter.com/AssertiveInc"> */}
+                          <a target="_blank" href="https://twitter.com/assertive_care">
                             <i className="fab fa-twitter"></i>
                           </a>
                         </div>
