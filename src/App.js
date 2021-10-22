@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.scss';
+import './Home.scss';
 import Header from './Header/Header';
 import Banner from './Banner/Banner';
 import Welcome from './Welcome/Welcome';
@@ -25,7 +26,7 @@ class App extends Component {
         <Switch>
           <Route path="/" exact>
             <div>
-              <Header />
+              <div className="header"><Header /></div>
               <Banner />
               <Welcome />
               <MainFocus />
