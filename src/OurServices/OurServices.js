@@ -60,6 +60,7 @@ class OurServices extends Component {
               type="upgrades"
               text={upgradeText} />
           </div>
+          <div className="os-bottom-margin"></div>
           <Footer />
         </div>   
       </div>

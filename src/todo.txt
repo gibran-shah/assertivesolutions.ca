@@ -23,7 +23,7 @@ BEFORE GOING LIVE:
 - why is textarea highlighted in red in firefox?    [CHECK]
 - link up form  [CHECK]
 - search [CHECK]
-- link up all buttons
+- link up all buttons [CHECK]
 - get permissions to use clients icons
 - blogs
 - facebook, linkedin, instagram
@@ -34,4 +34,5 @@ BEFORE GOING LIVE:
 - figure out token thing with git: https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ 
 - Email from linkedin support: Aug 19 in gibran.shah@gmail.com --> https://www.linkedin.com/in/gibran-shah-752439160/
 - Flesh out Linkedin page
-- fix right hand margin
+- fix right hand margin [CHECK]
+- fix git: https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
