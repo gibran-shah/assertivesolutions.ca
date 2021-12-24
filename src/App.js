@@ -25,7 +25,7 @@ class App extends Component {
       <Router>
         <Switch>
           <Route path="/" exact>
-            <div>
+            <div className="app-master-container">
               <div className="header"><Header /></div>
               <Banner />
               <Welcome />

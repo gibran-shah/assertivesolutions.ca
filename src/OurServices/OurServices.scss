@@ -6,9 +6,8 @@
 }
 
 .os-background-container {
-  width: 80%;
+  width: 100vw;
   height: 50vh;
-  padding: 10px 10% 0 10%;
   position: relative;
 
   background-image: url('../assets/images/top swish.png');
@@ -18,6 +17,7 @@
 
 .os-logo {
   width: 50%;
+  padding: 20px 0 0 10px;
 }
 
 .os-logo-img {
@@ -33,7 +33,7 @@
 }
 
 .os-foreground-container {
-  width: 100%;
+  width: 100vw;
   position: absolute;
   top: 0;
   left: 0;
@@ -46,6 +46,10 @@
 
 .os-top-margin {
   height: 200px;
+}
+
+.os-bottom-margin {
+  height: 30px;
 }
 
 .os-card-row {
