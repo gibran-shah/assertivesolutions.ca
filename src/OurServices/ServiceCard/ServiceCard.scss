@@ -1,11 +1,11 @@
 .service-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
   
   width: 400px;
-  height: 300px;
+  height: 430px;
   border-radius: 20px;
   background-color: white;
 }
@@ -32,4 +32,11 @@
 
 .yellow-card {
   box-shadow: 5px 5px 5px 5px yellow inset, -5px -5px 5px 5px yellow inset;
+}
+
+span {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 20px 20px 20px;
+  text-align: justify;
 }

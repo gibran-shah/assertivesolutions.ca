@@ -17,7 +17,7 @@ class ServiceCard extends Component {
 
     return (
       <div className={classes}>
-        <h1>{title}</h1>
+        <h2>{title}</h2>
         <img src={icon} />
         <span>{text}</span>
       </div>

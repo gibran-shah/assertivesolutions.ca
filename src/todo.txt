@@ -15,6 +15,8 @@
 - Let's Get Started button 
 - implement CI
 - document Image2Excel in github (create readme.dm)
+- get blog.assertivesolutions.ca
+- figure out token thing with git: https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ 
 
 
 BEFORE GOING LIVE:
@@ -23,15 +25,17 @@ BEFORE GOING LIVE:
 - why is textarea highlighted in red in firefox?    [CHECK]
 - link up form  [CHECK]
 - search [CHECK]
-- link up all buttons
+- link up all buttons [CHECK]
 - get permissions to use clients icons
 - blogs
 - facebook, linkedin, instagram
   - facebook needs: website link, support email, blog posts
   - twitter needs: website link, better bio, blog posts
 - create our services page
-- get blog.assertivesolutions.ca
-- figure out token thing with git: https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ 
 - Email from linkedin support: Aug 19 in gibran.shah@gmail.com --> https://www.linkedin.com/in/gibran-shah-752439160/
-- Flesh out Linkedin page
-- fix right hand margin
+- Flesh out Linkedin page [CHECK]
+- fix right hand margin [CHECK]
+- fix git: https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
+- make website mobile friendly
+- something happened to the text styling on main page
+- get node server to handle multiple domains: https://stackoverflow.com/questions/11960705/expressjs-server-how-to-handle-multiple-domains

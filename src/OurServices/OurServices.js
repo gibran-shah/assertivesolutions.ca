@@ -6,9 +6,30 @@ import ServiceCard from './ServiceCard/ServiceCard';
 
 class OurServices extends Component {
   render() {
-    const webappText = 'Web apps are awesome!';
-    const desktopText = 'Desktop apps are also kinda cool';
-    const mobileText = 'But mobile apps are da bomb';
+    const webappText = <>Web applications are essential to any successful business.
+      They are so much more than just a web site. Web applications allow visitors to
+      create accounts, save information, see your inventory, see <i>new</i> inventory
+      (without updating the web application), make purchases and place orders, and so much more.
+      We can have your web application designed, built, and go live in only months (if not weeks)
+      at a competitive price.</>;
+
+    const desktopText = <>Desktop applications can do everything web applications do
+      plus the ability to use them offline. Microsoft Word and Excel are desktop applications.
+      So are email clients like Outlook. While they can't be accessed from anywhere,
+      you have the security of knowing they can't be accessed unless you're at your computer.
+      But that doesn't mean they can't reach out. A custom desktop application
+      can be built and installed on all your office computers. And with a database
+      and server running on your network, the application can talk to various points on your network
+      while being protected by a secure firewall. If that sounds like the right solution for your business,
+      consider having one costum built for you.</>;
+
+    const mobileText = <>Mobile apps, like the ones on your iPhone or Android,
+      are great for those on the go or who prefer to travel light. Because mobile apps
+      run on your phone (or any device that's small and light), there is no need to stay fixed at your desk
+      or lug around a heavy laptop. And the best part is, mobile devices can connect you to anywhere
+      from anywhere─whether you're connected through wifi or data─so you can have lunch at the park
+      while checking your email or surfing the web─or connecting through any app we build for you
+      right on your device!</>;
     const bugFixText = 'Bug fixes';
     const maintenanceText = 'Maintenance';
     const upgradeText = 'Upgrades';
@@ -60,6 +81,7 @@ class OurServices extends Component {
               type="upgrades"
               text={upgradeText} />
           </div>
+          <div className="os-bottom-margin"></div>
           <Footer />
         </div>   
       </div>
