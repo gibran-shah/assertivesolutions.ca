@@ -5,9 +5,16 @@
   align-items: center;
   
   width: 400px;
-  height: 430px;
+  height: 435px;
   border-radius: 20px;
   background-color: white;
+
+  span {
+    font-size: 10.5pt;
+    font-weight: bold;
+    padding: 10px 20px 20px 20px;
+    text-align: justify;
+  }
 }
 
 .blue-card {
@@ -32,11 +39,4 @@
 
 .yellow-card {
   box-shadow: 5px 5px 5px 5px yellow inset, -5px -5px 5px 5px yellow inset;
-}
-
-span {
-  font-size: 14px;
-  font-weight: bold;
-  padding: 10px 20px 20px 20px;
-  text-align: justify;
 }

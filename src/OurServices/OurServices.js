@@ -30,9 +30,29 @@ class OurServices extends Component {
       from anywhere─whether you're connected through wifi or data─so you can have lunch at the park
       while checking your email or surfing the web─or connecting through any app we build for you
       right on your device!</>;
-    const bugFixText = 'Bug fixes';
-    const maintenanceText = 'Maintenance';
-    const upgradeText = 'Upgrades';
+
+    const maintenanceText = <>Once we've built your software to your full satisfaction,
+      we will still be there for you. We believe not only in delivering the product,
+      but ensuring that it continues to bring value to your business in the long haul.
+      Therefore, we're happy to stay on the team for as long as you need us─for
+      as long as your software needs maintenance, improvements, or adaptation to your
+      evolving business in any way. Let's make sure your software continues to delivering
+      the value your business requires for as long as possible.</>;
+
+    const bugFixText = <>Already have a custom built software application? Wish you could squash all the bugs?
+      Improve performance? Seal up all the cracks and holes? No worries. We're up to the challenge.
+      We would be happy to take on any flaws, performance issues, and bugs your software may suffer from.
+      As long as you have access to the source code (the code written by the original programmers),
+      we can fix any of its defects. Don't settle for software that's less than what you originally envisioned.
+      Let us help you bring your vision to complete fruition.</>;
+
+    const upgradeText = <>A part of bug fixes and maintenance is ensuring your software
+      gets timely upgrades to stay compatible with other upgrades. For example, upgrading
+      from Windows 10 to Windows 11 may require upgrades to the software we built for you.
+      But it's not just the software we built for you─we'll help upgrade any software your
+      business depends on─whether that's to the latest operating system, to commercial software,
+      or even hardware upgrades. Upgrades can be scary─let us put you at ease by doing
+      the work for you.</>;
 
     return (
       <div className="os-main-container">
@@ -70,12 +90,12 @@ class OurServices extends Component {
           <div className="os-card-row">
             <ServiceCard
               colorClass="red-card"
-              type="bug-fixes"
-              text={bugFixText} />
-            <ServiceCard
-              colorClass="blue-card"
               type="maintenance"
               text={maintenanceText} />
+            <ServiceCard
+              colorClass="blue-card"
+              type="bug-fixes"
+              text={bugFixText} />
             <ServiceCard
               colorClass="grey-card"
               type="upgrades"
