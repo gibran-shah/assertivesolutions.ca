@@ -3,7 +3,11 @@ import './OurClients.scss';
 import AcmLogo from '../assets/images/client logos/acm logo.png';
 import HAndBLogo from '../assets/images/client logos/h&b logo.png';
 import AtbLogo from '../assets/images/client logos/atb logo.png';
-import ProsperusGroupLogo from '../assets/images/client logos/prosperus group logo.png';
+// import ProsperusGroupLogo from '../assets/images/client logos/prosperus group logo.png';
+import BodeLogo from '../assets/images/client logos/bode logo.png';
+import AMILogo from '../assets/images/client logos/AMI logo.png';
+import MobiltexLogo from '../assets/images/client logos/mobiltex logo.png';
+import MaximusLogo from '../assets/images/client logos/maximus logo.png';
 
 class OurClients extends Component {
     render() {
@@ -21,7 +25,11 @@ class OurClients extends Component {
                         <img className="client-logo-img" src={AcmLogo} alt="ACM Facility Safety" />
                         <img className="client-logo-img" src={HAndBLogo} alt="Holland and Barnes" />
                         <img className="client-logo-img" src={AtbLogo} alt="ATB Financial" />
-                        <img className="client-logo-img" src={ProsperusGroupLogo} alt="Prosperus Group" />
+                        {/* <img className="client-logo-img" src={ProsperusGroupLogo} alt="Prosperus Group" /> */}
+                        <img className="client-logo-img" src={BodeLogo} alt="Bode Canada" />
+                        <img className="client-logo-img" src={AMILogo} alt="Advanced Measurements" />
+                        <img className="client-logo-img" src={MobiltexLogo} alt="Mobiltex Data" />
+                        <img className="client-logo-img" src={MaximusLogo} alt="Maximus Canada" />
                     </div>
                 </div>
             </section>
