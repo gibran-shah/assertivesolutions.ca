@@ -17,6 +17,7 @@
 - document Image2Excel in github (create readme.dm)
 - get blog.assertivesolutions.ca
 - figure out token thing with git: https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ 
+- loader on blogs page: if firebase call returns with no records, replace it with 'no data' text
 
 
 BEFORE GOING LIVE:
