@@ -9,6 +9,7 @@ import Footer from '../Footer/Footer';
 import logo_white_288x305 from '../assets/images/logo white - 288 x 305.png';
 import Pagination from './pagination';
 import Loader from '../Loader/Loader';
+import NoBlogs from './noBlogs';
 
 // https://www.npmjs.com/package/react-table
 // https://github.com/tannerlinsley/react-table
@@ -33,7 +34,8 @@ class Blog extends Component {
             accessToken: null,
             file: null,
             currentPagePosts: [],
-            pageSize: 5
+            pageSize: 5,
+            blogsLoaded: false
         };
 
         this.changeHandler = this.changeHandler.bind(this);
@@ -128,7 +130,8 @@ class Blog extends Component {
                     imageUrl: response.data.imageUrl || null
                 };
                 this.setState(state => ({
-                    blogPosts: [newPost, ...state.blogPosts]
+                    blogPosts: [newPost, ...state.blogPosts],
+                    blogsLoaded: true
                 }));
                 this.clearForm();
             }).catch(err => {
@@ -237,7 +240,7 @@ class Blog extends Component {
         return (
             <div className="main-container">
                 <div className="background-container">
-                    {!this.state.blogPosts.length ? <Loader /> : null}
+                    {!this.state.blogsLoaded ? <Loader /> : null}
                     <div className="flex-row-space-between">
                         <div className="logo flex-row-start">
                             <img
@@ -255,16 +258,23 @@ class Blog extends Component {
                         </div>
                     </div>
                     <div className={foregroundContainerStyles}>
-                        {this.createTable()}
-                        <Pagination
-                            totalRecords={this.state.blogPosts.length}
-                            pageLimit={5}
-                            pageNeighbours={2}
-                            onPageChanged={this.onPageChanged}
-                            postIds={this.state.blogPosts.map(p => p.id)}
-                            readMoreLessClicked={this.readMoreLessClicked}
-                            that={this}
-                        />
+                        {
+                            this.state.blogPosts.length
+                            ? (
+                                <>
+                                    this.createTable()
+                                    <Pagination
+                                        totalRecords={this.state.blogPosts.length}
+                                        pageLimit={5}
+                                        pageNeighbours={2}
+                                        onPageChanged={this.onPageChanged}
+                                        postIds={this.state.blogPosts.map(p => p.id)}
+                                        readMoreLessClicked={this.readMoreLessClicked}
+                                        that={this}
+                                    />
+                                </>
+                            ) : <NoBlogs/>
+                        }
                     </div>
                     {writePost}
                 </div>
@@ -289,7 +299,8 @@ class Blog extends Component {
                 const currentPagePosts = allPosts.slice(0, this.state.pageSize);
                 this.setState({
                     blogPosts: allPosts,
-                    currentPagePosts
+                    currentPagePosts,
+                    blogsLoaded: true
                 });
             }
         }, err => {
