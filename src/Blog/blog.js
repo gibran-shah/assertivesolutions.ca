@@ -262,7 +262,7 @@ class Blog extends Component {
                             this.state.blogPosts.length
                             ? (
                                 <>
-                                    this.createTable()
+                                    {this.createTable()}
                                     <Pagination
                                         totalRecords={this.state.blogPosts.length}
                                         pageLimit={5}

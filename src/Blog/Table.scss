@@ -3,6 +3,7 @@
     margin: 20px auto;
     overflow: hidden;
     position: relative;
+    pointer-events: auto;
 }
 
 .divider {
@@ -16,11 +17,13 @@
 
 .collapsed {
   max-height: 300px;
+  pointer-events: auto;
 }
 
 .expanded {
   min-height: 300px;
   max-height: 1000px;
+  pointer-events: auto;
 }
 
 .height-transition {
@@ -37,6 +40,7 @@
   background-image: linear-gradient(transparent, transparent, white, white);
   opacity: 1;
   transition: opacity 2s;
+  pointer-events: none;
 }
 
 .expanded::before {
@@ -49,6 +53,7 @@
   background-image: linear-gradient(transparent, transparent, white, white);
   opacity: 0;
   transition: opacity 2s;
+  pointer-events: none;
 }
 
 hr {
