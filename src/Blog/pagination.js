@@ -181,14 +181,14 @@ class Pagination extends Component {
     const postIds = this.props.postIds;
 
     // https://medium.com/@nugen/react-hooks-calling-child-component-function-from-parent-component-4ea249d00740
-    if (idParam && postIds && postIds.length && !this.paramUsed) {
-      this.gotoPage(this.getPageByPostId(postIds, idParam));
-      document.querySelector(`[name="${idParam}"]`).scrollIntoView({behavior: 'smooth'});
-      setTimeout(() => {
-        this.props.readMoreLessClicked(idParam, this.props.that);
-      }, 500);
-      this.paramUsed = true;
-    }
+    // if (idParam && postIds && postIds.length && !this.paramUsed) {
+    //   this.gotoPage(this.getPageByPostId(postIds, idParam));
+    //   document.querySelector(`[name="${idParam}"]`).scrollIntoView({behavior: 'smooth'});
+    //   setTimeout(() => {
+    //     this.props.readMoreLessClicked(idParam, this.props.that);
+    //   }, 500);
+    //   this.paramUsed = true;
+    // }
   }
 
   componentWillReceiveProps(nextProps) {

@@ -100,7 +100,7 @@ function Table(props) {
                     let postClass = collapsed ? 'collapsed' : 'expanded';
 
                     return (
-                        <div className={[postClass, 'post height-transition opacity-transition'].join(' ')} key={row.index}>
+                        <div className={[postClass, 'post height-transition'].join(' ')} key={row.index}>
                             <a name={id} />
                             <div className="image-title-updated-at">
                                 <h3>{title}&nbsp;&nbsp;&nbsp;{editButton}</h3>

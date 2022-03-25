@@ -16,8 +16,10 @@ class OurBlog extends Component {
 
     render() {
         let blogs = [];
-        if (this.state.blogs.length) {
-          for (let i = 0; i < 3; i++) {
+        const length = this.state.blogs.length;
+        if (length) {
+          const maxBlogs = Math.min(length, 3);
+          for (let i = 0; i < maxBlogs; i++) {
             const blog = this.state.blogs[i];
             blogs.push(
               <BlogPost
