@@ -176,19 +176,21 @@ class Pagination extends Component {
     this.gotoPage(this.state.currentPage + (this.pageNeighbours * 2) + 1);
   }
 
-  componentDidUpdate() {
+  scrollToPost() {
     const idParam = new URLSearchParams(window.location.search).get('id');
     const postIds = this.props.postIds;
 
-    // https://medium.com/@nugen/react-hooks-calling-child-component-function-from-parent-component-4ea249d00740
-    // if (idParam && postIds && postIds.length && !this.paramUsed) {
-    //   this.gotoPage(this.getPageByPostId(postIds, idParam));
-    //   document.querySelector(`[name="${idParam}"]`).scrollIntoView({behavior: 'smooth'});
-    //   setTimeout(() => {
-    //     this.props.readMoreLessClicked(idParam, this.props.that);
-    //   }, 500);
-    //   this.paramUsed = true;
-    // }
+    window.history.replaceState({}, 'no-id-param', '/blog');
+
+    this.gotoPage(this.getPageByPostId(postIds, idParam));
+    const post = document.querySelector(`[name="${idParam}"]`);
+    if (post) {
+      post.scrollIntoView({behavior: 'smooth'});
+      // see if you can do this in a scroll end handler
+      setTimeout(() => {
+        this.props.readMoreLessClicked(idParam, this.props.that);
+      }, 500);
+    }
   }
 
   componentWillReceiveProps(nextProps) {

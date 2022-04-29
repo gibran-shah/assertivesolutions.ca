@@ -46,6 +46,7 @@ class Blog extends Component {
         this.postTitleRef = React.createRef();
         this.postBodyRef = React.createRef();
         this.selectedFileRef = React.createRef();
+        this.paginatorRef = React.createRef();
     }
 
     readMoreLessClicked(postId, that) {
@@ -270,6 +271,7 @@ class Blog extends Component {
                                         onPageChanged={this.onPageChanged}
                                         postIds={this.state.blogPosts.map(p => p.id)}
                                         readMoreLessClicked={this.readMoreLessClicked}
+                                        ref={this.paginatorRef}
                                         that={this}
                                     />
                                 </>
@@ -306,6 +308,13 @@ class Blog extends Component {
         }, err => {
             console.log('err=', err);
         });
+    }
+    
+    componentDidUpdate() {
+        const idParam = new URLSearchParams(window.location.search).get('id');
+        if (idParam && this.state.blogPosts.length) {
+          this.paginatorRef.current.scrollToPost();
+        }
     }
 
     onPageChanged = data => {
