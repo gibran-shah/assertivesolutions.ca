@@ -40,3 +40,7 @@ BEFORE GOING LIVE:
 - make website mobile friendly
 - something happened to the text styling on main page [CHECK]
 - get node server to handle multiple domains: https://stackoverflow.com/questions/11960705/expressjs-server-how-to-handle-multiple-domains [CHECK]
+- fix "login failed" message [CHECK]
+- get blog to appear as soon as you submit it
+- won't scroll to blog if it has to navigate to a different page
+- logout button not working

@@ -25,7 +25,7 @@ class OurBlog extends Component {
               <BlogPost
                 key={blog.id}
                 id={blog.id}
-                blogImg={blog.imageUrl[0]}
+                blogImg={(blog.imageUrl && blog.imageUrl.length) ? blog.imageUrl[0] : null}
                 date={moment.unix(blog.updatedAt/1000).format('MMM DD, YYYY')}
                 title={blog.title}
                 blurb={blog.body}
