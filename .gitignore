@@ -23,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 backend/node_modules
 backend/log.txt
+backend/.env
+backend/assertivesolutions2-firebase-adminsdk-zrq1r-139c46b5da.json

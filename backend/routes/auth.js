@@ -62,7 +62,7 @@ router.get('/signout', async (req, res, next) => {
 	
 	if (!fbAdmin.apps.length) {
 		try {
-			const serviceAccount = require("C:/inetpub/wwwroot/assertivesolutions/backend/assertivesolutions2-firebase-adminsdk-zrq1r-0292d968e4.json");
+			const serviceAccount = require(process.env.SERVICE_ACCOUNT_FILE_PATH);
 			fbAdmin.initializeApp({
 				credential: fbAdmin.credential.cert(serviceAccount),
 				databaseURL: 'https://assertivesolutions2.firebaseio.com'
