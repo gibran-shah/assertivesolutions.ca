@@ -18,6 +18,9 @@
 - get blog.assertivesolutions.ca
 - figure out token thing with git: https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ 
 - loader on blogs page: if firebase call returns with no records, replace it with 'no data' text
+- After clicking edit button, animate edit button and scroll to bottom
+- get blog to appear as soon as you submit it
+- won't scroll to blog if it has to navigate to a different page
 
 
 BEFORE GOING LIVE:
@@ -41,7 +44,8 @@ BEFORE GOING LIVE:
 - something happened to the text styling on main page [CHECK]
 - get node server to handle multiple domains: https://stackoverflow.com/questions/11960705/expressjs-server-how-to-handle-multiple-domains [CHECK]
 - fix "login failed" message [CHECK]
-- get blog to appear as soon as you submit it
-- won't scroll to blog if it has to navigate to a different page
 - logout button not working [CHECK - solved itself]
 - get path from environment [CHECK]
+- handle section parameters on home page
+- READ LESS link needs to be pushed down more (issue arises when devtools open)
+
