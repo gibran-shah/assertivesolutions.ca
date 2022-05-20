@@ -24,6 +24,26 @@
   min-height: 300px;
   max-height: 1000px;
   pointer-events: auto;
+
+  @media(max-width: 1300px) {
+    max-height: 1500px;
+  }
+
+  @media(max-width: 900px) {
+    max-height: 2000px;
+  }
+
+  @media(max-width: 650px) {
+    max-height: 2500px;
+  }
+
+  @media(max-width: 550px) {
+    max-height: 4000px;
+  }
+
+  @media(max-width: 370px) {
+    max-height: 5000px;
+  }
 }
 
 .height-transition {
@@ -105,6 +125,10 @@ hr {
     flex-direction: row;
     justify-content: center;
     z-index: 200;
+
+    @media(max-width: 600px) {
+      bottom: 0;
+    }
 }
 
 .read-more-link {
