@@ -165,6 +165,7 @@ router.post('/', (req, res, next) => {
 });
 
 router.patch('/', (req, res, next) => {
+	console.log('in patch');
 	fs.appendFileSync('log.txt', new Date().toString() + ': in blog.js : router.patch\n');
 
 	new formidable.IncomingForm().parse(req, async (err, fields, files) => {
@@ -184,7 +185,7 @@ router.patch('/', (req, res, next) => {
 		
 		if (!fbAdmin.apps.length) {
 			try {
-				const serviceAccount = require("C:/inetpub/wwwroot/assertivesolutions/backend/assertivesolutions2-firebase-adminsdk-zrq1r-0292d968e4.json");
+				const serviceAccount = require("C:/assertivesolutions.ca/backend/assertivesolutions2-firebase-adminsdk-zrq1r-139c46b5da.json");
 				fbAdmin.initializeApp({
 					credential: fbAdmin.credential.cert(serviceAccount),
 					databaseURL: 'https://assertivesolutions2.firebaseio.com'

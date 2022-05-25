@@ -47,5 +47,6 @@ BEFORE GOING LIVE:
 - logout button not working [CHECK - solved itself]
 - get path from environment [CHECK]
 - handle section parameters on home page
-- READ LESS link needs to be pushed down more (issue arises when devtools open)
+- READ LESS link needs to be pushed down more (issue arises when devtools open) [CHECK]
+- Can't edit posts [CHECK]
 
