@@ -70,6 +70,14 @@ class Blog extends Component {
         this.setState({editPostId: post.id});
         this.postTitleRef.current.value = post.title;
         this.postBodyRef.current.value = post.body;
+        this.scrollToForm();
+    }
+
+    scrollToForm = () => {
+        const newPostContainer = document.querySelector('.new-post-container');
+        if (newPostContainer) {
+            newPostContainer.scrollIntoView({behavior: 'smooth'});
+        }
     }
 
     changeHandler(event) {
