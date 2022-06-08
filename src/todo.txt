@@ -46,7 +46,9 @@ BEFORE GOING LIVE:
 - fix "login failed" message [CHECK]
 - logout button not working [CHECK - solved itself]
 - get path from environment [CHECK]
-- handle section parameters on home page
+- handle section parameters on home page [CHECK]
 - READ LESS link needs to be pushed down more (issue arises when devtools open) [CHECK]
 - Can't edit posts [CHECK]
+- sort blogs by created date
+- fix our blog section [CHECK]
 

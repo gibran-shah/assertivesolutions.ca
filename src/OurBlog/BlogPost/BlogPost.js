@@ -15,14 +15,16 @@ class BlogPost extends Component {
         const blogLink = `/blog?id=${this.props.id}`;
 
         return (
-            <div className="blog-item flex-column-space-between">
+            <div className="blog-item">
                 <div className="blog-img-and-date">
                     <div style={backgroundStyles}></div>
                     <div className="blog-date"><i className="far fa-calendar-alt">&nbsp;</i>{this.props.date}</div>
-                </div>  
-                <span className="blog-title">{this.props.title}</span>
-                <span className="blog-blurb">{this.props.blurb}</span>
-                <a className="read-more-link" href={blogLink}>read more</a>
+                </div>
+                <div className="blog-title">{this.props.title}</div>
+                <div className="blog-blurb">{this.props.blurb}</div>
+                <div className="read-more-link-container">
+                    <a className="read-more-link" href={blogLink}>read more</a>
+                </div>
             </div>
         );
     }
