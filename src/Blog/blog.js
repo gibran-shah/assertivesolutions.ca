@@ -305,7 +305,7 @@ class Blog extends Component {
             if (response.data) {
                 const entries = Object.entries(response.data);
                 const allPosts = entries.map(p => Object.assign({id: p[0], collapsed: true}, {...p[1]}))
-                    .sort((p1, p2) => p1.updatedAt > p2.updatedAt ? -1 : 1);
+                    .sort((p1, p2) => p1.createdAt < p2.createdAt ? -1 : 1);
                 const currentPagePosts = allPosts.slice(0, this.state.pageSize);
                 this.setState({
                     blogPosts: allPosts,

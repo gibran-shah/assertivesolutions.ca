@@ -25,6 +25,10 @@ function Table(props) {
             accessor: 'bodyCol'
         },
         {
+            Header: 'created',
+            accessor: 'createdAtCol'
+        },
+        {
             Header: 'last updated',
             accessor: 'updatedAtCol'
         },
@@ -46,6 +50,7 @@ function Table(props) {
             idCol: post.id,
             titleCol: post.title,
             bodyCol: post.body,
+            createdAtCol: post.createdAt,
             updatedAtCol: post.updatedAt,
             imageUrlCol: post.imageUrl ? post.imageUrl[0] : null,
             collapsedCol: post.collapsed
@@ -76,6 +81,7 @@ function Table(props) {
                     const id = row.cells.find(c => c.render('Header') === 'id').value;
                     const title = row.cells.find(c => c.render('Header') === 'title').value;
                     const body = row.cells.find(c => c.render('Header') === 'body').value;
+                    const createdAt = row.cells.find(c => c.render('Header') === 'created').value;
                     const updatedAt = row.cells.find(c => c.render('Header') === 'last updated').value;
                     const imageUrl = row.cells.find(c => c.render('Header') === 'image').value;
                     const collapsed = row.cells.find(c => c.render('Header') === 'collapsed').value;
@@ -102,7 +108,7 @@ function Table(props) {
                             <a name={id} />
                             <div className="image-title-updated-at">
                                 <h3>{title}&nbsp;&nbsp;&nbsp;{editButton}</h3>
-                                <p>{moment.unix(updatedAt/1000).format('MMM DD, YYYY')}</p>
+                                <p>{moment.unix(createdAt/1000).format('MMM DD, YYYY')}</p>
                             </div>
                             {paragraphs}
                             <div className="read-more-link-container">
