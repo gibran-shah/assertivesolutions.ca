@@ -91,7 +91,7 @@ function Table(props) {
                     let paragraphCount = 0;
                     const paragraphArray = body.split('\n').filter(p => p !== '').map(p => {
                         paragraphCount++;
-                        // Wrap paragraph is <p> tags and add image if it's the first paragraph
+                        // Wrap paragraph in <p> tags and add image if it's the first paragraph
                         p = (paragraphCount === 1 ? `<img src="${imageUrl}" class="${imageClass}" />` : '') + p;
                         return <p key={paragraphCount} dangerouslySetInnerHTML={{ __html: p }}></p>;
                     });
