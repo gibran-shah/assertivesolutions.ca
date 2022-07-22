@@ -58,7 +58,7 @@ class ContactMethod extends Component {
         return (
             <div className="contact-method flex-row-space-between">
                 <div className="flex-column-center">
-                    <img src={ icon } alt="{ icon }" />
+                    <img src={ icon } alt="{ icon }" className="contact-method-icon" />
                 </div>
                 <div className="name-and-value flex-column-space-around">
                     <span className="contact-method-name">{ methodTypeName }</span>

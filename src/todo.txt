@@ -31,15 +31,15 @@ BEFORE GOING LIVE:
 - search [CHECK]
 - link up all buttons [CHECK]
 - get permissions to use clients icons
-- blogs
-- facebook, linkedin, instagram
+- blogs [CHECK]
+- facebook, linkedin, instagram [CHECK but check up on these]
   - facebook needs: website link, support email, blog posts
   - twitter needs: website link, better bio, blog posts
 - create our services page [CHECK]
 - Email from linkedin support: Aug 19 in gibran.shah@gmail.com --> https://www.linkedin.com/in/gibran-shah-752439160/
 - Flesh out Linkedin page [CHECK]
 - fix right hand margin [CHECK]
-- fix git: https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
+- fix git: https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup [CHECK]
 - make website mobile friendly
 - something happened to the text styling on main page [CHECK]
 - get node server to handle multiple domains: https://stackoverflow.com/questions/11960705/expressjs-server-how-to-handle-multiple-domains [CHECK]
@@ -49,6 +49,6 @@ BEFORE GOING LIVE:
 - handle section parameters on home page [CHECK]
 - READ LESS link needs to be pushed down more (issue arises when devtools open) [CHECK]
 - Can't edit posts [CHECK]
-- sort blogs by created date
+- sort blogs by created date [CHECK]
 - fix our blog section [CHECK]
-
+- setup email

@@ -9,6 +9,12 @@
     }
 }
 
+.contact-method-icon {
+    @media(max-width: 1360px) {
+        display: none;
+    }
+}
+
 .contact-method-name {
     font-weight: bold;
     font-family: arial;

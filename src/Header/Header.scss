@@ -3,12 +3,19 @@
 .header-main {
     background-color: white;
     padding: 5px 20px;
-    flex-wrap: wrap;
+
+    @media(max-width: 1160px) {
+        justify-content: center !important;   
+    }
 }
 
 .logo-name {
     width: 500px;
     height: 110px;
+
+    @media(max-width: 1160px) {
+        justify-content: center !important;   
+    }
 
     @media(max-width: 500px) {
         justify-content: center;
@@ -42,6 +49,16 @@
 
 .contact-search-menu {
     width: 800px;
+
+    @media(max-width: 1360px) {
+        width: auto;
+        flex-grow: 1;
+        min-width: 600px;
+    }
+
+    @media(max-width: 1160px) {
+        display: none !important;
+    }
 }
 
 .contact-methods {
