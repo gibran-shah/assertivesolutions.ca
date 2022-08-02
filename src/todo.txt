@@ -41,6 +41,7 @@ BEFORE GOING LIVE:
 - fix right hand margin [CHECK]
 - fix git: https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup [CHECK]
 - make website mobile friendly
+  - hamburger menu: https://www.digitalocean.com/community/tutorials/react-react-burger-menu-sidebar
 - something happened to the text styling on main page [CHECK]
 - get node server to handle multiple domains: https://stackoverflow.com/questions/11960705/expressjs-server-how-to-handle-multiple-domains [CHECK]
 - fix "login failed" message [CHECK]

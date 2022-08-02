@@ -14,6 +14,7 @@ import smoothscroll from 'smoothscroll-polyfill';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Blog from './Blog/blog';
 import OurServices from './OurServices/OurServices';
+import SideMenu from './SideMenu/SideMenu';
 
 class App extends Component {
 
@@ -26,6 +27,7 @@ class App extends Component {
         <Switch>
           <Route path="/" exact>
             <div className="app-master-container">
+              <SideMenu pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
               <div className="header"><Header /></div>
               <Banner />
               <Welcome />
