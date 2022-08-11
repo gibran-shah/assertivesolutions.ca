@@ -11,6 +11,7 @@ class Banner extends Component {
     render() {
         return (
             <section className="banner-section">
+                <a name="banner" />
                 <div className="banner-div">
                     <img className="banner-img" src={banner} alt="banner.png" />
                     <div className="white-logo-and-name flex-column-space-between">

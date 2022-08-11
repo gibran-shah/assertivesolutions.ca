@@ -7,6 +7,10 @@
     height: 30px;
     left: 36px;
     top: 36px;
+
+    @media(min-width: 1161px) {
+      display: none;
+    }
   }
   
   /* Color/shape of burger icon bars */
@@ -57,6 +61,12 @@
     padding: 0.8em;
   }
   
+  /* My classes */
+  .menu-item {
+    cursor: pointer;
+  }
+  /* END My classes */
+
   /* Individual item */
 .bm-item {
     display: inline-block;
