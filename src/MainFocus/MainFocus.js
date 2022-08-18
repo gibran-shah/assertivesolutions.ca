@@ -9,7 +9,9 @@ class MainFocus extends Component {
     render() {
         return (
             <section>
-                <a name="our-focus" />
+                <div className="anchor-container">
+                    <a className="our-focus-anchor" name="our-focus" />
+                </div>
                 <div className="our-main-focus-areas">
                     <div className="main-focus flex-column-center">
                         <img className="main-focus-img" src={MainFocusImg} alt="main focus.png" />

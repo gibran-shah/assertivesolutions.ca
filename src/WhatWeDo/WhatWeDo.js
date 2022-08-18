@@ -13,7 +13,9 @@ class WhatWeDo extends Component {
                     <img className="what-we-do-background" src={WhatWeDoBackground} alt="what we do background.png" />
                     <div className="what-we-do-foreground flex-row-space-around">
                         <div className="what-we-do-blurb-and-button flex-column-center">
-                            <a className="what-we-do-anchor" name="what-we-do" />
+                            <div className="anchor-container">
+                                <a className="what-we-do-anchor" name="what-we-do" />
+                            </div>
                             <div className="what-we-do-heading">
                                 <span className="white-text">what we do</span>
                             </div>

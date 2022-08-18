@@ -55,3 +55,13 @@
 .contact-us-button {
     background-color: $secondaryColor;
 }
+
+.anchor-container {
+    position: relative;
+}
+
+.about-us-anchor {
+    position: absolute;
+    top: -150px;
+    left: 0;
+}

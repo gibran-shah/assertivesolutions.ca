@@ -58,7 +58,9 @@ class ContactUs extends Component {
 
         return (
             <section>
-                <a name="contact-us" />
+                <div className="anchor-container">
+                    <a className="contact-us-anchor" name="contact-us" />
+                </div>
                 <div className="contact-us-main">
                     <div className="section-heading">
                         <span className="heading-text contact-us-heading">contact <span className="primary-text">us</span></span>

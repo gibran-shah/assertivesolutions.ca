@@ -13,7 +13,9 @@ class OurClients extends Component {
     render() {
         return (
             <section>
-                <a name="our-clients" />
+                <div className="anchor-container">
+                    <a className="our-clients-anchor" name="our-clients" />
+                </div>
                 <div className="our-clients-main">
                     <div className="section-heading">
                         <span className="heading-text our-clients-heading">our <span className="primary-text">clients</span></span>

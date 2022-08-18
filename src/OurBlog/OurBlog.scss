@@ -28,3 +28,13 @@
         align-items: center;
     }
 }
+
+.anchor-container {
+    position: relative;
+}
+
+.our-blog-anchor {
+    position: absolute;
+    top: -200px;
+    left: 0;
+}

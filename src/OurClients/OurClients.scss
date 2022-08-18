@@ -33,3 +33,13 @@
 .our-clients-heading {
     font-size: $headingTextSize;
 }
+
+.anchor-container {
+    position: relative;
+}
+
+.our-clients-anchor {
+    position: absolute;
+    top: -200px;
+    left: 0;
+}

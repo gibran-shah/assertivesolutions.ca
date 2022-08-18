@@ -7,7 +7,9 @@ class Welcome extends Component {
     render() {
         return (
             <section>
-                <a name="about-us" />
+                <div className="anchor-container">
+                    <a className="about-us-anchor" name="about-us" />
+                </div>
                 <div className="welcome">
                     <div className="section-heading">
                         <span className="heading-text welcome-heading">welcome to <span className="primary-text">assertive</span> <span className="secondary-text">solutions</span></span>

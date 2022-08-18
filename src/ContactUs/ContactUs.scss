@@ -71,5 +71,13 @@
     font-size: $headingTextSize;
 }
 
+.anchor-container {
+    position: relative;
+}
 
+.contact-us-anchor {
+    position: absolute;
+    top: -150px;
+    left: 0;
+}
 

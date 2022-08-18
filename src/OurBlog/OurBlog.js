@@ -38,7 +38,9 @@ class OurBlog extends Component {
 
       return (
           <section>
-              <a name="our-blog" />
+              <div className="anchor-container">
+                <a className="our-blog-anchor" name="our-blog" />
+              </div>
               <div className="our-blog-main flex-column-center">
                   <div className="section-heading">
                       <span className="heading-text our-blog-heading">our <span className="primary-text">blog</span></span>
