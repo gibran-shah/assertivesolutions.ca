@@ -9,6 +9,10 @@ export default props => {
     const section = document.querySelector(`[name=${sectionName}]`);
     if (section) {
       section.scrollIntoView({behavior:'smooth'});
+      const closeBtn = document.querySelector(`[id=react-burger-cross-btn]`);
+      if (closeBtn) {
+        closeBtn.click();
+      }
     }
   };
 
