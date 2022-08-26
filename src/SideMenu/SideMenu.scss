@@ -31,7 +31,8 @@
   
   /* Color/shape of close button cross */
   .bm-cross {
-    background: #bdc3c7;
+    // background: #bdc3c7;
+    background: black;
   }
   
   /*
@@ -45,7 +46,8 @@
   
   /* General sidebar styles */
   .bm-menu {
-    background: #373a47;
+    // background: #373a47;
+    background-image: linear-gradient(90deg, #aeedf8 0%, white 20%, white 50%, #aeedf8 100%);
     padding: 2.5em 1.5em 0;
     font-size: 1.15em;
   }
@@ -71,7 +73,8 @@
 .bm-item {
     display: inline-block;
   
-    color: #d1d1d1;
+    // color: #d1d1d1;
+    color: black;
     margin-bottom: 10px;
     text-align: left;
     text-decoration: none;
@@ -79,7 +82,8 @@
   }
   
   .bm-item:hover {
-    color: #ffffff;
+    //color: #ffffff;
+    color: #a0a0a0;
   }
   
   /* Styling of overlay */
