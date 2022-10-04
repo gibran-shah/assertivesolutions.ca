@@ -3,12 +3,14 @@
 .os-main-container {
   width: 100%;
   min-height: 100vh;
+  pointer-events: none;
 }
 
 .os-background-container {
   width: 100vw;
   height: 50vh;
   position: relative;
+  pointer-events: none;
 
   background-image: url('../assets/images/top swish.png');
   background-repeat: no-repeat;
@@ -18,11 +20,13 @@
 .os-logo {
   width: 50%;
   padding: 20px 0 0 10px;
+  pointer-events: none;
 }
 
 .os-logo-img {
   width: 75px;
   height: 75px;
+  pointer-events: auto;
 }
 
 .os-logo-item {

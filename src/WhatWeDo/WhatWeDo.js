@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from "react-router-dom";
 import '../App.scss';
 import './WhatWeDo.scss';
 import WhatWeDoBackground from '../assets/images/what we do background.png';
@@ -24,7 +25,7 @@ class WhatWeDo extends Component {
                                 Our main focus areas are web, desktop, and mobile applications, but we also do bug fixes, revamp existing software, and offer consulting services.
                             </span>
                             <button className="what-we-do-button"
-                              onClick={() => window.location.href = 'http://localhost:3000/services'}>
+                              onClick={() => this.props.history.push("/services")}>
                                 Our Services &nbsp;<i className="fas fa-arrow-alt-circle-right"></i>
                             </button>
                         </div>
@@ -38,4 +39,4 @@ class WhatWeDo extends Component {
     }
 }
 
-export default WhatWeDo;
+export default withRouter(WhatWeDo);

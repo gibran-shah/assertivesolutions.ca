@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from "react-router-dom";
 import './Welcome.scss';
 import '../App.scss';
 
@@ -19,7 +20,7 @@ class Welcome extends Component {
                     </div>
                     <div className="welcome-buttons-div flex-row-space-between">
                         <button className="welcome-buttons"
-                          onClick={() => window.location.href = 'http://localhost:3000/services'}>
+                          onClick={() => this.props.history.push("/services")}>
                             Read More &nbsp;<i className="fas fa-arrow-alt-circle-right"></i>
                         </button>
                         <button className="welcome-buttons contact-us-button"
@@ -33,4 +34,4 @@ class Welcome extends Component {
     }
 }
 
-export default Welcome;
+export default withRouter(Welcome);

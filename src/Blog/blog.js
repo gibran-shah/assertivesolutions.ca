@@ -256,7 +256,7 @@ class Blog extends Component {
                               className="logo-img logo-item"
                               src={logo_white_288x305}
                               alt="logo white - 288 x 305.png" 
-                              onClick={() => window.location.assign('http://localhost:3000')} />
+                              onClick={() => window.location.assign('http://www.assertivesolutions.ca')} />
                               {/* Make this into the actual url and create an environment file */}
                             <span className="heading-text white-text logo-item">assertive solutions <i>blog</i></span>
                         </div>

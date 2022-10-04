@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from "react-router-dom";
 import './MainFocus.scss';
 import '../App.scss';
 import MainFocusImg from '../assets/images/main focus.png';
@@ -27,7 +28,7 @@ class MainFocus extends Component {
                         </ul>
                         <div>
                             <button className="flex-item"
-                              onClick={() => window.location.href = 'http://localhost:3000/services'}>
+                              onClick={() => this.props.history.push("/services")}>
                                 Read More &nbsp;<i className="fas fa-arrow-alt-circle-right"></i>
                             </button>
                         </div>
@@ -38,4 +39,4 @@ class MainFocus extends Component {
     }
 }
 
-export default MainFocus;
+export default withRouter(MainFocus);

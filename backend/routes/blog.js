@@ -74,7 +74,7 @@ router.post('/', (req, res, next) => {
 		
 		if (!fbAdmin.apps.length) {
 			try {
-				const serviceAccount = require("C:/assertivesolutions.ca/backend/assertivesolutions2-firebase-adminsdk-zrq1r-139c46b5da.json");
+				const serviceAccount = require(process.env.SERVICE_ACCOUNT_FILE_PATH);
 				fbAdmin.initializeApp({
 					credential: fbAdmin.credential.cert(serviceAccount),
 					databaseURL: 'https://assertivesolutions2.firebaseio.com'
@@ -185,7 +185,7 @@ router.patch('/', (req, res, next) => {
 		
 		if (!fbAdmin.apps.length) {
 			try {
-				const serviceAccount = require("C:/assertivesolutions.ca/backend/assertivesolutions2-firebase-adminsdk-zrq1r-139c46b5da.json");
+				const serviceAccount = require(process.env.SERVICE_ACCOUNT_FILE_PATH);
 				fbAdmin.initializeApp({
 					credential: fbAdmin.credential.cert(serviceAccount),
 					databaseURL: 'https://assertivesolutions2.firebaseio.com'
