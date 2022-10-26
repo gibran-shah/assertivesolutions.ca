@@ -69,7 +69,7 @@ class OurServices extends Component {
         </div>
         <div className="os-foreground-container">
           <div className="os-top-margin"></div>
-          <div className="os-card-row">
+          <div className="os-card-row non-mobile">
             <ServiceCard
               colorClass="blue-card"
               type="webapp"
@@ -86,7 +86,7 @@ class OurServices extends Component {
           <div className="thats-not-all-container">
             <strong>But that's not all. We also provide the following services:</strong>
           </div>
-          <div className="os-card-row">
+          <div className="os-card-row non-mobile">
             <ServiceCard
               colorClass="red-card"
               type="maintenance"
@@ -97,6 +97,58 @@ class OurServices extends Component {
               text={bugFixText} />
             <ServiceCard
               colorClass="grey-card"
+              type="upgrades"
+              text={upgradeText} />
+          </div>
+          <div className="os-card-row mobile-big">
+            <ServiceCard
+              colorClass="blue-card"
+              type="webapp"
+              text={webappText} />
+            <ServiceCard
+              colorClass="grey-card"
+              type="desktop"
+              text={desktopText} />
+            <ServiceCard
+              colorClass="red-card"
+              type="mobile"
+              text={mobileText} />
+            <ServiceCard
+              colorClass="blue-card"
+              type="maintenance"
+              text={maintenanceText} />
+            <ServiceCard
+              colorClass="grey-card"
+              type="bug-fixes"
+              text={bugFixText} />
+            <ServiceCard
+              colorClass="red-card"
+              type="upgrades"
+              text={upgradeText} />
+          </div>
+          <div className="os-card-row mobile-small">
+          <ServiceCard
+              colorClass="no-color-card"
+              type="webapp"
+              text={webappText} />
+            <ServiceCard
+              colorClass="no-color-card"
+              type="desktop"
+              text={desktopText} />
+            <ServiceCard
+              colorClass="no-color-card"
+              type="mobile"
+              text={mobileText} />
+            <ServiceCard
+              colorClass="no-color-card"
+              type="maintenance"
+              text={maintenanceText} />
+            <ServiceCard
+              colorClass="no-color-card"
+              type="bug-fixes"
+              text={bugFixText} />
+            <ServiceCard
+              colorClass="no-color-card"
               type="upgrades"
               text={upgradeText} />
           </div>

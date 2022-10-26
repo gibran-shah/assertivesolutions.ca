@@ -9,11 +9,23 @@
   border-radius: 20px;
   background-color: white;
 
+  margin: 0 10px;
+  min-width: 400px;
+
   span {
     font-size: 10.5pt;
     font-weight: bold;
     padding: 10px 20px 20px 20px;
     text-align: justify;
+  }
+
+  @media(max-width: 1300px) {
+    margin-bottom: 20px;
+  }
+
+  @media(max-width: 440px) {
+    min-width: 100px;
+    width: auto;
   }
 }
 
@@ -39,4 +51,8 @@
 
 .yellow-card {
   box-shadow: 5px 5px 5px 5px yellow inset, -5px -5px 5px 5px yellow inset;
+}
+
+.no-color-card {
+
 }
