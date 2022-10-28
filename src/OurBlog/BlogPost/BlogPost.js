@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { withRouter } from "react-router-dom";
 import './BlogPost.scss';
+
 class BlogPost extends Component {
     render() {
         const backgroundStyles = {
@@ -23,11 +25,13 @@ class BlogPost extends Component {
                 <div className="blog-title">{this.props.title}</div>
                 <div className="blog-blurb">{this.props.blurb}</div>
                 <div className="read-more-link-container">
-                    <a className="read-more-link" href={blogLink}>read more</a>
+                    <button className="read-more-link" onClick={() => this.props.history.push(blogLink)}>
+                        read more
+                    </button>
                 </div>
             </div>
         );
     }
 }
 
-export default BlogPost;
+export default withRouter(BlogPost);
