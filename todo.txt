@@ -1,0 +1,55 @@
+
+- get higher resolution image for web, desktop, and mobile apps
+- figure out what you want to do about divider
+- see what you can add to focus areas
+- See if you can find a better way to keep what we do section within background image
+- figure out how to get main css class to stay separate between header and what we do section
+- Make sure you're using <section> the way it's meant to be used
+- figure out how to get image title for alt
+- figure out how to import images in batch
+- delete section title images and stop importing them   [CHECK]
+- figure out how to set formatting for phone number properly
+- standardize naming convention for images
+- upload code to github and link to pipeline
+- fix search button on safari
+- Let's Get Started button 
+- implement CI
+- document Image2Excel in github (create readme.dm)
+- get blog.assertivesolutions.ca
+- figure out token thing with git: https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ 
+- loader on blogs page: if firebase call returns with no records, replace it with 'no data' text
+- After clicking edit button, animate edit button and scroll to bottom
+- get blog to appear as soon as you submit it
+- won't scroll to blog if it has to navigate to a different page
+
+
+BEFORE GOING LIVE:
+- new phone number
+- need icon for website     [CHECK]    
+- why is textarea highlighted in red in firefox?    [CHECK]
+- link up form  [CHECK]
+- search [CHECK]
+- link up all buttons [CHECK]
+- get permissions to use clients icons
+- blogs [CHECK]
+- facebook, linkedin, instagram [CHECK but check up on these]
+  - facebook needs: website link, support email, blog posts
+  - twitter needs: website link, better bio, blog posts
+- create our services page [CHECK]
+- Email from linkedin support: Aug 19 in gibran.shah@gmail.com --> https://www.linkedin.com/in/gibran-shah-752439160/
+- Flesh out Linkedin page [CHECK]
+- fix right hand margin [CHECK]
+- fix git: https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup [CHECK]
+- make website mobile friendly
+  - hamburger menu: https://www.digitalocean.com/community/tutorials/react-react-burger-menu-sidebar
+- something happened to the text styling on main page [CHECK]
+- get node server to handle multiple domains: https://stackoverflow.com/questions/11960705/expressjs-server-how-to-handle-multiple-domains [CHECK]
+- fix "login failed" message [CHECK]
+- logout button not working [CHECK - solved itself]
+- get path from environment [CHECK]
+- handle section parameters on home page [CHECK]
+- READ LESS link needs to be pushed down more (issue arises when devtools open) [CHECK]
+- Can't edit posts [CHECK]
+- sort blogs by created date [CHECK]
+- fix our blog section [CHECK]
+- setup email & change email link to href
