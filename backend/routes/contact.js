@@ -2,10 +2,10 @@ const exp = require('express');
 const nodeMailer = require('nodemailer');
 const fs = require('fs');
 const sgMail = require('@sendgrid/mail');
+const aws = require('aws-sdk');
 
 const router = exp.Router();
 
-// router.post('/', (req, res, next) => res.status(200).send('contact post!!!'));
 router.post('/', (req, res, next) => {
 	fs.appendFileSync('log.txt', new Date().toString() + ': In contact.js : router.post\n');
     const chunks = [];
@@ -21,21 +21,45 @@ router.post('/', (req, res, next) => {
 
         const emailBody = `Name: ${name}<br/>Email: ${email}<br/>Phone: ${phone}<br/>Company: ${company}<br/>Inquiry:<br/>${inquiry}`;
 
-		sgMail.setApiKey('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');
+		fs.appendFileSync('log.txt', new Date().toString() + ': emailBody = ' + emailBody + '\n');
+
+		aws.config.update({region: 'us-east-1'});
 		
-		const msg = {
-			to: 'gshah@assertivesolutions.ca',
-			from: 'asbackend@assertivesolutions.ca',
-			subject: 'Assertive Solutions Contact Form',
-			text: emailBody,
-			html: '<strong><i>' + emailBody + '</i></strong>'
+		fs.appendFileSync('log.txt', new Date().toString() + ': point 1\n');
+		
+		const params = {
+			Destination: {
+				ToAddresses: ['gshah@assertivesolutions.ca']
+			},
+			Message: {
+				Body: {
+					Html: {
+						Charset: 'UTF-8',
+						Data: emailBody
+					}
+				},
+				Subject: {
+					Charset: 'UTF-8',
+					Data: 'Assertive Solutions Contact Form'
+				}
+			},
+			Source: 'no-reply@assertivesolutions.ca'
 		};
 		
-		sgMail.send(msg).then(result => {
-			fs.appendFileSync('log.txt', new Date().toString() + ': Email sent\n');
-			res.status(200).send('Email successfully sent.');
-		}).catch(err => {
-			res.status(500).send('Error sending email.');
+		const credentials = new aws.SharedIniFileCredentials({profile: 'default'});
+		aws.config.credentials = credentials;
+		
+		fs.appendFileSync('log.txt', new Date().toString() + ': AWS SES credentials set.\n');
+		
+		const sendPromise = new aws.SES({apiVersion: '2022-11-01'}).sendEmail(params).promise();
+		sendPromise.then(
+			function(data) {
+				fs.appendFileSync('log.txt', new Date().toString() + ': Email sent\n');
+				res.status(200).send('Email successfully sent.');
+		}).catch(
+			function(err) {
+				fs.appendFileSync('log.txt', new Date().toString() + ': Error sending email: ' + err + '\n');
+				res.status(500).send('Error sending email.');
 		});
     });
 });
