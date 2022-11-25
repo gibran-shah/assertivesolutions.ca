@@ -53,3 +53,8 @@ BEFORE GOING LIVE:
 - sort blogs by created date [CHECK]
 - fix our blog section [CHECK]
 - setup email & change email link to href
+
+
+ALL BROWSERS:
+- Home link doesn't work
+- blogs has huge right margin
