@@ -55,6 +55,14 @@ BEFORE GOING LIVE:
 - setup email & change email link to href
 
 
-ALL BROWSERS:
+Edge, Chrome, and Firefox:
 - Home link doesn't work
 - blogs has huge right margin
+- typing www.assertivesolutions.ca/blog doesn't work
+- read less link on top of text in blogs
+- eye icon pushed up against right edge of text box (in Edge it splits into 2 and shifts)
+
+iphone:
+- main banner needs to be pushed down
+- head on our services page needs more height
+- blog page needs more work
