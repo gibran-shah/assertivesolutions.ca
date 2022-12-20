@@ -56,8 +56,8 @@ BEFORE GOING LIVE:
 
 
 Edge, Chrome, and Firefox:
-- Home link doesn't work
-- blogs has huge right margin
+- Home link doesn't work                                  [CHECK]
+- blogs has huge right margin                             [CHECK]
 - typing www.assertivesolutions.ca/blog doesn't work
 - read less link on top of text in blogs
 - eye icon pushed up against right edge of text box (in Edge it splits into 2 and shifts)
