@@ -58,7 +58,7 @@ BEFORE GOING LIVE:
 Edge, Chrome, and Firefox:
 - Home link doesn't work                                  [CHECK]
 - blogs has huge right margin                             [CHECK]
-- typing www.assertivesolutions.ca/blog doesn't work: https://stackoverflow.com/questions/74883827/how-do-i-go-to-different-paths-on-my-react-website-without-getting-cannot-get
+- typing www.assertivesolutions.ca/blog doesn't work:     [CHECK]
 - read less link on top of text in blogs                  [can't replicate]
 - eye icon pushed up against right edge of text box (in Edge it splits into 2 and shifts) [CHECK but can't replicate splitting]
 

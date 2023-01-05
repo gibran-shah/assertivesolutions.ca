@@ -39,10 +39,10 @@ class App extends Component {
               <Footer />
             </div>
           </Route>
-          <Route path="/blog">
+          <Route path="/blog" exact>
             <Blog/>
           </Route>
-          <Route path="/services">
+          <Route path="/services" exact>
             <OurServices/>
           </Route>
         </Switch>
