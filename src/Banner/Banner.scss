@@ -44,6 +44,14 @@
 .banner-section {
     margin-bottom: 13%;
 
+    @media(max-width: 1160px) {
+        margin-top: 50px;   
+    }
+
+    @media(max-width: 800px) {
+        margin-top: 100px;   
+    }
+
     @media(max-width: 500px) {
         margin-bottom: 37%;
     }
