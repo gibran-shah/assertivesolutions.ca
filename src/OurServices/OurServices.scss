@@ -15,6 +15,10 @@
   background-image: url('../assets/images/top swish.png');
   background-repeat: no-repeat;
   background-size: 100% 180px;
+
+  @media(max-width: 810px) {
+    background-size: 100% 220px;
+  }
 }
 
 .os-logo {

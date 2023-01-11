@@ -63,6 +63,6 @@ Edge, Chrome, and Firefox:
 - eye icon pushed up against right edge of text box (in Edge it splits into 2 and shifts) [CHECK but can't replicate splitting]
 
 iphone:
-- main banner needs to be pushed down
-- head on our services page needs more height
+- main banner needs to be pushed down         [CHECK]
+- head on our services page needs more height [CHECK]
 - blog page needs more work
