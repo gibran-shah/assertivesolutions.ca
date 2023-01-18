@@ -11,6 +11,11 @@
     background-image: url('../assets/images/top swish.png');
     background-repeat: no-repeat;
     background-size: 100% 180px;
+
+    @media(max-width: 610px) {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
 .loading-height {
@@ -19,6 +24,14 @@
 
 .logo {
     width: 50%;
+
+    @media(max-width: 1130px) {
+        width: 25%;   
+    }
+
+    @media(max-width: 930px) {
+        width: 100%;   
+    }
 }
 
 .logo-img {
@@ -35,6 +48,14 @@
 
 .login {
     width: 50%;
+
+    @media(max-width: 1130px) {
+        width: 75%;   
+    }
+
+    @media(max-width: 930px) {
+        display: none !important;   
+    }
 }
 
 .foreground-container {

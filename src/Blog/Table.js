@@ -108,7 +108,7 @@ function Table(props) {
                             <a name={id} />
                             <div className="image-title-updated-at">
                                 <h3>{title}&nbsp;&nbsp;&nbsp;{editButton}</h3>
-                                <p>{moment.unix(createdAt/1000).format('MMM DD, YYYY')}</p>
+                                <p className="updated-at-date">{moment.unix(createdAt/1000).format('MMM DD, YYYY')}</p>
                             </div>
                             {paragraphs}
                             <div className="read-more-link-container">
