@@ -65,4 +65,9 @@ Edge, Chrome, and Firefox:
 iphone:
 - main banner needs to be pushed down         [CHECK]
 - head on our services page needs more height [CHECK]
-- blog page needs more work
+- blog page needs more work                   [CHECK]
+
+- Fix link to contact page in blog            [CHECK]
+- fix scrolling to top on services page in firefox
+- make client logos into links                [CHECK]
+
